@@ -113,11 +113,11 @@ CALL US NOW<br>
 </li>
 
 <li class="dropdown active">
-    <a href="login.php">Post Property&nbsp;<span class="caret"></span></a>
+    <a href="user/frmpg.php">Post Property&nbsp;<span class="caret"></span></a>
 
 </li>
 <li class="dropdown active">
-<a href="index.php">Get Alerts&nbsp;<span class="caret"></span></a>
+    <a href="user/frmAlerts.php">Get Alerts&nbsp;<span class="caret"></span></a>
 
 </li>
 <li class="dropdown">

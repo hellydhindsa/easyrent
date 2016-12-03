@@ -1,6 +1,6 @@
 <?php
 include_once '../buslogic.php';
-if(isset($_POST["property_submit"]))
+if(isset($_POST["Alert_submit"]))
 {
     $obj= new clspg();
     $obj->pgtit=$_POST["title"];
@@ -37,17 +37,6 @@ if(isset($_POST["property_submit"]))
    if($sts)
    {
  
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["pgcod"];
-     $obj1->type='P';
-       $obj1->save_facprp();
-}
-   }
    }
    else
    {
@@ -83,7 +72,7 @@ function getState(val) {
 <h1 class="page-title">Set Alerts</h1>
 </div>
 <div class="submit-content">
-<form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="frmpg.php">
+    <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="frmAlerts.php">
    
 <div class="noo-control-group">
 <div class="group-title">Alert Description</div>
@@ -94,9 +83,7 @@ function getState(val) {
 <div class="dropdown label-select">
     <select class="form-control" onChange="getState(this.value);" required>
 <option value="">Select City</option>
-
-    
-      <?php
+  <?php
                                          $obj= new clscat();         
                                                   $arr = $obj->dsp_cat();
      
@@ -158,7 +145,7 @@ function getState(val) {
 
 <div class="noo-submit row">
 <div class="col-md-12">
-    <input type="submit" name="property_submit" class="btn btn-lg rounded metro btn-primary" id="property_submit" value="Add Alerts">
+    <input type="submit" name="Alert_submit" class="btn btn-lg rounded metro btn-primary" id="property_submit" value="Add Alerts">
 <label>Your Alerts Request will be submitted and we will update you</label>
 </div>
 </div>

@@ -18,72 +18,26 @@ if(isset($sts))
 <div class="container">
 <div class="row">
  
-<div class="col-xs-12 col-sm-6 col-md-3 footer-nav-col">
+<div class="col-xs-12 col-sm-6 col-md-6 footer-nav-col">
 <div class="ft-about-us">
-<h4 class="ft-col-title">CitiLights</h4>
+<h4 class="ft-col-title">EasyRent</h4>
 <div class="text-block">
-<p>CitiLights brings wide range of choice, steadily updated property list and market trend for you to figure out your right decision.</p>
+<p>EasyRent brings wide range of choice, steadily updated property list and market trend for you to figure out your right decision.</p>
 <p>You are now at right place for your real estate research.</p>
 </div>
 </div>
 </div>
  
  
-<div class="col-xs-12 col-sm-6 col-md-3 footer-nav-col">
-<div class="ft-featured-properties">
-<h4 class="ft-col-title">Featued Property</h4>
-<div class="featured-property">
-<ul>
-<li>
-<div class="featured-image">
-<a href="property-details.html"><img src="../images/property/property13.jpg" alt=""></a>
-</div>
-<div class="featured-decs">
-<span class="featured-status"><a href="#"></a></span>
-<h4 class="featured-title"><a href="property-details.html" title="Fresno, CA93722">Fresno, CA93722</a></h4>
-</div>
-</li>
-<li>
-<div class="featured-image">
-<a href="property-details.html"><img src="../images/property/property7.jpg" alt=""></a>
-</div>
-<div class="featured-decs">
-<span class="featured-status"><a href="#">For Rent</a></span>
-<h4 class="featured-title"><a href="property-details.html" title="AVA High Line">AVA High Line</a></h4>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
+
  
- 
-<div class="col-xs-12 col-sm-6 col-md-3 footer-nav-col">
-<div class="ft-useful-links">
-<h4 class="ft-col-title">Useful links</h4>
-<nav class="useful-links-menu" role="navigation">
-<ul>
-<li class="menu-item"><a href="#">Terms of Use</a></li>
-<li class="menu-item"><a href="#">Privacy Policy</a></li>
-<li class="menu-item"><a href="#">Contact Support</a></li>
-<li class="menu-item"><a href="#">Knowledgebase</a></li>
-<li class="menu-item"><a href="#">Careers</a></li>
-<li class="menu-item"><a href="#">FAQs</a></li>
-</ul>
-</nav>
-</div>
-</div>
- 
- 
-<div class="col-xs-12 col-sm-6 col-md-3 footer-nav-col">
+<div class="col-xs-12 col-sm-6 col-md-6 footer-nav-col">
 <div class="ft-contact-info">
 <h4 class="ft-col-title">Contact info</h4>
 <ul class="detail-contact-info">
-<li><i class="fa fa-map-marker"></i>&nbsp;376 Baker Street, New York</li>
-<li><i class="fa fa-phone"></i>&nbsp;(+01)-486-2857</li>
-<li><i class="fa fa-envelope-o"></i>&nbsp;<a href="http://html.nootheme.com/cdn-cgi/l/email-protection#157c7b737a55767c617c797c727d61663b767a78"><span class="__cf_email__" data-cfemail="98f1f6fef7d8fbf1ecf1f4f1fff0ecebb6fbf7f5">[email&#160;protected]</span><script cf-hash='f9e31' type="text/javascript">
-/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script></a></li>
-</ul>
+<li><i class="fa fa-map-marker"></i>&nbsp;244 Sector 34c Chandigarh</li>
+<li><i class="fa fa-phone"></i>&nbsp;(+91)9465209952</li>
+
 </div>
 </div>
  
@@ -96,14 +50,14 @@ if(isset($sts))
 <div class="container">
 <div class="row">
 <div class="col-xs-12 col-sm-6 text-block">
-&copy; 2014 CitiLights. All Rights Reserved.
+&copy; 2016 EasyRent. All Rights Reserved.
 <br/>
-<span>Designed by <a title="Visit Nootheme.com!" href="http://www.nootheme.com/" target="_blank">NooTheme.com</a>.</span>
+<span>Power by HiddenWebSolutions.com</span>
 <br>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">
 <div class="logo-image">
-<a href="index-2.html"><img src="../images/logo/logo-footer.png" alt="CitiLights"></a>
+<a href="index-2.html"><img src="../images/logo/logo-footer.png" alt="EasyRent"></a>
 </div>
 </div>
 </div>
