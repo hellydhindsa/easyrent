@@ -1,12 +1,14 @@
 <?php
 
 include_once '../buslogic.php';
+//code check user is login or not
+ if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
 if(isset($_POST["btnupd"]))
 {
    // echo "enter to update   section here ";
      $obj1= new clsprf();
     $obj1->prfname=$_POST["nam"];
-    $obj1->prfphn=$_POST["phn"];
+   // $obj1->prfphn=$_POST["phn"];
   //  $obj1->prftype=$_POST["regtyp"];
    $obj1->prfcode=$_SESSION["prfcod"];
     $obj1->prfaddress=$_POST["address"];
@@ -125,12 +127,12 @@ include_once 'header_1.php';
 <input type="text" id="nam" class="form-control" value="<?php if(isset($name)) echo $name; ?>" name="nam" required="">
 </div>
 </div>
-<div class="form-group gsub-location">
+<!--<div class="form-group gsub-location">
 <div class="form-group s-prop-title">
 <label for="phn">Phone No&nbsp;&#42;</label>
 <input type="text" id="phn" class="form-control" value="<?php if(isset($phone)) echo $phone; ?>" name="phn" required="">
 </div>
-</div>
+</div>-->
 <div class="form-group gstatus">
 <div class="form-group s-prop-title">
 <label for="address">Address&nbsp;&#42;</label>

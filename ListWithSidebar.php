@@ -60,24 +60,7 @@ function getState(val) {
  
 <div class="properties-header">
 <h1 class="page-title">Properties</h1>
-<!--<div class="properties-toolbar">
-    <a href="GridWithSidebar.php" data-toggle="tooltip" data-placement="bottom" title="Grid"><i class="fa fa-th-large"></i></a>
-    <a class="selected" href="ListWithSidebar.php" data-toggle="tooltip" data-placement="bottom" title="List"><i class="fa fa-list"></i></a>
-<form class="properties-ordering" method="get">
-<div class="properties-ordering-label">Sorted by</div>
-<div class="form-group properties-ordering-select">
-<div class="label-select">
-<select class="form-control">
-<option>Date</option>
-<option>Bath</option>
-<option>Bed</option>
-<option>Area</option>
-<option>Name</option>
-</select>
-</div>
-</div>
-</form>
-</div>-->
+
 </div>
  
  
@@ -94,6 +77,13 @@ function getState(val) {
         $arr = $obj->DisplayIndexSearch($loc,$typ,$cat);
        // If(count($arr)>0)
       }
+ else { $loc=0;
+          $typ="A";
+          $cat="A";
+     
+      $obj= new clsprop();
+        $arr = $obj->DisplayIndexSearch($loc,$typ,$cat);
+        }
       if(isset($arr))
       {
         for($i=0; $i<count($arr); $i++)
@@ -149,17 +139,6 @@ echo'</article>';
 </div>
 <div class="clearfix"></div>
  
-<!--<nav class="pagination-nav">
-<ul class="pagination list-center">
-<li><a class="prev page-numbers" href="#"><i class="fa fa-angle-left"></i></a></li>
-<li><span class="page-numbers current">1</span></li>
-<li><a class="page-numbers" href="#">2</a></li>
-<li><span class="page-dots"><i class="fa fa-ellipsis-h"></i></span></li>
-<li><a class="page-numbers" href="#">7</a></li>
-<li><a class="page-numbers" href="#">8</a></li>
-<li><a class="next page-numbers" href="#"><i class="fa fa-angle-right"></i></a></li>
-</ul>
-</nav>-->
  
 </div>
  

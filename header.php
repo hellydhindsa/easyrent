@@ -33,8 +33,8 @@
 <div class="container">
 <div class="top-header-inner">
 <ul class="social-top">
-<li><a href="#" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-<li><a href="#" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+<li><a href="https://www.facebook.com/easyrent.co.in" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li><a href="https://www.facebook.com/easyrent.co.in" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
 </ul>
 <div class="top-header-content">
@@ -83,7 +83,7 @@
 </button>
 <div class="logo">
 <div class="logo-image">
-<a href="index.php" title="NooTheme CitiLights"></a>
+<a href="index.php" title="Easy Rent"></a>
 </div>
 </div>
 </div>
@@ -108,7 +108,7 @@ CALL US NOW<br>
 
 </li>
 <li class="dropdown">
-<a href="http://localhost:8080/property/ListWithSidebar.php?loc=0&typ=A&cat=A">Properties&nbsp;<span class="caret"></span></a>
+<a href="ListWithSidebar.php">Properties&nbsp;<span class="caret"></span></a>
 
 </li>
 

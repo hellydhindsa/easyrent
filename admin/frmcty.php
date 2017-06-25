@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+//session_start();
 include_once '../buslogic.php';
 if(isset($_POST["btnsub"]))
 {
@@ -138,9 +138,9 @@ include_once 'AdminHeader.php';
 <div class="container">
 <div class="row">
 <div class="col-xs-12 col-sm-6 text-block">
-&copy; 2015 CitiLights. All Rights Reserved.
+&copy; 2017 EasyRent. All Rights Reserved.
 <br/>
-<span>Designed by <a title="Visit Nootheme.com!" href="http://www.nootheme.com/" target="_blank">NooTheme.com</a>.</span>
+<span>Power by <a title="Visit Nootheme.com!"  target="_blank">HiddenWebSolutions.com</a>.</span>
 <br>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">
@@ -176,6 +176,4 @@ include_once 'AdminHeader.php';
 /* ]]> */
 </script>
 </body>
-
-<!-- Mirrored from html.nootheme.com/citilights/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:46:40 GMT -->
 </html>

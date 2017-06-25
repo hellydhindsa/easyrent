@@ -23,7 +23,7 @@
 <h4 class="ft-col-title">Contact info</h4>
 <ul class="detail-contact-info">
 <li><i class="fa fa-map-marker"></i>&nbsp;244 Sector 34c Chandigarh</li>
-<li><i class="fa fa-phone"></i>&nbsp;(+91)9465209952</li>
+<li><i class="fa fa-phone"></i>&nbsp;(+91)9465209952,(+91)9878161852</li>
 
 </div>
 </div>
@@ -37,7 +37,7 @@
 <div class="container">
 <div class="row">
 <div class="col-xs-12 col-sm-6 text-block">
-&copy; 2016 EasyRent. All Rights Reserved.
+&copy; 2017 EasyRent. All Rights Reserved.
 <br/>
 <span>Power by HiddenWebSolutions.com</span>
 <br>
@@ -61,7 +61,7 @@
 </div>
 
 
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
 <script type="text/javascript" src="js/SmoothScroll.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>

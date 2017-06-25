@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 include_once '../buslogic.php';
 if(isset($_POST["btnupd"]))
 {

@@ -1,6 +1,8 @@
 <?php
 include_once '../buslogic.php';
 include_once 'header_1.php';
+//code check user is login or not
+ if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
 if(isset($_SESSION["MoreDetailPno"]))
 {
   $PropertyNO=$_SESSION["MoreDetailPno"];

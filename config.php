@@ -4,7 +4,7 @@ class clscon
     public $link;
     function db_connect()
     {
-        $host="localhost";
+       $host="localhost";
        $uname="root";
        $pwd="";
         $this->link=mysqli_connect($host,$uname,$pwd,"propertydb");

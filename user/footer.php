@@ -11,6 +11,28 @@ if(isset($sts))
     </script>'; 
    }
 ?>
+ <script>
+function CloseUploadPicturesModel() {
+  var picturesCount=0;
+  $.ajax({
+	type: "POST",
+	url: "Get_Prperty_Count.php",
+	//data:'PropertyType='+val,
+	success: function(data){
+                picturesCount=parseInt(data);
+                if(picturesCount>0)
+                {
+                    $('#myModal').modal('hide');
+                }
+                else
+                {
+                   $("#myModal").modal({show: true}); 
+                }
+	}
+	});
+	
+}
+</script>
 <!----------------------------------------footer-area-start-------------------------------->
 <footer class="footer">
  
@@ -36,7 +58,7 @@ if(isset($sts))
 <h4 class="ft-col-title">Contact info</h4>
 <ul class="detail-contact-info">
 <li><i class="fa fa-map-marker"></i>&nbsp;244 Sector 34c Chandigarh</li>
-<li><i class="fa fa-phone"></i>&nbsp;(+91)9465209952</li>
+<li><i class="fa fa-phone"></i>&nbsp;(+91)9465209952,(+91)9878161852</li>
 
 </div>
 </div>
@@ -50,7 +72,7 @@ if(isset($sts))
 <div class="container">
 <div class="row">
 <div class="col-xs-12 col-sm-6 text-block">
-&copy; 2016 EasyRent. All Rights Reserved.
+&copy; 2017 EasyRent. All Rights Reserved.
 <br/>
 <span>Power by HiddenWebSolutions.com</span>
 <br>
@@ -96,8 +118,6 @@ if(isset($sts))
 /* ]]> */
 </script>
 </body>
-
-<!-- Mirrored from html.nootheme.com/citilights/submit-proprety.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:49:09 GMT -->
 </html>
 
 

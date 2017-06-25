@@ -91,6 +91,67 @@ class clscat
             $con->db_close();
         }
 }
+class classUserAlerts
+{
+   // `UserAlertsId`, `PropertyType`, `FurnishedStatus`, `Location`, `UserId`
+    public $UserAlertsId,$PropertyType,$FurnishedStatus,$Location,$UserId;
+    function SaveUserAlerts()
+    {
+        $con=new clscon();
+        $link=$con->db_connect();
+        $qry="call InsertUserAlerts('$this->PropertyType',$this->Location,$this->UserId)";
+        $res=  mysqli_query($link, $qry);
+        if(mysqli_affected_rows($link))
+        {
+            $con->db_close();
+            return TRUE;
+                    
+        }
+        else
+        {
+            $con->db_close();
+            return FALSE;
+        }}
+
+        
+        function DeleteUserAlerts()
+        {
+          $con=new clscon();
+             $link=$con->db_connect();
+        $qry="call DeleteUserAlert($this->UserAlertsId)";
+        $res=  mysqli_query($link, $qry);
+        if(mysqli_affected_rows($link))
+        {
+          $con->db_close();
+            return TRUE;   
+        }
+ else {
+     $con->db_close();
+            return FALSE;
+ }
+     
+ }
+        
+        function DispalyUserAlerts($logincode)
+        {
+            $con=new clscon();
+            $link=$con->db_connect();
+            $qry="call GetUserAlerts($logincode)";
+            $res=  mysqli_query($link, $qry);
+            $i=0;
+            $arr=array();
+            while($r=  mysqli_fetch_row($res))
+            {
+                $arr[$i]=$r;
+                $i++;
+                
+            }
+            $con->db_close();
+            return $arr;
+        }
+
+     
+}
        class clsreg
     {
     public $regcode,$regemail,$regpwd,$regdate,$regrol;
@@ -99,8 +160,13 @@ class clscat
         $con=new clscon();
         $link=$con->db_connect();
         $qry="call insreg('$this->regemail','$this->regpwd','$this->regdate','$this->regrol',@cod)";
-        $res=  mysqli_query($link, $qry);
+        $res=  mysqli_query($link, $qry) ;
+         if(!$res)
+        {
+           return mysqli_errno($link); 
+        }
         $res1= mysqli_query($link,"select @cod") or die(mysqli_error($link));
+       
         $r=  mysqli_fetch_row($res1);
         $rcod=$r[0];
         if(mysqli_affected_rows($link))
@@ -196,6 +262,29 @@ class clscat
             $con= new clscon();
             $link=$con->db_connect();
             $qry="call logincheck('$eml','$pwd',@cod,@rol)";
+            $res= mysqli_query($link, $qry) or die(mysqli_error($link));
+            $res1= mysqli_query($link,"select @cod,@rol") or die(mysqli_error($link));
+            $r=  mysqli_fetch_row($res1);
+           // echo $r[0];
+            if($r[0]==-1)
+            { 
+             $con->db_close ();
+            return 'N';
+            }
+            else 
+            {
+            $_SESSION["lcod"]=$r[0];
+            $a=$r[1];
+            $con->db_close();
+            return $a;
+            }
+        }
+        
+         function UpdateOTPStatus($eml,$pwd,$otp)
+        {
+            $con= new clscon();
+            $link=$con->db_connect();
+            $qry="call UpdateOTPStatus('$eml','$pwd','$otp',@cod,@rol)";
             $res= mysqli_query($link, $qry) or die(mysqli_error($link));
             $res1= mysqli_query($link,"select @cod,@rol") or die(mysqli_error($link));
             $r=  mysqli_fetch_row($res1);
@@ -316,7 +405,7 @@ class clscat
         $con=new clscon();
         $link=$con->db_connect();
         $qry="call inspg('$this->pgtit','$this->pgtyp','$this->pgloc','$this->pglndmrk','$this->pgadd','$this->pgrnt','$this->pgrntfor','$this->pgscrty','$this->pgocrg','$this->pgnoofseats','$this->pgavlfrm','$this->pgdsc','$this->pgsts','$this->pgregcod','$this->pgnoper','$this->pgfursts','$this->pgdelsts','$this->pglat','$this->pglong','$this->pgmntcrg','$this->pgmntcrgfor','$this->pgregdat',@cod)";
-        $res=  mysqli_query($link, $qry);
+        $res=  mysqli_query($link, $qry)or die(mysqli_error($link));
          $res1= mysqli_query($link,"select @cod") or die(mysqli_error($link));
             $r=  mysqli_fetch_row($res1);
            $pgcod=$r[0];
@@ -328,7 +417,7 @@ class clscat
             unset($_SESSION["huscod"]);
              $_SESSION["pgcod"]=$pgcod; 
             $con->db_close();
-            return TRUE;
+            return $res;
                     
         }
         else
@@ -381,7 +470,25 @@ class clscat
             return $arr;
         }  
         
-        
+              function GetPropertyPicturesCount($cod,$typ)
+        {
+            $con=new clscon();
+            $link=$con->db_connect();
+            $qry="call GetPropertyPicturesCount('$cod','$typ')";
+            $res=  mysqli_query($link, $qry)or die(mysqli_error($link));
+            
+            $r=  mysqli_fetch_row($res);
+            if(isset($r[0]))
+            {
+            $con->db_close();
+            return $r[0];
+            }
+            else
+            {
+                 $con->db_close();
+               return 0;  
+            }
+        }  
         
         
  function fndlstpgpic()
@@ -653,6 +760,10 @@ class clsfacprp
         $link=$con->db_connect();
         $qry="call insprf('$this->prfname','$this->prfphn','$this->prftype','$this->prfregcod','$this->prfaddress','$this->prfcmp','$this->prfpic','$this->prfIsActive','$this->Otp','$this->otpIsApproved','$this->prfLocation',@cod)";
         $res=  mysqli_query($link, $qry);
+         if(!$res)
+        {
+           return mysqli_errno($link); 
+        }
         $res1= mysqli_query($link,"select @cod") or die(mysqli_error($link));
         $r=  mysqli_fetch_row($res1);
         $pcod=$r[0];
@@ -670,14 +781,31 @@ class clsfacprp
         
         }
 
-        
-        
+    function UpdateUserStatus($cod,$sts)
+        {
+            $con=new clscon();
+             $link=$con->db_connect();
+        $qry="call updateUserStatus($cod,$sts)";
+       // echo $qry;
+        $res=  mysqli_query($link, $qry) or die(mysqli_error($link));
+        if(mysqli_affected_rows($link))
+        {
+            $con->db_close();
+            return TRUE;
+                    
+        }
+        else
+        {
+            $con->db_close();
+            return FALSE;
+            
+        }}
         
         function update_prf()
         {
             $con=new clscon();
              $link=$con->db_connect();
-        $qry="call updprf($this->prfcode,'$this->prfname','$this->prfphn','$this->prfaddress','$this->prfcmp','$this->prfpic')";
+        $qry="call UpdateUserProfile($this->prfcode,'$this->prfname','$this->prfaddress','$this->prfcmp','$this->prfpic')";
        // echo $qry;
         $res=  mysqli_query($link, $qry) or die(mysqli_error($link));
         if(mysqli_affected_rows($link))
@@ -727,7 +855,23 @@ class clsfacprp
             $con->db_close();
             return $arr;
         }
-
+ function DisplayUsersAdmin()
+        {
+            $con=new clscon();
+            $link=$con->db_connect();
+            $qry="call DisplayUsersAdmin()";
+            $res=  mysqli_query($link, $qry)or die(mysqli_error($link));
+            $i=0;
+            $arr=array();
+            while($r=  mysqli_fetch_row($res))
+            {
+                $arr[$i]=$r;
+                $i++;
+                
+            }
+            $con->db_close();
+            return $arr;
+        }
         function find_prf()
         {
             $con=new clscon();

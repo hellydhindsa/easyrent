@@ -1,19 +1,18 @@
 <?php
 ob_start();
 include_once 'buslogic.php';
+$showOTP_modal = false;
 if(isset($_REQUEST["sts"])&& $_REQUEST["sts"]=='S')
 {
     unset($_SESSION["lcod"]);
 }
-if(isset($_POST["btnlogin"]))
-{
- 
-    $obj= new clsreg();
-    $r=$obj->logincheck($_POST["log"],$_POST["pwd"]);
-  //  echo $r;
-    if($r=='N')
+  function ActionAfterLogin()
+     {
+          $msg='enter method';
+             if($r=='N')
     {
         $msg="Email Password Incorrect";
+        clearLoginSessions();
     }
         elseif ($r=='U') 
         {
@@ -29,25 +28,173 @@ if(isset($_POST["btnlogin"]))
          {
     header("location:user/frmpg.php");
         }
-        
+        clearLoginSessions();
          }
    elseif ($r=='A')
    {
   header("location:admin/frmcty.php");
+  clearLoginSessions();
    }
-//    elseif($r=='H')
-//        header("location:#");
-    
+    elseif ($r=='O')
+   {
+        $_SESSION["LoginEmail"]=$_POST["log"];
+        $_SESSION["LoginPassword"]=$_POST["pwd"];
+      //  $showOTP_modal=true;
+      
+       echo '<script type="text/javascript">',
+     ' $(\'#OTPConfirmModel\').modal();',
+     '</script>';
+   }
+  
+     }
+
+if(isset($_POST["btnlogin"]))
+{
+ 
+    $obj= new clsreg();
+    $r=$obj->logincheck($_POST["log"],$_POST["pwd"]);
+  
+             if($r=='N')
+    {
+        $msg="Email Password Incorrect";
+        clearLoginSessions();
+    }
+        elseif ($r=='U') 
+        {
+         if(isset($_SESSION["MoreDetailPno"]))
+         {
+              header("location:user/FrmMoreDetailView.php"); 
+         }
+        elseif(isset($_SESSION["MoreDetailAgentno"]))
+         {
+              header("location:user/agentsdetail.php"); 
+         }
+         else
+         {
+    header("location:user/frmpg.php");
+        }
+        clearLoginSessions();
+         }
+   elseif ($r=='A')
+   {
+  header("location:admin/frmcty.php");
+  clearLoginSessions();
+   }
+    elseif ($r=='O')
+   {
+        $_SESSION["LoginEmail"]=$_POST["log"];
+        $_SESSION["LoginPassword"]=$_POST["pwd"];
+        $showOTP_modal=true;
+      $msg='OTP REQUIRED';
+     
+   }
+  
+
+}
+if(isset($_POST["submitOtpVerification"]))
+{
+  //  $msg=$_SESSION["LoginEmail"].$_SESSION["LoginPassword"].$_POST["OTPTextBox"];
+     $obj= new clsreg();
+    $r=$obj->UpdateOTPStatus($_SESSION["LoginEmail"],$_SESSION["LoginPassword"],$_POST["OTPTextBox"]);  
+  //  ActionAfterLogin($r);
+                if($r=='N')
+    {
+        $msg="Email Password Incorrect";
+        clearLoginSessions();
+    }
+        elseif ($r=='U') 
+        {
+         if(isset($_SESSION["MoreDetailPno"]))
+         {
+              header("location:user/FrmMoreDetailView.php"); 
+         }
+        elseif(isset($_SESSION["MoreDetailAgentno"]))
+         {
+              header("location:user/agentsdetail.php"); 
+         }
+         else
+         {
+    header("location:user/frmpg.php");
+        }
+        clearLoginSessions();
+         }
+   elseif ($r=='A')
+   {
+  header("location:admin/frmcty.php");
+  clearLoginSessions();
+   }
+    elseif ($r=='O')
+   {
+       // $_SESSION["LoginEmail"]=$_POST["log"];
+      //  $_SESSION["LoginPassword"]=$_POST["pwd"];
+        $showOTP_modal=true;
+      $msg='OTP REQUIRED';
+     
+   }
 }
 if(isset($_POST["btnreg"]))
 {
-    //------------------sms sending---------
-    $otp = rand(1000, 9999);
-$url = 'http://smslowprice.com/SendingSms.aspx';
+ 
+    $obj= new clsreg();
+    $obj->regdate=date('y-m-d');
+    $obj->regemail=$_POST["eml"];
+ 
+    $obj->regpwd=$_POST["pwd"];
+    $obj->regrol='U';
+   $rcode= $obj->save_reg();
+ if($rcode!=1062)
+ {
+     $otp = rand(1000, 9999);
+   $obj1= new clsprf();
+    $obj1->prfname=$_POST["nam"];
+    $obj1->prfphn=$_POST["phn"];
+    $obj1->prftype=$_POST["regtyp"];
+    $obj1->prfregcod=$rcode;
+    $obj1->prfaddress=$_POST["address"];
+    $obj1->prfcmp=$_POST["cmp"];
+    $obj1->prfIsActive=1;
+    $obj1->otpIsApproved=0;
+    $obj1->Otp=$otp;
+    $obj1->prfLocation=$_POST["AgentLocation"];
+
+   $s=$_FILES["fil"]["name"];
+    $s=  substr($s, strpos($s, '.'));
+    $obj1->prfpic=$s;
+    $profileCode=$obj1->save_prf();
+    
+    if($profileCode !=1062)
+ {
+        SendOtp($_POST["nam"],$_POST["phn"],$otp);
+    if($s!="")
+    {
+   move_uploaded_file ($_FILES["fil"]["tmp_name"],"delpics/".$profileCode.$s);
+    }
+ 
+     $msg="Registration sucessfull ";
+ }
+ else {
+     $msg="Your Phone Number -".$_POST["phn"]."- Already Exist";
+ 
+ }
+ }
+ else
+ {
+     $msg="Your Email -".$_POST["eml"]."- Already Exist";  
+ }
+ 
+     
+     
+     
+  
+}
+function SendOtp($name,$phoneNumber,$otp)
+{
+       //------------------sms sending---------
+    $url = 'http://smslowprice.com/SendingSms.aspx';
 $fields = array('userid'=>urlencode('vickysingla'),
 'pass'=>urlencode('welcome@123'),
-'phone'=>urlencode($_POST["phn"]),
-'msg'=>urlencode('Dear '.$_POST["nam"].', Thanks for Registration.Your Mobile Verification Code for EasyRent is '.$otp.' .'));
+'phone'=>urlencode($phoneNumber),
+'msg'=>urlencode('Dear '.$name.', Thanks for Registration.Your Mobile Verification Code for EasyRent is '.$otp.' .'));
 $fields_string='';
 foreach($fields as $key=>$value)
 { $fields_string .=$key.'='.$value.'&';}
@@ -58,49 +205,24 @@ curl_setopt($ch,CURLOPT_URL,$url_final);
 $result = curl_exec($ch);
 curl_close($ch);
 //------------------------------
-    $obj= new clsreg();
-    $obj->regdate=date('y-m-d');
-    $obj->regemail=$_POST["eml"];
- 
-    $obj->regpwd=$_POST["pwd"];
-    $obj->regrol='U';
-   $rcode= $obj->save_reg();
- 
-   $obj1= new clsprf();
-    $obj1->prfname=$_POST["nam"];
-    $obj1->prfphn=$_POST["phn"];
-    $obj1->prftype=$_POST["regtyp"];
-    $obj1->prfregcod=$rcode;
-    $obj1->prfaddress=$_POST["address"];
-    $obj1->prfcmp=$_POST["cmp"];
-    $obj1->prfIsActive=0;
-    $obj1->otpIsApproved=0;
-    $obj1->Otp=$otp;
-    $obj1->prfLocation=$_POST["AgentLocation"];
-
-   $s=$_FILES["fil"]["name"];
-    $s=  substr($s, strpos($s, '.'));
-    $obj1->prfpic=$s;
-    echo $s;
-    $a=$obj1->save_prf();
-    if($s!="")
-    {
-   move_uploaded_file ($_FILES["fil"]["tmp_name"],"delpics/".$a.$s);
-    }
-//     $msgreg="Registration sucessfull ";
-     $msg="Registration sucessfull ";
- 
-     
-     
-     
-  
 }
+function clearLoginSessions()
+{
+     if(isset($_SESSION["LoginEmail"]))
+         {
+         unset($_SESSION["LoginEmail"]);
+         }
+         if(isset($_SESSION["LoginPassword"]))
+         {
+             unset($_SESSION["LoginPassword"]);
+         }
+     }
+   
 ob_end_clean();
 ?>
+
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from html.nootheme.com/citilights/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:46:40 GMT -->
 <head>
 <meta charset="utf-8">
 <title>EasyRent - Login - Register</title>
@@ -120,6 +242,7 @@ ob_end_clean();
 <link rel="stylesheet" href="css/shortcode.css">
 <link id="style-main-color" rel="stylesheet" href="css/color/color1.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script>
 
  
@@ -203,10 +326,6 @@ background-color: #f0e797;
     white-space: nowrap;
 }
 </style>
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
 <body class="page-fullwidth">
  
@@ -280,7 +399,7 @@ CALL US NOW<br>
 
 </li>
 <li class="dropdown">
-<a href="http://localhost:8080/property/ListWithSidebar.php?loc=0&typ=A&cat=A">Properties&nbsp;<span class="caret"></span></a>
+<a href="ListWithSidebar.php">Properties&nbsp;<span class="caret"></span></a>
 
 </li>
 
@@ -289,7 +408,7 @@ CALL US NOW<br>
 
 </li>
 <li class="dropdown active">
-<a href="index.php">Get Alerts&nbsp;<span class="caret"></span></a>
+<a href="user/frmAlerts.php">Get Alerts&nbsp;<span class="caret"></span></a>
 
 </li>
 <li class="dropdown">
@@ -342,11 +461,12 @@ CALL US NOW<br>
             echo '<label style="color: red;
     font-weight: bold;" >'.$msg.'</label>';
         ?>
+
 </div>
 <!--<p class="logreg-desc">Lost your password? <a href="#">Click here to reset</a>
 </p>-->
 
-<p class="logreg-desc">Not register yet? <button type="button" class="btn-link" data-toggle="modal" data-target="#myModal">Click Here to register</button>
+<p class="logreg-desc">Not register yet? <button type="button" class="btn-link" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Click Here to register</button>
 </p>
  </form>
 <!--   ------------------------------------------pop up------------------------------------------------------>
@@ -355,7 +475,7 @@ CALL US NOW<br>
 
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="myModal" role="dialog" >
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -483,38 +603,73 @@ CALL US NOW<br>
 
 
 <!--          ---------------------------------------------------close  popup-------------------------------  -->
-
-
+<!-------------------model for otp OTPConfirmModel----------- -->
+<div class="modal fade" id="OTPConfirmModel" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title"> One Time Password Verification</h2>
+        </div>
+        <div class="modal-body">
+     <form name="SubmitOTP-form" id="registration-form" class="noo-form property-form" action="login.php" method="post">
+          
+                     <div class="col-md-12">
+<div class="form-group s-prop-title">
+<label for="eml">OTP&nbsp;&#42;</label>
+<input type="number" id="eml" class="form-control" value="" name="OTPTextBox" required="">
 </div>
+</div>
+
+       
+          <div class="form-actions">
+            <button type="submit" name="submitOtpVerification" id="btnreg" class="btn11 navbar-btn btn-default">Submit</button>
+             <button type="reset" class="btn11 navbar-btn btn-default">Resend Otp</button>
+          </div>
+  
+      </form>  
+
+
     
-<!--    
-<div class="col-md-6 register-form">
-<form name="registerform" id="registerform" method="post" role="form">
- <form action="login.php" name="reg" method="post">
-<div class="logreg-title">Register Form</div>
-<p class="logreg-desc">Don't have an account? Please fill in the form below to create one.</p>
-<div class="form-message"></div>
-<div class="logreg-content">
-<div class="form-group">
-<label for="user_login" class="sr-only">Username</label>
 
-<input type="text" class="form-control" id="regusr" name="regusr" placeholder="Username *" required="">
-</div>
-<div class="form-group">
-<label for="user_email" class="sr-only">Your Email</label>
-<input type="password" class="form-control" id="regpwd" name="regpwd" placeholder="password *" required="">
-</div>
-</div>
-<div class="logreg-action">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
-<input type="submit" value="Register Account" name="btnreg" class="btn navbar-btn" />
+
+ 
+
+<!---------------------model end for otp---------------->
+</div>
+    <?php if($showOTP_modal){?>
+  <script> 
+      
+ $('#OTPConfirmModel').modal();
+     
+       
+  </script>
+    <?php } ?>
+
 <?php
         if(isset($msgreg))
             echo "<label>".$msgreg."</label>";
         ?>
 </div>
+    <script>
+  function openOTPModel()
+  {
+     
+       $('#OTPConfirmModel').modal();
+  }
+        </script>
   </form>
-</div>-->
+</div>
   
 </div>
 </div>
@@ -530,5 +685,5 @@ CALL US NOW<br>
 </div>
   
  <?php
-include_once 'footer.php';
+//include_once 'footer.php';
 ?>

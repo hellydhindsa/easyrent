@@ -1,5 +1,7 @@
 <?php
 include_once '../buslogic.php';
+//code check user is login or not
+ if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
 include_once 'header_1.php';
 ?>
 <div class="noo-wrapper">

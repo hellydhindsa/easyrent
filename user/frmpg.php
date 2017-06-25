@@ -1,5 +1,7 @@
 <?php
 include_once '../buslogic.php';
+//code check user is login or not
+ if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
 if(isset($_POST["property_submit"]))
 {
     $obj= new clspg();
@@ -13,7 +15,9 @@ if(isset($_POST["property_submit"]))
     $obj->pgscrty=$_POST["scrg"];
     $obj->pgocrg=$_POST["ocrg"];
     $obj->pgnoofseats=$_POST["noseat"];
-    $obj->pgavlfrm=$_POST["avlfrm"];
+    
+$cls_date = new DateTime($_POST["avlfrm"]);
+    $obj->pgavlfrm=$cls_date->format('y-m-d');
     $obj->pgsts="Y";
    $obj->pgregcod=$_SESSION["lcod"];
    //  $obj->pgregcod=1;
@@ -31,7 +35,7 @@ if(isset($_POST["property_submit"]))
     $obj->pglat=$_POST["lat"];
     $obj->pglong=$_POST["long"];
     $obj->pgmntcrg=$_POST["mcrg"];
-    $obj->pgmntcrgfor=$_POST["mcrg"];
+    $obj->pgmntcrgfor=$_POST["mcrgfor"];
     $obj->pgregdat=date('y-m-d');
    $sts= $obj->save_pg();
    if($sts)
@@ -71,44 +75,16 @@ function getState(val) {
 	}
 	});
 }
+
+
 </script>
 <div class="noo-wrapper">
  
 <div class="container noo-mainbody">
-    
-    <!--   ------------------------------------------pop up------------------------------------------------------>
+  <?php 
+include_once 'MultiPicturesUploadPanel.php';
+?>  
 
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title"> Upload PG Pictures </h2>
-        </div>
-        <div class="modal-body">
-
- 
-<form action="upload.php" class="dropzone" id="uploadFile" name="uploadFile" method="POST">
-        <span id="tmp-path"></span>
-    </form>
-You Have To Choose At least One Picture
-
-    
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn11 btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-<!--    ----------------------------------------------------------end model and images popup--------------------------->
 <div class="noo-mainbody-inner">
 <div class="row clearfix">
  
@@ -127,7 +103,7 @@ include_once 'leftpanel.php';
  
 <div class="noo-content col-xs-12 col-md-8">
 <div class="submit-header">
-<h1 class="page-title">Submit PG</h1>
+<h1 class="page-title">Submit PG </h1>
 </div>
 <div class="submit-content">
 <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="frmpg.php">
@@ -137,8 +113,8 @@ include_once 'leftpanel.php';
 <div class="group-container row">
     <div class="col-md-8">
 <div class="form-group s-prop-title">
-<label for="title">Title&nbsp;&#42;</label>
-<input type="text" id="title" class="form-control" value="" name="title" required="">
+<label for="title">Title&nbsp;</label>
+<input type="text" id="title" class="form-control" value="" name="title">
 </div>
 </div>
 <div class="col-md-4">
@@ -211,7 +187,7 @@ include_once 'leftpanel.php';
     <div class="col-md-6">
         
 <div class="form-group s-prop-bedrooms">
-<label for="avlfrm">Avalable From</label>
+<label for="avlfrm">Available From</label>
 <div class="input-group date datepicker" id="datetimepicker">
 <input type="text" id="avlfrm" class="form-control" value="" name="avlfrm" required>
  <span class="input-group-addon">
@@ -247,7 +223,7 @@ include_once 'leftpanel.php';
 <div class="form-group s-prop-_noo_property_feature_attic">
 
 <label for="_noo_property_feature_attic" class="checkbox-label">
-<input type="checkbox" id="delsts" name="delsts" class="" value="1">&nbsp;I am not intrested in in getting response from brokers. <i></i>
+<input type="checkbox" id="delsts" name="delsts" class="" value="1">&nbsp;I am not interested in getting response from brokers. <i></i>
 </label>
 </div>
 </div>
@@ -339,7 +315,7 @@ echo'<i></i></label></div></div>';
 </div>
 <div class="col-md-8">
 <div class="form-group s-prop-address">
-<label for="lndmrk">LandMark&nbsp;&#42;</label>
+<label for="lndmrk">LandMark&nbsp;</label>
 <textarea id="lndmrk" class="form-control" name="lndmrk" rows="1" required=""></textarea>
 </div>
 </div>
@@ -364,23 +340,22 @@ echo'<i></i></label></div></div>';
 </div>
 
 <div class="noo-control-group">
-<div class="group-title">Rents and Charges</div>
+<div class="group-title">Rents and Other Charges</div>
 <div class="group-container row">
     
 <div class="col-md-7">
 <div class="form-group s-prop-bedrooms">
 <label for="ernt">Expected Rent&nbsp;(rupees)</label>
-<input type="text" id="ernt" class="form-control" value="" name="ernt" required>
+<input type="number" id="ernt" class="form-control" value="" name="ernt" required>
 </div>
 </div>
 <div class="col-md-5">
 <div class="form-group s-prop-status">
 <label> Structure</label>
 <div class="dropdown label-select">
-    <select class="form-control" name="rntfor" required>
-    <option value="">select one</option>
-<option value="M">Monthly</option>
-<option value="Q">Quartly</option>
+    <select class="form-control" name="rntfor">
+    <option value="M">Monthly</option>
+<option value="Q">Quarterly</option>
 <option value="Y">Yearly</option>
 
 </select>
@@ -389,31 +364,30 @@ echo'<i></i></label></div></div>';
 </div>
 <div class="col-md-6">
 <div class="form-group s-prop-type">
-<label for="scrg">Security Charges</label>
-<input type="text" id="scrg" class="form-control" value="" name="scrg" required>
+<label for="scrg">Security Charges (rupees)</label>
+<input type="number" id="scrg" class="form-control" value="" name="scrg">
 </div>
 </div>
 <div class="col-md-6">
 <div class="form-group s-prop-bedrooms">
-<label for="ocrg">Other charges</label>
-<input type="text" id="ocrg" class="form-control" value="" name="ocrg" required>
+<label for="ocrg">Other Charges (rupees)</label>
+<input type="number" id="ocrg" class="form-control" value="" name="ocrg">
 </div>
 </div>
 
 <div class="col-md-7">
 <div class="form-group s-prop-bedrooms">
-<label for="mcrg">Maintainness Charges&nbsp;(rupees)</label>
-<input type="text" id="mcrg" class="form-control" value="" name="mcrg" required>
+<label for="mcrg">Maintenance Charges&nbsp;(rupees)</label>
+<input type="number" id="mcrg" class="form-control" value="" name="mcrg">
 </div>
 </div>
 <div class="col-md-5">
 <div class="form-group s-prop-status">
 <label> Structure</label>
 <div class="dropdown label-select">
-    <select class="form-control" name="mcrgfor" required>
-        <option value="">select one</option>
+    <select class="form-control" name="mcrgfor">
     <option value="M">Monthly</option>
-<option value="Q">Quartly</option>
+<option value="Q">Quarterly</option>
 <option value="Y">Yearly</option>
 <option value="O">One-Time</option>
 
@@ -423,26 +397,11 @@ echo'<i></i></label></div></div>';
 </div>
 </div>
 </div>
-<!--    <div class="noo-control-group">
-<div class="group-title">Property Images</div>
-<div class="group-container row">
-<div class="col-md-12">
-<div id="upload-container">
-<div id="aaiu-upload-container">
-<div class="moxie-shim moxie-shim-html5">
-<label for="input-upload" class="btn btn-secondary btn-lg">Select Images</label>
-<input id="input-upload" type="file" multiple="" accept="image/jpeg,image/gif,image/png">
-</div>
-<p>At least 1 image is required for a valid submission. The featured image will be used to dispaly on property listing page.</p>
-</div>
-</div>
-</div>
-</div>
-</div>-->
+
 <div class="noo-submit row">
 <div class="col-md-12">
     <input type="submit" name="property_submit" class="btn btn-lg rounded metro btn-primary" id="property_submit" value="Add Property">
-<label>Your submission will be reviewed by Administrator before it can be published</label>
+<label></label>
 </div>
 </div>
 </form>

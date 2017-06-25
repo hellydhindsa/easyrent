@@ -106,7 +106,7 @@
 </button>
 <div class="logo">
 <div class="logo-image">
-    <a href="../index.php" title="NooTheme CitiLights"></a>
+    <a href="../index.php" title="Easy Rent"></a>
 </div>
 </div>
 </div>
@@ -117,7 +117,7 @@
 <i class="fa fa-mobile"></i>
 <div class="calling-desc">
 CALL US NOW<br>
-<span><a href="tel:(+01)-793-7938">(+01)-793-7938</a></span>
+<span><a>9878161852</a></span>
 </div>
 </div>
 </div>
@@ -126,7 +126,7 @@ CALL US NOW<br>
  <div class="main-navigation">
 <nav class="collapse navbar-collapse" id="main-collapse" role="navigation">
 <ul class="nav navbar-nav">
-<li class="dropdown active">
+<li class="dropdown">
     <a href="frmpg.php">Add PG&nbsp;<span class="caret"></span></a>
 
 </li>
@@ -135,21 +135,14 @@ CALL US NOW<br>
 
 </li>
 <li class="dropdown">
-<a href="frmhou.php">Add house&nbsp;<span class="caret"></span></a>
+<a href="frmhou.php">Add House&nbsp;<span class="caret"></span></a>
 
 </li>
 <li class="dropdown">
-<a href="frmcom.php">Add commercial Property&nbsp;<span class="caret"></span></a>
+<a href="frmcom.php">Add Commercial Property&nbsp;<span class="caret"></span></a>
 
 </li>
-<li class="dropdown">
-<a href="#">abc3&nbsp;<span class="caret"></span></a>
 
-</li>
-<li class="dropdown">
-<a href="contact.html">abc4&nbsp;<span class="caret"></span></a>
-
-</li>
 </ul>
 </nav>
 </div>

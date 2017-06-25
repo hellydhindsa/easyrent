@@ -1,5 +1,7 @@
 <?php
 include_once '../buslogic.php';
+//code check user is login or not
+ if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
 if(isset($_POST["property_submit"]))
 {
     $obj= new clscp();
@@ -24,7 +26,9 @@ if(isset($_POST["property_submit"]))
     $obj->cpsts="P";
        $obj->cpregcod=$_SESSION["lcod"];
   //  $obj->cpregcod=2;
-    $obj->cpavlfrm=$_POST["avlfrm"];
+       $cls_date = new DateTime($_POST["avlfrm"]);
+    $obj->cpavlfrm=$cls_date->format('y-m-d');
+   // $obj->cpavlfrm=$_POST["avlfrm"];
     $obj->cpdsc=$_POST["desc"];
     $obj->cpfursts=$_POST["fursts"];
      $obj->cplat=$_POST["lat"];
@@ -86,39 +90,9 @@ function getState(val) {
  
 <div class="container noo-mainbody">
     
-    <!--   ------------------------------------------pop up------------------------------------------------------>
-
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title"> Upload Commencial pictures </h2>
-        </div>
-        <div class="modal-body">
-
- 
-<form action="upload.php" class="dropzone" id="uploadFile" name="uploadFile" method="POST">
-        <span id="tmp-path"></span>
-    </form>
-You Have To Choose At least One Picture
-
-    
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn11 btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-<!--    ----------------------------------------------------------end model and images popup--------------------------->
+  <?php 
+include_once 'MultiPicturesUploadPanel.php';
+?>
 <div class="noo-mainbody-inner">
 <div class="row clearfix">
  
@@ -129,60 +103,14 @@ You Have To Choose At least One Picture
 include_once 'leftpanel.php';
 ?>
 </div>
-<!--<h3 class="dashboard-sidebar-title">Abhusan Data 1</h3>
-<div class="membership-info dashboard-sidebar">
-<div class="sidebar-content">
-<p><strong>abc1</strong></p>
-<p>abc2:&nbsp;3</p>
-<p>abc3:&nbsp;1</p>
-<p>abc3:&nbsp;1</p>
-<p>abc4:&nbsp;1</p>
-<p>abc5:&nbsp;Never</p>
-</div>
-</div>-->
-<!--<h3 id="subscription-sidebar" class="dashboard-sidebar-title">abhushan data 2</h3>
-<div class="membership-payment dashboard-sidebar">
-<div class="sidebar-content">
-<form class="subscription_post">
-<div class="form-message">
-</div>
-<div class="form-group">
-<div class="dropdown label-select">
-<select class="form-control">
-<option>Plu</option>
-<option>Premium Plan</option>
-<option>Basic Plan</option>
-</select>
-</div>
-</div>
-<div class="form-group">
-<input type="hidden" name="recurring_payment" class="" value="0">
-<label for="recurring_payment" class="checkbox-label">
-<input type="checkbox" id="recurring_payment" name="recurring_payment" value="1">xyz1</label>
-</div>
-<div class="form-group recurring_time" style="display: none;">
-<label for="recurring_time">xyz2</label>
-<input type="text" id="recurring_time" class="form-control" name="recurring_time" value="3">
-</div>
-<div class="">
-<input type="submit" class="btn btn-secondary" value="PAY WITH PAYPAL">
-</div>
-<div>
-</div>
-<div class="package-info">
-or&nbsp;
-<a href="#">xyz3</a>
-</div>
-</form>
-</div>
-</div>-->
+
 </div>
 </div>
  
  
 <div class="noo-content col-xs-12 col-md-8">
 <div class="submit-header">
-<h1 class="page-title">Submit Commencial Property</h1>
+<h1 class="page-title">Submit commercial Property</h1>
 </div>
 <div class="submit-content">
 <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form">
@@ -191,7 +119,7 @@ or&nbsp;
 <div class="group-container row">
     <div class="col-md-6">
 <div class="form-group s-prop-type">
-<label>Property for</label>
+<label>Property Type</label>
 <div class="dropdown label-select">
     <select class="form-control" name="cptyp" required>
 <option value="">select one</option>
@@ -205,7 +133,7 @@ or&nbsp;
 </div>
     <div class="price col-md-6">
     <div class="form-group s-prop-type">
-<label>floor No</label>
+<label>Floor No</label>
 <div class="dropdown label-select">
     <select class="form-control" name="flono" required>
   <option value="">select one</option>
@@ -227,7 +155,7 @@ or&nbsp;
 </div>
 <div class="price_label col-md-6">
     <div class="form-group s-prop-type">
-<label>Total floors</label>
+<label>Total Floors</label>
 <div class="dropdown label-select">
 <select class="form-control" name="totflo" required>
 <option value="">select one</option>
@@ -249,7 +177,7 @@ or&nbsp;
 </div>
     <div class="col-md-6">
 <div class="form-group s-prop-bedrooms">
-<label for="avlfrm">Avalable From</label>
+<label for="avlfrm">Available From</label>
 <div class="input-group date datepicker" id="datetimepicker">
 <input type="text" id="avlfrm" class="form-control" value="" name="avlfrm" required>
  <span class="input-group-addon">
@@ -259,49 +187,6 @@ or&nbsp;
 </div>
 </div>
 
-<!--<div class="col-md-4">
-<div class="form-group s-prop-type">
-<label>PG for</label>
-<div class="dropdown label-select">
-<select class="form-control">
-<option>select one</option>
-<option>Boys</option>
-<option>Girls</option>
-
-</select>
-</div>
-</div>
-</div>-->
-<!--<div class="col-md-6">
-<div class="form-group s-prop-type">
-<label>Number Of Seats</label>
-<div class="dropdown label-select">
-<select class="form-control">
-<option>select Option</option>
-<option>One</option>
-<option>Two</option>
-<option>Three</option>
-<option>Four</option>
-<option>Five</option>
-<option>Six</option>
-<option>Seven</option>
-<option>Eignt</option>
-<option>Nine</option>
-<option>Ten</option>
-<option>Eleven</option>
-</select>
-</div>
-</div>
-</div>-->
- 
-
-
-<!--<div class="col-md-4">
-<div class="form-group s-prop-bathrooms">
-<label for="bathrooms">Bath Rooms</label>
-<input type="text" id="bathrooms" class="form-control" value="" name="bathrooms">
-</div>
-</div>-->
 <div class="col-md-12">
 <div class="form-group s-prop-desc">
 <label for="textarea">Description&nbsp;</label>
@@ -312,7 +197,7 @@ or&nbsp;
 <div class="form-group s-prop-_noo_property_feature_attic">
 <input type="hidden" name="noo_property_feature[attic]" class="" value="0">
 <label for="_noo_property_feature_attic" class="checkbox-label">
-<input type="checkbox" id="_noo_property_feature_attic" name="delsts" class="" value="1">&nbsp;I am not intrested in in getting response from brokers. <i></i>
+<input type="checkbox" id="_noo_property_feature_attic" name="delsts" class="" value="1">&nbsp;I am not interested in getting response from brokers. <i></i>
 </label>
 </div>
 </div>
@@ -375,7 +260,7 @@ or&nbsp;
 </div>
 <div class="col-md-8">
 <div class="form-group s-prop-address">
-<label for="lndmrk">LandMark&nbsp;&#42;</label>
+<label for="lndmrk">LandMark&nbsp;</label>
 <textarea id="lndmrk" class="form-control" name="lndmrk" rows="1" required=""></textarea>
 </div>
 </div>
@@ -407,7 +292,7 @@ or&nbsp;
 
 <div class="form-group s-prop-_noo_property_field_lot_area">
 <label for="rdfac">Width of road Facing plot(feets)</label>
-<input type="text" id="rdfac" name="rdfac" class="form-control" value="" required>
+<input type="number" id="rdfac" name="rdfac" class="form-control" value="" required>
 </div>
 </div>
 <div class="col-md-6">
@@ -446,7 +331,7 @@ or&nbsp;
 <div class="form-group s-prop-bathrooms">
 <div class="form-group s-prop-_noo_property_field_lot_area">
 <label for="_noo_property_field_lot_area">Total Area Covered</label>
-<input type="text" id="_noo_property_field_lot_area" name="totare" class="form-control" value="" required>
+<input type="number" id="_noo_property_field_lot_area" name="totare" class="form-control" value="" required>
 </div>
 </div>
 </div> 
@@ -484,7 +369,7 @@ or&nbsp;
 <div class="col-md-6">
 <div class="form-group s-prop-status">
 
-<label>Personal Pentry</label>
+<label>Personal Pentary</label>
 <div class="dropdown label-select">
 <select class="form-control" name="ppntry" required>
 <option value="">select one</option>
@@ -542,24 +427,23 @@ echo'<i></i></label></div></div>';
 </div>
 
 <div class="noo-control-group">
-<div class="group-title">Rents and Charges</div>
+<div class="group-title">Rents and Other Charges</div>
 <div class="group-container row">
     
 <div class="col-md-7">
 <div class="form-group s-prop-bedrooms">
 <label for="rnt">Expected Rent&nbsp;(rupees)</label>
-<input type="text" id="rnt" class="form-control" value="" name="rnt" required>
+<input type="number" id="rnt" class="form-control" value="" name="rnt" required>
 </div>
 </div>
 <div class="col-md-5">
 <div class="form-group s-prop-status">
-<label> select one</label>
+<label> Structure</label>
 <div class="dropdown label-select">
-<select class="form-control" name="rntfor">
-   <option value="M">Monthly</option>
-<option value="Q">Quartly</option>
+    <select class="form-control" name="rntfor" >
+<option value="M">Monthly</option>
+<option value="Q">Quarterly</option>
 <option value="Y">Yearly</option>
-
 
 </select>
 </div>
@@ -567,30 +451,30 @@ echo'<i></i></label></div></div>';
 </div>
 <div class="col-md-6">
 <div class="form-group s-prop-type">
-<label for="scrty">Security Charges</label>
-<input type="text" id="scrty" class="form-control" value="" name="scrty" required>
+<label for="scrty">Security Charges (rupees)</label>
+<input type="number" id="scrty" class="form-control" value="" name="scrty" >
 </div>
 </div>
 <div class="col-md-6">
 <div class="form-group s-prop-bedrooms">
-<label for="ocrg">Other charges</label>
-<input type="text" id="ocrg" class="form-control" value="" name="ocrg" required>
+<label for="ocrg">Other Charges (rupees)</label>
+<input type="number" id="ocrg" class="form-control" value="" name="ocrg" >
 </div>
 </div>
 
 <div class="col-md-7">
 <div class="form-group s-prop-bedrooms">
-<label for="mntcrg">Maintainness Charges&nbsp;(rupees)</label>
-<input type="text" id="mntcrg" class="form-control" value="" name="mntcrg" required>
+<label for="mntcrg">Maintenance Charges&nbsp;(rupees)</label>
+<input type="number" id="mntcrg" class="form-control" value="" name="mntcrg" >
 </div>
 </div>
 <div class="col-md-5">
 <div class="form-group s-prop-status">
-<label> Select One</label>
+<label> Structure</label>
 <div class="dropdown label-select">
-<select class="form-control" required name="mntcrgfor">
+    <select class="form-control" name="mcrgfor" >
     <option value="M">Monthly</option>
-<option value="Q">Quartly</option>
+<option value="Q">Quarterly</option>
 <option value="Y">Yearly</option>
 <option value="O">One-Time</option>
 
@@ -600,26 +484,11 @@ echo'<i></i></label></div></div>';
 </div>
 </div>
 </div>
-<!--    <div class="noo-control-group">
-<div class="group-title">Property Images</div>
-<div class="group-container row">
-<div class="col-md-12">
-<div id="upload-container">
-<div id="aaiu-upload-container">
-<div class="moxie-shim moxie-shim-html5">
-<label for="input-upload" class="btn btn-secondary btn-lg">Select Images</label>
-<input id="input-upload" type="file" multiple="" accept="image/jpeg,image/gif,image/png">
-</div>
-<p>At least 1 image is required for a valid submission. The featured image will be used to dispaly on property listing page.</p>
-</div>
-</div>
-</div>
-</div>
-</div>-->
+
 <div class="noo-submit row">
 <div class="col-md-12">
 <input type="submit" name="property_submit" class="btn btn-lg rounded metro btn-primary" id="property_submit" value="Add Property">
-<label>Your submission will be reviewed by Administrator before it can be published</label>
+<label></label>
 </div>
 </div>
 </form>
