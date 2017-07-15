@@ -103,7 +103,7 @@ CALL US NOW<br>
 <div class="main-navigation">
 <nav class="collapse navbar-collapse" id="main-collapse" role="navigation">
 <ul class="nav navbar-nav">
-<li class="dropdown active">
+<li class="dropdown ">
 <a href="index.php">Home&nbsp;<span class="caret"></span></a>
 
 </li>
@@ -112,11 +112,11 @@ CALL US NOW<br>
 
 </li>
 
-<li class="dropdown active">
+<li class="dropdown">
     <a href="user/frmpg.php">Post Property&nbsp;<span class="caret"></span></a>
 
 </li>
-<li class="dropdown active">
+<li class="dropdown">
     <a href="user/frmAlerts.php">Get Alerts&nbsp;<span class="caret"></span></a>
 
 </li>
