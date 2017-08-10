@@ -428,6 +428,44 @@ class classUserAlerts
         }}
          
      }
+
+     class ContactForm
+     {
+            public $contactFormName,$contactFormEmail,$contactFormSubject,$contactFormMessage,$contactFormDate;
+    function saveContactForm()
+    {
+        $con=new clscon();
+        $link=$con->db_connect();
+        $qry="call insertContactForm('$this->contactFormName','$this->contactFormEmail','$this->contactFormSubject','$this->contactFormMessage','$this->contactFormDate')";
+        $res=  mysqli_query($link, $qry)or die(mysqli_error($link));
+        if(mysqli_affected_rows($link))
+        {
+            $con->db_close();
+            return $res;
+        }
+        else
+        { $con->db_close();
+            return FALSE;
+        }}
+         //GetContactForm method to get contact form who are not deleted and order by date desc
+            function GetContactForm()
+        {
+            $con=new clscon();
+            $link=$con->db_connect();
+            $qry="call GetContactForm()";
+            $res=  mysqli_query($link, $qry);
+            $i=0;
+            $arr=array();
+            while($r=  mysqli_fetch_row($res))
+            {
+                $arr[$i]=$r;
+                $i++;
+                
+            }
+            $con->db_close();
+            return $arr;
+        }
+     }
      class clspgpic
 {
     public $pgpiccod,$pgpicfil,$pgpicdsc,$pgpicpgcod,$pgpictyp;

@@ -19,24 +19,7 @@ if (isset($_REQUEST["Agentcod"]))
     }
 
 }
-//if(!isset($_SESSION["lcod"]))
-//{
-//    header("location:../frmlogin.php?sts=S");
-//}
-function GetAgentType($agentTyp) {
-        $FinalAgent="PG";
-        if($agentTyp =='O')
-        {
-          $FinalAgent="Owner";
-        }
-        else if ($agentTyp =='B')
-        {
-             $FinalAgent="Agent";
-        }
-        
-           
-            return $FinalAgent;
-         }
+
 include_once 'AdminHeader.php';
 ?>
 
@@ -59,25 +42,23 @@ include_once 'AdminHeader.php';
 <form id="new_post"  class="noo-form property-form" >
  <div class=" col-md-12">
       <?php
-        $obj= new clsprf();
-        $arr = $obj->DisplayUsersAdmin();
+        $obj= new ContactForm();
+        $arr = $obj->GetContactForm();
         If(count($arr)>0)
-            echo "<table width='90%'><tr><th>City</th><th>Location</th><th>Name</th><th>Company</th><th>Type</th><th>Activate</th></tr>";
+            echo "<table width='90%'><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th><th>Delete</th></tr>";
         for($i=0; $i<count($arr); $i++)
         {
            // $type=  substr($arr[$i][2], 0, 1);
             echo"<tr width='10%'><td>".$arr[$i][0]."</td>";
             echo"<td width='10%'>".$arr[$i][1]."</td>";
             echo"<td width='20%'>".$arr[$i][2]."</td>";
-            echo"<td width='10%'>".$arr[$i][3]."</td>";
-             echo"<td width='10%'>".GetAgentType($arr[$i][7])."</td>";
-            if($arr[$i][6]==1)
-            {
-            echo"<td width='10%'><a href=frmManageAgent.php?Agentcod=".$arr[$i][5]."&mode=A>Active</a></td>";
-        }
- else {
-      echo"<td width='10%'><a href=frmManageAgent.php?Agentcod=".$arr[$i][5]."&mode=NA>Not Active</a></td>";
- }
+            echo"<td width='50%'>".$arr[$i][3]."</td>";
+             echo"<td width='10%'>".$arr[$i][4]."</td>";
+          //  if($arr[$i][6]==1)
+          //  {
+            echo"<td width='10%'><a href=viewcontactForms.php?Contactcod=".$arr[$i][5]."&mode=A>Delete</a></td>";
+        //}
+
             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
            
         }
@@ -110,7 +91,8 @@ include_once 'AdminHeader.php';
 <div class="col-xs-12 col-sm-6 text-block">
 &copy; 2017 EasyRent. All Rights Reserved.
 <br/>
-<span>Power by HiddenWebSolutions.com</span><br>
+<span>Power by HiddenWebSolutions.com</span>
+<br>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">
 <div class="logo-image">
@@ -145,6 +127,4 @@ include_once 'AdminHeader.php';
 /* ]]> */
 </script>
 </body>
-
-<!-- Mirrored from html.nootheme.com/citilights/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:46:40 GMT -->
 </html>

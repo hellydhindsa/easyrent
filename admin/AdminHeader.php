@@ -97,7 +97,7 @@
 </button>
 <div class="logo">
 <div class="logo-image">
-<a href="../index.php" title="NooTheme CitiLights"></a>
+<a href="../index.php" title="Easy rent"></a>
 </div>
 </div>
 </div>
@@ -137,6 +137,11 @@
     <a href="frmManageAgent.php">Users&nbsp;<span class="caret"></span></a>
 
 </li>
+<li class="dropdown">
+    <a href="Viewcontactforms.php">Contactforms&nbsp;<span class="caret"></span></a>
+
+</li>
+
 <li class="dropdown">
     <a href="../index.php">Logout&nbsp;<span class="caret"></span></a>
 

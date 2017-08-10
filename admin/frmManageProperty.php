@@ -116,8 +116,7 @@ include_once 'AdminHeader.php';
 <div class="col-xs-12 col-sm-6 text-block">
 &copy; 2015 CitiLights. All Rights Reserved.
 <br/>
-<span>Designed by <a title="Visit Nootheme.com!" href="http://www.nootheme.com/" target="_blank">NooTheme.com</a>.</span>
-<br>
+<span>Power by HiddenWebSolutions.com</span><br>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">
 <div class="logo-image">
