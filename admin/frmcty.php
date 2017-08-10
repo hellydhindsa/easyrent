@@ -140,7 +140,8 @@ include_once 'AdminHeader.php';
 <div class="col-xs-12 col-sm-6 text-block">
 &copy; 2017 EasyRent. All Rights Reserved.
 <br/>
-<span>Power by <a title="Visit Nootheme.com!"  target="_blank">HiddenWebSolutions.com</a>.</span>
+<span>Power by <a title="Visit HiddenWebSolutions.com!" href="http://www.hiddenwebsolutions.com"  target="_blank">HiddenWebSolutions.com</a>.</span>
+
 <br>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">

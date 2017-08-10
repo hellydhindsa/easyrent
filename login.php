@@ -685,5 +685,5 @@ CALL US NOW<br>
 </div>
   
  <?php
-//include_once 'footer.php';
+include_once 'footer.php';
 ?>

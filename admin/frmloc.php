@@ -174,9 +174,9 @@ function abc(e)
 <div class="container">
 <div class="row">
 <div class="col-xs-12 col-sm-6 text-block">
-&copy; 2015 CitiLights. All Rights Reserved.
+&copy; 2017 EasyRent. All Rights Reserved.
 <br/>
-<span>Designed by <a title="Visit Nootheme.com!" href="http://www.nootheme.com/" target="_blank">NooTheme.com</a>.</span>
+<span>Power by <a title="Visit HiddenWebSolutions.com!" href="http://www.hiddenwebsolutions.com"  target="_blank">HiddenWebSolutions.com</a>.</span>
 <br>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">

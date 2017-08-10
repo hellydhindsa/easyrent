@@ -39,7 +39,7 @@
 <div class="col-xs-12 col-sm-6 text-block">
 &copy; 2017 EasyRent. All Rights Reserved.
 <br/>
-<span>Power by HiddenWebSolutions.com</span>
+<span>Power by <a title="Visit HiddenWebSolutions.com!" href="http://www.hiddenwebsolutions.com"  target="_blank">HiddenWebSolutions.com</a>.</span>
 <br>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">
@@ -95,6 +95,4 @@
 //});
 </script>
 </body>
-
-<!-- Mirrored from html.nootheme.com/citilights/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:46:40 GMT -->
 </html>

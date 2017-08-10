@@ -114,9 +114,9 @@ include_once 'AdminHeader.php';
 <div class="container">
 <div class="row">
 <div class="col-xs-12 col-sm-6 text-block">
-&copy; 2015 CitiLights. All Rights Reserved.
+&copy; 2017 EasyRent. All Rights Reserved.
 <br/>
-<span>Power by HiddenWebSolutions.com</span><br>
+<span>Power by <a title="Visit HiddenWebSolutions.com!" href="http://www.hiddenwebsolutions.com"  target="_blank">HiddenWebSolutions.com</a>.</span>
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">
 <div class="logo-image">
