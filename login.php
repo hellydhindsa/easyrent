@@ -219,30 +219,8 @@ function clearLoginSessions()
      }
    
 ob_end_clean();
+ include_once 'header.php';
 ?>
-
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>EasyRent - Login - Register</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="shortcut icon" href="images/icon/favicon.jpg" type="image/x-icon">
- 
-<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic,400italic' rel='stylesheet' type='text/css'>
- 
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/style-selector.css">
-
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/shortcode.css">
-<link id="style-main-color" rel="stylesheet" href="css/color/color1.css">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script>
 
  
@@ -258,176 +236,6 @@ function getState(val) {
 	});
 }
 </script>
-  <style>
-    .abcform>form{float:left; margin-left: 33%;
-    margin-right: auto;
-    max-width: 450px;  }
-    .btn-large11{
-        background-color: #f0e797;
-        color: #bdb254;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-top: 0;
-    padding: 8px 16px;
-    text-transform: uppercase;
-    transition: all 0.3s linear 0s;
-   
-    }
-      .form-group.s-prop-desc-new textarea {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(222, 222, 222);
-    border-collapse: separate;
-    border-radius: 3px;
-    bottom: auto;
-    box-shadow: none;
-    box-sizing: border-box;
-    clear: none;
-    display: block;
-    float: none;
-    height: 100px;
-    left: auto;
-    margin: 0;
-    outline: 0 none rgb(85, 85, 85);
-    outline-offset: 0;
-    padding: 8px;
-    position: static;
-    right: auto;
-    text-align: start;
-    top: auto;
-    vertical-align: baseline;
-   
-    z-index: auto;
-}
-.btn11 {
-    color: #bdb254;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-top: 0;
-/*    padding: 8px 16px;*/
-    text-transform: uppercase;
-    transition: all 0.3s linear 0s;
-/*    width: 100%;*/
-background-color: #f0e797;
--moz-user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-block;
-  
- 
-    line-height: 1.42857;
-   
-    padding: 6px 12px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-}
-</style>
-</head>
-<body class="page-fullwidth">
- 
-<div class="site">
- 
-<header class="noo-header">
- 
-<div class="top-header">
-<div class="container">
-<div class="top-header-inner">
-<ul class="social-top">
-<li><a href="#" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-<li><a href="#" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-
-</ul>
-<div class="top-header-content">
-<div class="emailto content-item">
-<a href="http://html.nootheme.com/cdn-cgi/l/email-protection#f29b9c949db2919b869b9e9b959a8681dc919d9f"><i class="fa fa-envelope-o"></i>&nbsp;Email:<span class="__cf_email__" data-cfemail="056c6b636a45666c716c696c626d71762b666a68">[email&#160;protected]</span><script cf-hash='f9e31' type="text/javascript">
-/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script></a>
-</div>
-<div class="register content-item">
-<a href="login.php"><i class="fa fa-key"></i>&nbsp;Register</a>
-</div>
-<div class="login content-item">
-<a href="login.php"><i class="fa fa-sign-in"></i>&nbsp;Login</a>
-</div>
- 
-<div class="header-search">
-<label for="input-header-search"><i class="fa fa-search"></i></label>
-<input type="text" id="input-header-search" placeholder="Search">
-</div>
-</div>
-</div>
-</div>
-</div>
- 
- 
-<div class="main-nav-wrap container">
- 
-<div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-collapse">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<div class="logo">
-<div class="logo-image">
-<a href="index.php" title="NooTheme CitiLights"></a>
-</div>
-</div>
-</div>
- 
- 
-<div class="calling-info">
-<div class="calling-content">
-<i class="fa fa-mobile"></i>
-<div class="calling-desc">
-CALL US NOW<br>
-<span><a>9878161852</a></span>
-</div>
-</div>
-</div>
- 
- 
-<div class="main-navigation">
-<nav class="collapse navbar-collapse" id="main-collapse" role="navigation">
-<ul class="nav navbar-nav">
-<li class="dropdown active">
-<a href="index.php">Home&nbsp;<span class="caret"></span></a>
-
-</li>
-<li class="dropdown">
-<a href="ListWithSidebar.php">Properties&nbsp;<span class="caret"></span></a>
-
-</li>
-
-<li class="dropdown active">
-    <a href="login.php">Post Property&nbsp;<span class="caret"></span></a>
-
-</li>
-<li class="dropdown active">
-<a href="user/frmAlerts.php">Get Alerts&nbsp;<span class="caret"></span></a>
-
-</li>
-<li class="dropdown">
-<a href="FrmAgentListing.php">Agents&nbsp;<span class="caret"></span></a>
-
-</li>
-
-<li class="dropdown">
-<a href="contact.php">Contact&nbsp;<span class="caret"></span></a>
-
-</li>
-</ul>
-</nav>
-</div>
- 
-</div>
- 
-</header>
- 
 <div class="noo-wrapper">
  
 <div class="container-fluid noo-mainbody">
@@ -463,8 +271,8 @@ CALL US NOW<br>
         ?>
 
 </div>
-<!--<p class="logreg-desc">Lost your password? <a href="#">Click here to reset</a>
-</p>-->
+<p class="logreg-desc">Lost your password? <a href="#">Click here to reset</a>
+</p>
 
 <p class="logreg-desc">Not register yet? <button type="button" class="btn-link" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Click Here to register</button>
 </p>
@@ -668,7 +476,7 @@ CALL US NOW<br>
        $('#OTPConfirmModel').modal();
   }
         </script>
-  </form>
+
 </div>
   
 </div>
@@ -682,8 +490,7 @@ CALL US NOW<br>
 </div>
 </div>
  
-</div>
-  
+
  <?php
 include_once 'footer.php';
 ?>

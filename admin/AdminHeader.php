@@ -141,7 +141,10 @@
     <a href="Viewcontactforms.php">Contactforms&nbsp;<span class="caret"></span></a>
 
 </li>
+<li class="dropdown">
+    <a href="ChangePassword.php">Change Password&nbsp;<span class="caret"></span></a>
 
+</li>
 <li class="dropdown">
     <a href="../index.php">Logout&nbsp;<span class="caret"></span></a>
 

@@ -161,7 +161,10 @@ CALL US NOW<br>
 <a href="frmcom.php">Add Commercial Property&nbsp;<span class="caret"></span></a>
 
 </li>
+<li class="dropdown">
+    <a href="ChangePassword.php">Change Password&nbsp;<span class="caret"></span></a>
 
+</li>
 </ul>
 </nav>
 </div>
