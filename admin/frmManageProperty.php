@@ -101,56 +101,6 @@ include_once 'AdminHeader.php';
     
 
 </div>
- 
- 
-<footer class="footer">
- 
-<div class="footer">
-
-</div>
- 
- 
-<div class="copyright">
-<div class="container">
-<div class="row">
-<div class="col-xs-12 col-sm-6 text-block">
-&copy; 2017 EasyRent. All Rights Reserved.
-<br/>
-<span>Power by <a title="Visit HiddenWebSolutions.com!" href="http://www.hiddenwebsolutions.com"  target="_blank">HiddenWebSolutions.com</a>.</span>
-</div>
-<div class="col-xs-12 col-sm-6 logo-block">
-<div class="logo-image">
-<a href="index-2.html"><img src="../images/logo/logo-footer.png" alt="CitiLights"></a>
-</div>
-</div>
-</div>
-</div>
- 
-<div id="back-to-top" class="back-to-top">
-<i class="fa fa-angle-up"></i>
-</div>
- 
-</div>
- 
-</footer>
- 
-</div>
- 
- 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
-<script type="text/javascript" src="js/SmoothScroll.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-<script type="text/javascript" src="js/style.selector.js"></script>
- 
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript">
-/* <![CDATA[ */
-(function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
-/* ]]> */
-</script>
-</body>
-
-<!-- Mirrored from html.nootheme.com/citilights/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:46:40 GMT -->
-</html>
+   <?php
+include_once 'Adminfooter.php';
+?>

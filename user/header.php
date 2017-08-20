@@ -131,7 +131,7 @@ background-color: #f0e797;
 </div>
  
  
-<div class="calling-info">
+<!--<div class="calling-info">
 <div class="calling-content">
 <i class="fa fa-mobile"></i>
 <div class="calling-desc">
@@ -139,7 +139,7 @@ CALL US NOW<br>
 <span><a>9878161852</a></span>
 </div>
 </div>
-</div>
+</div>-->
  
 
  <div class="main-navigation">

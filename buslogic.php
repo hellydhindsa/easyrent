@@ -279,6 +279,27 @@ class classUserAlerts
             return $a;
             }
         }
+        function ChangePassword($password,$registrationCode)
+        {
+            $con= new clscon();
+            $link=$con->db_connect();
+            $qry="call ChangePassword('$password','$registrationCode',@phone)";
+            $res= mysqli_query($link, $qry) or die(mysqli_error($link));
+            $res1= mysqli_query($link,"select @phone") or die(mysqli_error($link));
+            $r=  mysqli_fetch_row($res1);
+           // echo $r[0];
+            if($r[0]==-1)
+            { 
+             $con->db_close ();
+            return 'N';
+            }
+            else 
+            {
+            $ReturnedPhone=$r[0];
+            $con->db_close();
+            return $ReturnedPhone;
+            }
+        }
         
          function UpdateOTPStatus($eml,$pwd,$otp)
         {

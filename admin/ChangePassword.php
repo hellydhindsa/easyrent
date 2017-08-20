@@ -9,12 +9,17 @@ if(isset($_POST["buttonChangePassword"]))
 {
  if($_POST["Password"]==$_POST["Confirmpassword"]){
     $obj= new clsreg();
-    $r=$obj->logincheck($_POST["Password"],$_POST["Confirmpassword"]);
+    $r=$obj->ChangePassword($_POST["Password"],$_SESSION["lcod"]);
   
              if($r=='N')
     {
-        $msg="Email Password Incorrect";
+        $msg="Change Password Not Completed";
        
+    }
+    else
+    {
+        $msg="Change Password Completed Sucessfully";  
+        SendMessage($r);
     }
   
  }
@@ -25,14 +30,14 @@ if(isset($_POST["buttonChangePassword"]))
 
 }
 
-function SendMessage($name,$phoneNumber)
+function SendMessage($phoneNumber)
 {
        //------------------sms sending---------
     $url = 'http://smslowprice.com/SendingSms.aspx';
 $fields = array('userid'=>urlencode('vickysingla'),
 'pass'=>urlencode('welcome@123'),
 'phone'=>urlencode($phoneNumber),
-'msg'=>urlencode('Dear '.$name.', Your password Updated Sucessfully .'));
+'msg'=>urlencode('Dear Admin, Your password Updated Sucessfully .'));
 $fields_string='';
 foreach($fields as $key=>$value)
 { $fields_string .=$key.'='.$value.'&';}
@@ -103,8 +108,7 @@ curl_close($ch);
  
 </div>
 </div>
-</div>
 
  <?php
-include_once 'footer.php';
+include_once 'Adminfooter.php';
 ?>

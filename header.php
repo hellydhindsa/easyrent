@@ -20,8 +20,9 @@
 <link rel="stylesheet" href="css/citilights-shortcode.css">
 <link id="style-main-color" rel="stylesheet" href="css/color/color1.css">
 
- 
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
 </head>
 <body class="home page-fullwidth">
  

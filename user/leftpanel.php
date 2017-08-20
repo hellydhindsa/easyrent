@@ -3,6 +3,7 @@
                                          $obj= new clsprf();  
                                        
                                                   $picarr = $obj->dsp_prfbyusercod($_SESSION["lcod"]);
+                                                  if(isset($picarr) && count($picarr)>0 ){
                                                   $pi=$picarr[0][7];
                                                   $extension=  substr($pi, strpos($pi, '.'));
                                                   if($extension>3)
@@ -11,6 +12,10 @@
                                                   }
  else {
       $pic=$picarr[0][7];
+ }
+                                                  }
+ else {
+      $pic='agent5.jpg'; 
  }
                                                   
  ?>
