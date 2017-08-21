@@ -1,33 +1,15 @@
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from html.nootheme.com/citilights/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:46:40 GMT -->
 <head>
 <meta charset="utf-8">
-<title>CitiLights - Login - Register</title>
+<title>Easy-Rent Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="../images/icon/favicon.jpg" type="image/x-icon">
  
 <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic,400italic' rel='stylesheet' type='text/css'>
- <style>
-    .abcform>form{float:left; margin-left: 33%;
-    margin-right: auto;
-    max-width: 450px;  }
-    .btnnew{
-        background-color: #f0e797;
-        color: #bdb254;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-top: 0;
-    padding: 8px 16px;
-    text-transform: uppercase;
-    transition: all 0.3s linear 0s;
-    width: 50%;
-    }
-</style>
+
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -36,7 +18,8 @@
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/shortcode.css">
 <link id="style-main-color" rel="stylesheet" href="../css/color/color1.css">
-
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 
 </head>
 <body class="page-fullwidth">
@@ -129,11 +112,16 @@
 
 </li>
 <li class="dropdown">
+    <a href="frmManageTestimonials.php">Testimonials&nbsp;<span class="caret"></span></a>
+
+</li>
+
+<li class="dropdown">
     <a href="ChangePassword.php">Change Password&nbsp;<span class="caret"></span></a>
 
 </li>
 <li class="dropdown">
-    <a href="../index.php">Logout&nbsp;<span class="caret"></span></a>
+    <a href="../login.php?sts=S">Logout&nbsp;<span class="caret"></span></a>
 
 </li>
 </ul>

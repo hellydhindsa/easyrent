@@ -44,7 +44,7 @@
 </div>
 <div class="col-xs-12 col-sm-6 logo-block">
 <div class="logo-image">
-    <a href="index.php"><img src="images/logo/logo-footer.png" alt="EasyRent"></a>
+    <a href="../index.php"><img src="../images/logo/logo-footer.png" alt="EasyRent"></a>
 </div>
 </div>
 </div>
@@ -62,18 +62,18 @@
 
 
 <!--<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
-<script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
-<script type="text/javascript" src="js/SmoothScroll.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
-<script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-<script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
-<script type="text/javascript" src="js/jquery.nouislider.all.min.js"></script>
-<script type="text/javascript" src="js/style.selector.js"></script>
+<script type="text/javascript" src="../js/jquery.parallax-1.1.3.js"></script>
+<script type="text/javascript" src="../js/SmoothScroll.js"></script>
+<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script type="text/javascript" src="../js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="../js/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="../js/jquery.nouislider.all.min.js"></script>
+<script type="text/javascript" src="../js/style.selector.js"></script>
  
-<script type="text/javascript" src="js/property-slider.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="../js/property-slider.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&a.indexOf("/cdn-cgi/l/email-protection") > -1  && (a.length > 28)){s='';j=27+ 1 + a.indexOf("/cdn-cgi/l/email-protection");if (a.length > j) {r=parseInt(a.substr(j,2),16);for(j+=2;a.length>j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);}t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();

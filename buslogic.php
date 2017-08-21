@@ -152,6 +152,70 @@ class classUserAlerts
 
      
 }
+class classUserTestimonials
+{
+   // `UserAlertsId`, `PropertyType`, `FurnishedStatus`, `Location`, `UserId`
+    public $Code,$Month,$Picture,$UserName,$Text,$Isactive;
+    function SaveTestimonial()
+    {
+        $con=new clscon();
+        $link=$con->db_connect();
+        $qry="call insertTestimonial('$this->UserName','$this->Text','$this->Month','$this->Picture',@cod)";
+        $res=  mysqli_query($link, $qry)or die(mysqli_error($link));
+        $res1= mysqli_query($link,"select @cod") or die(mysqli_error($link));
+        $r=  mysqli_fetch_row($res1);
+        $Tcod=$r[0];
+        if(mysqli_affected_rows($link))
+        {
+            $con->db_close();
+            return $Tcod;
+                    
+        }
+        else
+        {
+            $con->db_close();
+            return FALSE;
+        }}
+
+        
+        function DeleteTestimonial()
+        {
+          $con=new clscon();
+             $link=$con->db_connect();
+        $qry="call DeleteUserTestimonial($this->Code)";
+        $res=  mysqli_query($link, $qry);
+        if(mysqli_affected_rows($link))
+        {
+          $con->db_close();
+            return TRUE;   
+        }
+ else {
+     $con->db_close();
+            return FALSE;
+ }
+     
+ }
+        
+        function DispalyActiveTestimonials()
+        {
+            $con=new clscon();
+            $link=$con->db_connect();
+            $qry="call DispalyActiveTestimonials()";
+            $res=  mysqli_query($link, $qry);
+            $i=0;
+            $arr=array();
+            while($r=  mysqli_fetch_row($res))
+            {
+                $arr[$i]=$r;
+                $i++;
+                
+            }
+            $con->db_close();
+            return $arr;
+        }
+
+     
+}
        class clsreg
     {
     public $regcode,$regemail,$regpwd,$regdate,$regrol;

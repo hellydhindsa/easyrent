@@ -1,6 +1,9 @@
 <?php
 //session_start();
 include_once '../buslogic.php';
+//code check user is login or not and IS It Admin
+ if(!isset($_SESSION["lcod"]) || $_SESSION["lcod"]!=11){header("location:../login.php");}
+ 
 if(isset($_POST["btnupd"]))
 {
     $obj= new clsfac();

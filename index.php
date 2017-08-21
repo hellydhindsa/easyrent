@@ -288,70 +288,31 @@ echo'</li>';
 <li data-target="#carousel-testimonial" data-slide-to="3"></li>
 </ol>
 <div class="carousel-inner">
- 
-<div class="item active">
-<div class="slide-content">
-<div class="testimonial-desc">“I found my current apartment on EasyRent with extraordinary help from them and totally satisfied with the choice I made. All I had to do was to tell what I was looking for and I got back property suggestions nearly exact to my imagination. Among those, I finally chose mine now then completed procedure at ease. Highly recommend Citilights for your home search.”</div>
+ <?php
+        $objDispay= new classUserTestimonials();
+        $arrTestimonial = $objDispay->DispalyActiveTestimonials();
+        If(count($arrTestimonial)>0)
+                for($i=0; $i<4; $i++)
+        {
+                    if($i==0)
+                    {echo'<div class="item active">';}
+                    else{echo'<div class="item">';}
+echo'<div class="slide-content">
+<div class="testimonial-desc">“'.$arrTestimonial[$i][2].'”</div>
 <div class="our-customer-info">
 <div class="avatar">
-    <a href="#"><img src="images/other/customer1.jpg" alt=""></a>
+    <a href="#"><img src="testimonialpics/'.$arrTestimonial[$i][0].$arrTestimonial[$i][3].'" alt=""></a>
 </div>
 <div class="custom-desc">
-<h4>Gurav Singla</h4>
-<p>Happy Buyer of June</p>
+<h4>'.$arrTestimonial[$i][1].'</h4>
+<p>Happy Buyer of '.$arrTestimonial[$i][4].'</p>
 </div>
 </div>
 </div>
-</div>
+</div>';
+        }?>
  
- 
-<div class="item">
-<div class="slide-content">
-<div class="testimonial-desc">“I found my current apartment on EasyRent with extraordinary help from them and totally satisfied with the choice I made. All I had to do was to tell what I was looking for and I got back property suggestions nearly exact to my imagination. Among those, I finally chose mine now then completed procedure at ease. Highly recommend Citilights for your home search.”</div>
-<div class="our-customer-info">
-<div class="avatar">
-<a href="#"><img src="images/other/customer2.jpg" alt=""></a>
-</div>
-<div class="custom-desc">
-<h4>Deepinder Samra</h4>
-<p>Happy Buyer of July</p>
-</div>
-</div>
-</div>
-</div>
- 
- 
-<div class="item">
-<div class="slide-content">
-<div class="testimonial-desc">“I found my current apartment on EasyRent with extraordinary help from them and totally satisfied with the choice I made. All I had to do was to tell what I was looking for and I got back property suggestions nearly exact to my imagination. Among those, I finally chose mine now then completed procedure at ease. Highly recommend Citilights for your home search.”</div>
-<div class="our-customer-info">
-<div class="avatar">
-<a href="#"><img src="images/other/customer3.jpg" alt=""></a>
-</div>
-<div class="custom-desc">
-<h4>Arshdeep Singh</h4>
-<p>Happy Buyer of August</p>
-</div>
-</div>
-</div>
-</div>
- 
- 
-<div class="item">
-<div class="slide-content">
-<div class="testimonial-desc">“I found my current apartment on EasyRent with extraordinary help from them and totally satisfied with the choice I made. All I had to do was to tell what I was looking for and I got back property suggestions nearly exact to my imagination. Among those, I finally chose mine now then completed procedure at ease. Highly recommend Citilights for your home search.”</div>
-<div class="our-customer-info">
-<div class="avatar">
-<a href="#"><img src="images/other/customer4.jpg" alt=""></a>
-</div>
-<div class="custom-desc">
-<h4>Amandeep Handa</h4>
-<p>Happy Buyer of September</p>
-</div>
-</div>
-</div>
-</div>
- 
+
 </div>
 </div>
 </div>

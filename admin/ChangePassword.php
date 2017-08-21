@@ -1,8 +1,9 @@
 <?php
 
 include_once '../buslogic.php';
-//code check user is login or not
- if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
+//code check user is login or not and IS It Admin
+ if(!isset($_SESSION["lcod"]) || $_SESSION["lcod"]!=11){header("location:../login.php");}
+ 
 
 
 if(isset($_POST["buttonChangePassword"]))

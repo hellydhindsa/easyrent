@@ -1,7 +1,5 @@
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from html.nootheme.com/citilights/submit-proprety.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:49:03 GMT -->
 <head>
 <meta charset="utf-8">
 <title>EasyRent - Submit Property</title>
@@ -55,11 +53,6 @@ background-color: #f0e797;
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script src="../js/dropzone.js"></script>
 
- 
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
 <body class="page-left-sidebar">
  
@@ -70,23 +63,19 @@ background-color: #f0e797;
 <div class="top-header">
 <div class="container">
 <div class="top-header-inner">
-<ul class="social-top">
+<!--<ul class="social-top">
 <li><a href="#" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
 <li><a href="#" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
 <li><a href="#" title="Pinterest" target="_blank"><i class="fa fa-pinterest"></i></a></li>
 <li><a href="#" title="RSS" target="_blank"><i class="fa fa-rss"></i></a></li>
-</ul>
+</ul>-->
 <div class="top-header-content">
 <div class="emailto content-item">
-<a href="http://html.nootheme.com/cdn-cgi/l/email-protection#3a53545c557a59534e5356535d524e4914595557"><i class="fa fa-envelope-o"></i>&nbsp;Email:<span class="__cf_email__" data-cfemail="771e19111837141e031e1b1e101f03045914181a">[email&#160;protected]</span><script cf-hash='f9e31' type="text/javascript">
-/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script></a>
 </div>
 <div class="register content-item">
-<a href="login-register.html"><i class="fa fa-key"></i>&nbsp;Register</a>
+
 </div>
-<!--<div class="login content-item">
-<a href="login-register.html"><i class="fa fa-sign-in"></i>&nbsp;Login</a>
-</div>-->
+
  <?php
     if(!isset($_SESSION["lcod"]))
    {
@@ -160,6 +149,13 @@ CALL US NOW<br>
 <li class="dropdown">
 <a href="frmcom.php">Add Commercial Property&nbsp;<span class="caret"></span></a>
 
+</li>
+
+<li class="dropdown">
+<a href="frmprf.php" >My Profile&nbsp;<span class="caret"></span></a>
+</li>
+<li class="dropdown">
+<a href="frmmyprp.php">My Properties&nbsp;<span class="caret"></span></a>
 </li>
 <li class="dropdown">
     <a href="ChangePassword.php">Change Password&nbsp;<span class="caret"></span></a>

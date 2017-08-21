@@ -14,12 +14,12 @@ if(isset($_POST["Alert_submit"]))
    $stsAlert= $obj->SaveUserAlerts();
    if($stsAlert)
    {
- 
+ $msg="your Testimonial Added Sucessfully";
    }
    else
    {
 
-       
+      $msg="your Testimonial Not Added Sucessfully";  
    }
     
 }
@@ -29,7 +29,15 @@ if (isset($_REQUEST["AlterCod"]))
     {
         $obj=new classUserAlerts();
         $obj->UserAlertsId=$_REQUEST["AlterCod"];
-        $obj->DeleteUserAlerts();
+      $deleteStatus=  $obj->DeleteUserAlerts();
+      if($deleteStatus)
+      {
+          $msg="your Testimonial Deleted Sucessfully"; 
+      }
+      else
+      {
+         $msg="your Testimonial Not Deleted Sucessfully";  
+      }
     }
 }
 function GetPropertyType($propertyTyp) {
@@ -138,7 +146,11 @@ function getState(val) {
 <div class="noo-submit row">
 <div class="col-md-12">
     <input type="submit" name="Alert_submit" class="btn btn-lg rounded metro btn-primary" id="property_submit" value="Add Alerts">
-<label></label>
+<?php
+        if(isset($msg))
+            echo '<label style="color: red;
+    font-weight: bold;" >'.$msg.'</label>';
+        ?>
 </div>
     <div class="noo-control-group">
 <div class="group-title">MY Alerts</div>
@@ -154,8 +166,8 @@ function getState(val) {
 <div class="form-group s-prop-type">
 
 <div class="form-message">
-    <span class="form-control"> your Alert for City :';
-echo $arr[$i][0].", Location :".$arr[$i][1]." With Property Type : ".GetPropertyType($arr[$i][2])." Is Set";
+    <span class="form-control"> <b>your Alert for City :</b>';
+echo $arr[$i][0].", <b>Location :</b>".$arr[$i][1]." <b>With Property Type :</b> ".GetPropertyType($arr[$i][2])." <b>Is Set</b>";
  echo'</span>
 </div>
 </div>
