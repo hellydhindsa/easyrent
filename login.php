@@ -6,47 +6,52 @@ if(isset($_REQUEST["sts"])&& $_REQUEST["sts"]=='S')
 {
     unset($_SESSION["lcod"]);
 }
-  function ActionAfterLogin()
-     {
-          $msg='enter method';
-             if($r=='N')
-    {
-        $msg="Email Password Incorrect";
-        clearLoginSessions();
-    }
-        elseif ($r=='U') 
-        {
-         if(isset($_SESSION["MoreDetailPno"]))
-         {
-              header("location:user/FrmMoreDetailView.php"); 
-         }
-        elseif(isset($_SESSION["MoreDetailAgentno"]))
-         {
-              header("location:user/agentsdetail.php"); 
-         }
-         else
-         {
-    header("location:user/frmpg.php");
-        }
-        clearLoginSessions();
-         }
-   elseif ($r=='A')
-   {
-  header("location:admin/frmcty.php");
-  clearLoginSessions();
-   }
-    elseif ($r=='O')
-   {
-        $_SESSION["LoginEmail"]=$_POST["log"];
-        $_SESSION["LoginPassword"]=$_POST["pwd"];
-      //  $showOTP_modal=true;
-      
-       echo '<script type="text/javascript">',
-     ' $(\'#OTPConfirmModel\').modal();',
-     '</script>';
-   }
-  
-     }
+//  function ActionAfterLogin()
+//     {
+//          $msg='enter method';
+//             if($r=='N')
+//    {
+//        $msg="Email Password Incorrect";
+//        clearLoginSessions();
+//    }
+//        elseif ($r=='U') 
+//        {
+//         if(isset($_SESSION["MoreDetailPno"]))
+//         {
+//             $PropertyNO=$_SESSION["MoreDetailPno"];
+//             $PropertyType=$_SESSION["MoreDetailPType"];
+//              header("location:user/FrmMoreDetailView.php?pno=$PropertyNO&typ=$PropertyType");
+//             // header("location:user/FrmMoreDetailView.php"); 
+//               unset($_SESSION["MoreDetailPno"]);
+//               unset($_SESSION["MoreDetailPType"]);
+//         }
+//        elseif(isset($_SESSION["MoreDetailAgentno"]))
+//         {
+//              header("location:user/agentsdetail.php"); 
+//         }
+//         else
+//         {
+//    header("location:user/frmpg.php");
+//        }
+//        clearLoginSessions();
+//         }
+//   elseif ($r=='A')
+//   {
+//  header("location:admin/frmcty.php");
+//  clearLoginSessions();
+//   }
+//    elseif ($r=='O')
+//   {
+//        $_SESSION["LoginEmail"]=$_POST["log"];
+//        $_SESSION["LoginPassword"]=$_POST["pwd"];
+//      //  $showOTP_modal=true;
+//      
+//       echo '<script type="text/javascript">',
+//     ' $(\'#OTPConfirmModel\').modal();',
+//     '</script>';
+//   }
+//  
+//     }
 
 if(isset($_POST["btnlogin"]))
 {
@@ -63,11 +68,19 @@ if(isset($_POST["btnlogin"]))
         {
          if(isset($_SESSION["MoreDetailPno"]))
          {
-              header("location:user/FrmMoreDetailView.php"); 
+           $PropertyNO=$_SESSION["MoreDetailPno"];
+             $PropertyType=$_SESSION["MoreDetailPType"];
+              header("location:user/FrmMoreDetailView.php?pno=$PropertyNO&typ=$PropertyType");
+             // header("location:user/FrmMoreDetailView.php"); 
+               unset($_SESSION["MoreDetailPno"]);
+               unset($_SESSION["MoreDetailPType"]);
          }
         elseif(isset($_SESSION["MoreDetailAgentno"]))
          {
-              header("location:user/agentsdetail.php"); 
+            $Agentno=$_SESSION["MoreDetailAgentno"];
+             header("location:user/agentsdetail.php?ano=$Agentno");
+             unset($_SESSION["MoreDetailAgentno"]);
+              //header("location:user/agentsdetail.php"); 
          }
          else
          {
@@ -106,11 +119,19 @@ if(isset($_POST["submitOtpVerification"]))
         {
          if(isset($_SESSION["MoreDetailPno"]))
          {
-              header("location:user/FrmMoreDetailView.php"); 
+               $PropertyNO=$_SESSION["MoreDetailPno"];
+             $PropertyType=$_SESSION["MoreDetailPType"];
+              header("location:user/FrmMoreDetailView.php?pno=$PropertyNO&typ=$PropertyType");
+             // header("location:user/FrmMoreDetailView.php"); 
+               unset($_SESSION["MoreDetailPno"]);
+               unset($_SESSION["MoreDetailPType"]);
          }
         elseif(isset($_SESSION["MoreDetailAgentno"]))
          {
-              header("location:user/agentsdetail.php"); 
+             $Agentno=$_SESSION["MoreDetailAgentno"];
+             header("location:user/agentsdetail.php?ano=$Agentno");
+             unset($_SESSION["MoreDetailAgentno"]);
+             // header("location:user/agentsdetail.php"); 
          }
          else
          {

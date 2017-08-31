@@ -1,6 +1,209 @@
 <?php
 session_start();
 include_once 'config.php';
+class GeneralFunction
+{
+     function ReturnRentFor($type)
+    {
+         $returnType='';
+       if($type=='M')
+        {
+          $returnType='Monthly';
+        }
+        elseif ($type=='Q')
+        {
+          $returnType='Quartly';
+        }
+         elseif ($type=='Y')
+        {
+          $returnType='Yearly';
+        }
+         elseif ($type=='O')
+        {
+          $returnType='One-Time';
+        }
+         else
+        {
+          $returnType='Monthly'; 
+        }
+        return $returnType;
+        }
+        function ReturnCommercialType($type)
+    {
+         $returnType='';
+       if($type=='O')
+        {
+          $returnType='Office';
+        }
+        elseif ($type=='S')
+        {
+          $returnType='Shop';
+        }
+         elseif ($type=='SH')
+        {
+          $returnType='ShowRoom';
+        }
+         elseif ($type=='G')
+        {
+          $returnType='Godown';
+        }
+         else
+        {
+          $returnType=''; 
+        }
+        return $returnType;
+        }
+        function ReturnPropertyFor($type)
+        {
+            $returnType='';
+            if($type=='B')
+        {
+          $returnType='Boys';
+        }
+        elseif ($type=='G')
+        {
+          $returnType='Girls';
+        }
+         elseif ($type=='F')
+        {
+          $returnType='Family';
+        }
+         else
+        {
+          $returnType='Boys'; 
+        }
+            return $returnType;
+        }
+           function ReturnFurnishedStatus($type)
+        {
+            $returnType='';
+            if($type=='F')
+        {
+          $returnType='Fully-Furnished';
+        }
+        elseif ($type=='U')
+        {
+          $returnType=' Un-Furnished';
+        }
+         elseif ($type=='S')
+        {
+          $returnType='Semi-Furnished';
+        }
+         else
+        {
+          $returnType='Fully-Furnished'; 
+        }
+            return $returnType;
+        }
+          function ReturnBoolStatus($type)
+        {
+            $returnType='';
+            if($type=='N')
+        {
+          $returnType='No';
+        }
+        elseif ($type=='Y')
+        {
+          $returnType='Yes';
+        }
+        
+         else
+        {
+          $returnType=''; 
+        }
+            return $returnType;
+        }
+          function ReturnNumber($type)
+        {
+            $returnType='';
+            if($type==1)
+        {
+          $returnType='One';
+        }
+        elseif ($type==2)
+        {
+          $returnType='Two';
+        }
+         elseif ($type==3)
+        {
+          $returnType='Three';
+        }
+         elseif ($type==4)
+        {
+          $returnType='Four';
+        }
+         elseif ($type==5)
+        {
+          $returnType='Five';
+        }
+         elseif ($type==6)
+        {
+          $returnType='Six';
+        }
+        elseif ($type==7)
+        {
+          $returnType='Seven';
+        }
+         elseif ($type==8)
+        {
+          $returnType='Eight';
+        }
+         elseif ($type==9)
+        {
+          $returnType='Nine';
+        }
+         elseif ($type==10)
+        {
+          $returnType='Ten';
+        }
+         elseif ($type==11)
+        {
+          $returnType='Eleven';
+        }
+        elseif ($type==12)
+        {
+          $returnType='Twelve';
+        }
+         elseif ($type==13)
+        {
+          $returnType='Thirteen';
+        }
+         elseif ($type==14)
+        {
+          $returnType='Fourteen';
+        }
+         elseif ($type==15)
+        {
+          $returnType='Fifteen';
+        }
+         elseif ($type==16)
+        {
+          $returnType='Sixteen';
+        }
+        elseif ($type==17)
+        {
+          $returnType='Seventeen';
+        }
+         elseif ($type==18)
+        {
+          $returnType='Eighteen';
+        }
+         elseif ($type==19)
+        {
+          $returnType='Nineteen';
+        }
+         elseif ($type==20)
+        {
+          $returnType='Twenty';
+        }
+        
+         else
+        {
+          $returnType=''; 
+        }
+            return $returnType;
+        }
+}
 class clscat
 {
     public $catcode,$catname;
@@ -91,6 +294,7 @@ class clscat
             $con->db_close();
         }
 }
+
 class classUserAlerts
 {
    // `UserAlertsId`, `PropertyType`, `FurnishedStatus`, `Location`, `UserId`

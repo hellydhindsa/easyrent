@@ -1254,7 +1254,7 @@
  }
  .property .property-featured .thumbnails ul li img {
      width: 100%;
-     height: auto;
+     height: 140px;
  }
  .property .property-featured .thumbnails .caroufredsel-next,
  .property .property-featured .thumbnails .caroufredsel-prev {

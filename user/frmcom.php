@@ -302,17 +302,16 @@ include_once 'leftpanel.php';
 <div class="dropdown label-select">
     <select class="form-control" name="ageofconst" required>
 <option value="">select one</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-<option value="4">Four</option>
-<option value="5">Five</option>
-<option value="5">Five</option>
-<option value="6">Six</option>
-<option value="7">Seven</option>
-<option value="8">Eight</option>
-<option value="9">Nine</option>
-<option value="10">Ten</option>
+<option value="1">One Year</option>
+<option value="2">Two Years</option>
+<option value="3">Three Years</option>
+<option value="4">Four Years</option>
+<option value="5">Five Years</option>
+<option value="6">Six Years</option>
+<option value="7">Seven Years</option>
+<option value="8">Eight Years</option>
+<option value="9">Nine Years</option>
+<option value="10">Ten Years</option>
 <option value="11">Eleven Years</option>
 <option value="12">Twelve Years</option>
 <option value="13">Thirteen Years</option>

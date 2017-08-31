@@ -2,7 +2,7 @@
 include_once '../buslogic.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
-include_once 'header_1.php';
+include_once 'AdminHeader.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
 if(isset($_SESSION["MoreDetailAgentno"]))
@@ -84,5 +84,5 @@ if(count($AgentDetailArray)>0)
 </div>
  
  <?php
-include_once 'footer.php';
+include_once 'Adminfooter.php';
 ?>

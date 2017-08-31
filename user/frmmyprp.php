@@ -62,9 +62,7 @@ elseif($arr[$i][10]=='O')
 { echo'One-Time';}
 else
 { echo'Monthly';}
-echo'</span></span></div><div class="property-action"><a href="frmprpdet.php?typ=';
-echo $typ;
-    echo '">More Details</a></div></div><div class="property-info property-fullwidth-info">';
+echo'</span></span></div><div class="property-action"><a href="frmEditProperties.php?typ='.$typ.'&pno='.$arr[$i][8].'">More Details</a></div></div><div class="property-info property-fullwidth-info">';
    echo'<div class="property-price"><span><span class="amount">';
     echo $arr[$i][3];
     echo'(rupees)/';
@@ -78,22 +76,12 @@ elseif($arr[$i][10]=='O')
 { echo'One-Time';}
 else
 { echo'Monthly';}
-    echo'</span> </span></div><div class="size"><span>';
-       echo $arr[$i][4];  
-    echo'sqft</span></div><div class="bathrooms"><span>';
-        echo $arr[$i][5]; 
-       echo' </span></div><div class="bedrooms"><span>';
-            echo $arr[$i][6]; 
-        echo'</span></div></div></div></div><div class="property-action property-fullwidth-action"><a href="frmprpdet.php?typ=';
-        echo $typ;  
-        echo '">More Details</a></div></article>';
+    echo'</span> </span></div><div class="size"><span>'.$arr[$i][4].'  
+   sqft</span></div><div class="bathrooms"><span>'.$arr[$i][5].'
+   </span></div><div class="bedrooms"><span>'.$arr[$i][6].' 
+  </span></div></div></div></div><div class="property-action property-fullwidth-action">
+  <a href="frmEditProperties.php?typ='.$typ.'&pno='.$arr[$i][8].'">More Details</a></div></article>';
         
-        
-        
-        
-      
-
-
         }     
         ?>
 

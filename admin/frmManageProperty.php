@@ -33,6 +33,13 @@ else if(isset($_REQUEST["mode"]) && $_REQUEST["mode"]=='NS')
         $obj->UpdatePropertyIndexStatus($_REQUEST["prpcod"], $_REQUEST["typ"], 1);
        
 }
+else if(isset($_REQUEST["mode"]) && $_REQUEST["mode"]=='MD')
+{
+  $PropertyNO= $_REQUEST["prpcod"];
+  $PropertyType=$_REQUEST["typ"];
+ header("location:FrmMoreDetailView.php?pno=$PropertyNO&typ=$PropertyType");
+       
+}
 }
 //if(!isset($_SESSION["lcod"]))
 //{
@@ -63,7 +70,7 @@ include_once 'AdminHeader.php';
         $obj= new clsprop();
         $arr = $obj->dsp_propertiesForAdmin();
         If(count($arr)>0)
-            echo "<table width='90%'><tr><th>Properties</th><th>Discription</th><th>Type</th><th>Rent</th><th>Date</th><th>Activate</th><th>Show to Index</th></tr>";
+            echo "<table width='100%'><tr><th>Properties</th><th>Discription</th><th>Type</th><th>Rent</th><th>Date</th><th>Activate</th><th>Show to Index</th><th>More Detail</th></tr>";
         for($i=0; $i<count($arr); $i++)
         {
             $type=  substr($arr[$i][2], 0, 1);
@@ -82,12 +89,13 @@ include_once 'AdminHeader.php';
             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             if($arr[$i][11]==1)
             {
-             echo"<td width='10%'><a href=frmManageProperty.php?prpcod=".$arr[$i][8]."&mode=S&typ=".$type." >Shown</a> </td></tr>";
+             echo"<td width='10%'><a href=frmManageProperty.php?prpcod=".$arr[$i][8]."&mode=S&typ=".$type." >Shown</a> </td>";
             }
             else
             {
-             echo"<td width='10%'><a href=frmManageProperty.php?prpcod=".$arr[$i][8]."&mode=NS&typ=".$type." > Not Shown</a> </td></tr>";   
+             echo"<td width='10%'><a href=frmManageProperty.php?prpcod=".$arr[$i][8]."&mode=NS&typ=".$type." > Not Shown</a> </td>";   
             }
+            echo"<td width='10%'><a href=frmManageProperty.php?prpcod=".$arr[$i][8]."&mode=MD&typ=".$type." >Click</a></td></tr>";
         }
         echo "</table>";
         ?>

@@ -1,6 +1,6 @@
 <?php
 include_once '../buslogic.php';
-include_once 'header_1.php';
+include_once 'AdminHeader.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
 if ($_REQUEST["pno"] && $_REQUEST["typ"]) {
@@ -426,5 +426,5 @@ $(document).ready(function(){
 });
 </script>
  <?php
-include_once 'footer_1.php';
+include_once 'Adminfooter.php';
 ?>

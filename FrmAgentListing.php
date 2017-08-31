@@ -23,7 +23,7 @@ $obj= new clsprop();
            
    if(isset($_SESSION["lcod"]))
    {
-       header("location:user/agentsdetail.php");
+       header("location:user/agentsdetail.php?ano=$Agentno");
    }
    else
    {

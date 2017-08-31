@@ -19,6 +19,11 @@ if (isset($_REQUEST["Agentcod"]))
         $obj->UpdateUserStatus($_REQUEST["Agentcod"], 1);
        
     }
+else if(isset($_REQUEST["mode"])&& $_REQUEST["mode"]=='MD')
+    {
+     $Agentno=$_REQUEST["Agentcod"];
+         header("location:agentsdetail.php?ano=$Agentno");
+    }
 
 }
 //if(!isset($_SESSION["lcod"]))
@@ -64,7 +69,7 @@ include_once 'AdminHeader.php';
         $obj= new clsprf();
         $arr = $obj->DisplayUsersAdmin();
         If(count($arr)>0)
-            echo "<table width='90%'><tr><th>City</th><th>Location</th><th>Name</th><th>Company</th><th>Type</th><th>Activate</th></tr>";
+            echo "<table width='90%'><tr><th>City</th><th>Location</th><th>Name</th><th>Company</th><th>Type</th><th>Activate</th><th>More Detail</th></tr>";
         for($i=0; $i<count($arr); $i++)
         {
            // $type=  substr($arr[$i][2], 0, 1);
@@ -81,7 +86,7 @@ include_once 'AdminHeader.php';
       echo"<td width='10%'><a href=frmManageAgent.php?Agentcod=".$arr[$i][5]."&mode=NA>Not Active</a></td>";
  }
             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-           
+           echo"<td width='10%'><a href=frmManageAgent.php?Agentcod=".$arr[$i][5]."&mode=MD>Click Here</a></td></tr>";
         }
         echo "</table>";
         ?>

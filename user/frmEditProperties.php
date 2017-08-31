@@ -137,7 +137,21 @@ if(count($proparr)>0)
   }
 
 ?>
+<script>
+function DeletePic(val) {
+   debugger;
+//	$.ajax({
+//	type: "POST",
+//	url: "get_state.php",
+//	data:'country_id='+val,
+//	success: function(data){
+//		$("#pgloc").html(data);
+//	}
+//	});
+}
 
+
+</script>
 <div class="noo-wrapper">
  
 <div class="container noo-mainbody">
@@ -196,7 +210,7 @@ echo'<li><img src="../pgpics/'.$arr[$i][0].$arr[$i][1].'" height="200" width="30
      //   for($i=0; $i<4; $i++)
          for($i=0; $i<4; $i++)
         {
-echo'<li><a href="#"><img src="../pgpics/'.$arr[$i][0].$arr[$i][1].'" height="20" width="30" alt=""/></a></li>';
+echo'<li><a href="#"><img src="../pgpics/'.$arr[$i][0].$arr[$i][1].'" height="20" width="30" alt=""/></a><input type="button" value="Delete" style="cursor: pointer;margin-top: 1px;" onClick="DeletePic('.$arr[$i][0].');"></li>';
          }}
       ?>
 <!--    <li><a href="#"><img src="../pgpics/27.jpg" height="20" width="30" alt=""/></a></li>-->
@@ -339,37 +353,55 @@ echo'<div class="has"><i class="fa fa-check-circle"></i>'.$arr[$i][1].'</div>';
 <div class="noo-sidebar-inner">
  
 <div class="block-sidebar find-property">
-<h3 class="title-block-sidebar">Details</h3>
+<h3 class="title-block-sidebar">Control Panel</h3>
 <div class="gsearch">
 <div class="gsearch-wrap">
 <form class="gsearchform" method="get" role="search">
-<div class="gsearch-content">
-    <h4 class="property-detail-title">Agent Detail</h4>
+    <div class="gsearch-content">
 <div class="gsearch-field">
-    <div class="user-avatar content-thumb">
-        
-        <img src="../delpics/<?php if(isset($pic)) echo $pic; ?>" alt="">
-</div>
-<div class="form-group glocation">
 
+<input type="file">
 </div>
-<div class="form-group gsub-location">
-<!--<div class="label">
-Name: preet
-</div>-->
-    <div class="detail-field row">
-<span class="col-xs-6 col-md-3 detail-field-label"><b>Name:</b></span>
-<span class="col-xs-6 col-md-9 detail-field-value"><?php if(isset($agentName)) echo $agentName; ?></span>
-<span class="col-xs-6 col-md-3 detail-field-label"><b>Email:</b></span>
-<span class="col-xs-6 col-md-9 detail-field-value"><?php if(isset($agentEmail)) echo $agentEmail; ?></span>
-<span class="col-xs-6 col-md-5 detail-field-label"><b>Phone No:</b></span>
-<span class="col-xs-6 col-md-7 detail-field-value"><?php if(isset($agentPhone)) echo $agentPhone; ?></span>
-<span class="col-xs-6 col-md-4 detail-field-label"><b>Address:</b></span>
-<span class="col-xs-6 col-md-7 detail-field-value"><?php if(isset($agentAddress)) echo $agentAddress; ?></span>
-
+<div class="gsearch-action">
+<div class="gsubmit">
+<a class="btn btn-deault" href="#">Add Pictures</a>
 </div>
-
-    </div>
+</div>
+</div>
+    <div class="gsearch-content">
+        <div class="gsearch-field">
+            <h5>You can make your Property Public or Private</h5>
+</div>
+<div class="gsearch-action">
+<div class="gsubmit">
+<a class="btn btn-deault" href="#">Make Public</a>
+</div>
+</div>
+</div>
+    <div class="gsearch-content">
+        <div class="gsearch-field">
+            <h5>Edit All Other Details</h5>
+</div>
+<div class="gsearch-action">
+<div class="gsubmit">
+<a class="btn btn-deault" href="#">Edit</a>
+</div>
+</div>
+</div>
+    <div class="gsearch-content">
+        <div class="gsearch-field">
+            <h5>Delete Property</h5>
+</div>
+<div class="gsearch-action">
+<div class="gsubmit">
+<a class="btn btn-deault" href="#">Delete</a>
+</div>
+</div>
+</div>
+<div class="gsearch-content">
+   
+<div class="gsearch-field">
+   
 <div class="form-group gstatus">
      <h4 class="property-detail-title">Rent Detail</h4>
   <div class="detail-field row">
