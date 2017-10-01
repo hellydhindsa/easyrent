@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>EasyRent - Home</title>
+<title>EasyRent - User</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -42,9 +42,9 @@
 <div class="emailto content-item">
 <a href="#"><i class="fa fa-envelope-o"></i>&nbsp;Email:info@easyrent.com</a>
 </div>
-<div class="register content-item">
+<!--<div class="register content-item">
 <a href="login.php"><i class="fa fa-key"></i>&nbsp;Register</a>
-</div>
+</div>-->
     <?php
     if(!isset($_SESSION["lcod"]))
    {
@@ -55,7 +55,7 @@
    else
    {
      echo'<div class="login content-item">
-<a href="login.php?sts=S"><i class="fa fa-sign-out"></i>&nbsp;Login Out</a>
+<a href="login.php?sts=S"><i class="fa fa-sign-out"></i>&nbsp;LogOut</a>
 </div>' ;  
    }
     
@@ -63,8 +63,8 @@
 
  
 <div class="header-search">
-<label for="input-header-search"><i class="fa fa-search"></i></label>
-<input type="text" id="input-header-search" placeholder="Search">
+<!--<label for="input-header-search"><i class="fa fa-search"></i></label>
+<input type="text" id="input-header-search" placeholder="Search">-->
 </div>
 </div>
 </div>

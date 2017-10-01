@@ -3,11 +3,27 @@ include_once '../buslogic.php';
 include_once 'header_1.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
-if ($_REQUEST["pno"] && $_REQUEST["typ"]) {
+ //function to set pg type and property code
+if (isset($_REQUEST["pno"]) && isset($_REQUEST["typ"])) {
     $PropertyNO=$_REQUEST["pno"];
   $PropertyType=$_REQUEST["typ"];  
   $type=substr($PropertyType,0,1);
 }
+//function to delete property picture
+if (isset($_REQUEST["picno"]) && isset($_REQUEST["exct"])) {
+    $PropertyNO=$_REQUEST["pno"];
+  $PropertyType=$_REQUEST["typ"];  
+  $type=substr($PropertyType,0,1);
+     $objDeletePic= new clspgpic();
+     $objDeletePic->pgpiccod=$_REQUEST["picno"];
+   $deleteStatus=  $objDeletePic->DeletePropertyPics();
+   if($deleteStatus)
+   {
+       unlink ('../pgpics/'.$_REQUEST["picno"].$_REQUEST["exct"]);
+   }
+}
+//test 
+$msgreg="picture added sucessfully";
 $obj= new clsprf();
 $picarr = $obj->DisplayProfileByPropertyID($PropertyNO,$type);
 if(count($picarr)>0)
@@ -138,17 +154,28 @@ if(count($proparr)>0)
 
 ?>
 <script>
-function DeletePic(val) {
-   debugger;
-//	$.ajax({
-//	type: "POST",
-//	url: "get_state.php",
-//	data:'country_id='+val,
-//	success: function(data){
-//		$("#pgloc").html(data);
-//	}
-//	});
+    function GetParameterValues(param) {
+var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+for (var i = 0; i < url.length; i++) {
+var urlparam = url[i].split('=');
+if (urlparam[0] == param) {
+return urlparam[1];
 }
+}
+    }
+    $('body').on('click', '.deletepictures', function() {
+      var val=  $(this).data('id');
+      if(val=='noimg')
+      {
+      var extension=$(this).data('ext');
+     var type=GetParameterValues('typ');
+    var pno=GetParameterValues('pno');
+    var baseurl = window.location.origin+window.location.pathname;
+    var UrltoHit= baseurl+'?typ='+type+'&pno='+pno+'&picno='+val+'&exct='+extension;
+window.location = UrltoHit;
+   
+      }});
+
 
 
 </script>
@@ -210,7 +237,7 @@ echo'<li><img src="../pgpics/'.$arr[$i][0].$arr[$i][1].'" height="200" width="30
      //   for($i=0; $i<4; $i++)
          for($i=0; $i<4; $i++)
         {
-echo'<li><a href="#"><img src="../pgpics/'.$arr[$i][0].$arr[$i][1].'" height="20" width="30" alt=""/></a><input type="button" value="Delete" style="cursor: pointer;margin-top: 1px;" onClick="DeletePic('.$arr[$i][0].');"></li>';
+echo'<li><a href="#"><img src="../pgpics/'.$arr[$i][0].$arr[$i][1].'" height="20" width="30" alt=""/></a><input type="button" value="Delete" class="deletepictures" data-ext="'.$arr[$i][1].'"  data-id="'.$arr[$i][0].'" style="cursor: pointer;margin-top: 1px;" );"></li>';
          }}
       ?>
 <!--    <li><a href="#"><img src="../pgpics/27.jpg" height="20" width="30" alt=""/></a></li>-->
@@ -356,17 +383,25 @@ echo'<div class="has"><i class="fa fa-check-circle"></i>'.$arr[$i][1].'</div>';
 <h3 class="title-block-sidebar">Control Panel</h3>
 <div class="gsearch">
 <div class="gsearch-wrap">
-<form class="gsearchform" method="get" role="search">
+
     <div class="gsearch-content">
+<!--       <form class="gsearchform" method="post" role="search">-->
+  <form name="addpics-form"  action="frmEditProperties.php?typ=P&pno=44" method="post"  enctype="multipart/form-data" class="gsearchform" >
+     <!--   frmEditProperties.php?typ=P&pno=44-->
 <div class="gsearch-field">
 
-<input type="file">
+<input type="file" id="fil" name="fil">
 </div>
 <div class="gsearch-action">
 <div class="gsubmit">
 <a class="btn btn-deault" href="#">Add Pictures</a>
+<?php
+        if(isset($msgreg))
+            echo "<label>".$msgreg."</label>";
+        ?>
 </div>
 </div>
+        </form>
 </div>
     <div class="gsearch-content">
         <div class="gsearch-field">
@@ -435,7 +470,7 @@ echo'<div class="has"><i class="fa fa-check-circle"></i>'.$arr[$i][1].'</div>';
 </div>
 
 </div>
-</form>
+
 </div>
 </div>
 </div>

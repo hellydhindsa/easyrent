@@ -203,6 +203,25 @@ class GeneralFunction
         }
             return $returnType;
         }
+        function SendMessageByPhone($phoneNumber,$message)
+{
+       //------------------sms sending---------
+    $url = 'http://smslowprice.com/SendingSms.aspx';
+$fields = array('userid'=>urlencode('vickysingla'),
+'pass'=>urlencode('welcome@123'),
+'phone'=>urlencode($phoneNumber),
+'msg'=>urlencode($message));
+$fields_string='';
+foreach($fields as $key=>$value)
+{ $fields_string .=$key.'='.$value.'&';}
+rtrim($fields_string,'&');
+$url_final=$url.'?'.$fields_string;
+$ch = curl_init();
+curl_setopt($ch,CURLOPT_URL,$url_final);
+$result = curl_exec($ch);
+curl_close($ch);
+//------------------------------
+}
 }
 class clscat
 {
@@ -591,6 +610,22 @@ class classUserTestimonials
             return $a;
             }
         }
+         function ResetPassword($PhoneNumber)
+        {
+            $con= new clscon();
+            $link=$con->db_connect();
+            $qry="call ResetPassword('$PhoneNumber',@Status)";
+            $res= mysqli_query($link, $qry) or die(mysqli_error($link));
+            $res1= mysqli_query($link,"select @Status") or die(mysqli_error($link));
+            $r=  mysqli_fetch_row($res1);
+           // echo $r[0];
+            if(isset($r))
+            { 
+             $con->db_close ();
+            return $r[0];
+            }
+            
+        }
     }
    
         class clssubcat
@@ -833,6 +868,23 @@ class classUserTestimonials
             $con->db_close();
           
             }
+                    function DeletePropertyPics()
+        {
+          $con=new clscon();
+             $link=$con->db_connect();
+        $qry="call DeletePropertyPics($this->pgpiccod)";
+        $res=  mysqli_query($link, $qry);
+        if(mysqli_affected_rows($link))
+        {
+          $con->db_close();
+            return TRUE;   
+        }
+ else {
+     $con->db_close();
+            return FALSE;
+ }
+     
+ }
         }
        
 class clsfac

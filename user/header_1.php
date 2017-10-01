@@ -63,7 +63,7 @@
    else
    {
      echo'<div class="login content-item">
-<a href="../login.php?sts=S"><i class="fa fa-sign-out"></i>&nbsp;Login Out</a>
+<a href="../login.php?sts=S"><i class="fa fa-sign-out"></i>&nbsp;LogOut</a>
 </div>' ;  
    }
    ?>
@@ -109,8 +109,14 @@ CALL US NOW<br>
  <div class="main-navigation">
 <nav class="collapse navbar-collapse" id="main-collapse" role="navigation">
 <ul class="nav navbar-nav">
+    <li class="dropdown">
+<a href="frmprf.php" >My Profile&nbsp;<span class="caret"></span></a>
+</li>
 <li class="dropdown">
-    <a href="frmpg.php">Add PG&nbsp;<span class="caret"></span></a>
+<a href="frmmyprp.php">My Properties&nbsp;<span class="caret"></span></a>
+</li>
+<li class="dropdown">
+    <a href="frmpg.php">Add PG &nbsp;<span class="caret"></span></a>
 
 </li>
 <li class="dropdown">
@@ -126,6 +132,11 @@ CALL US NOW<br>
 
 </li>
 
+
+<li class="dropdown">
+    <a href="ChangePassword.php">Change Password&nbsp;<span class="caret"></span></a>
+
+</li>
 </ul>
 </nav>
 </div>

@@ -15,7 +15,7 @@ if(isset($_POST["property_submit"]))
     $obj->pgscrty=$_POST["scrg"];
     $obj->pgocrg=$_POST["ocrg"];
     $obj->pgnoofseats=$_POST["noseat"];
-    
+    $obj->pgdsc=$_POST["desc"];
 $cls_date = new DateTime($_POST["avlfrm"]);
     $obj->pgavlfrm=$cls_date->format('y-m-d');
     $obj->pgsts="Y";

@@ -88,7 +88,7 @@ background-color: #f0e797;
    else
    {
      echo'<div class="login content-item">
-<a href="../login.php?sts=S"><i class="fa fa-sign-out"></i>&nbsp;Login Out</a>
+<a href="../login.php?sts=S"><i class="fa fa-sign-out"></i>&nbsp;LogOut</a>
 </div>' ;  
    }
    ?>
@@ -118,22 +118,16 @@ background-color: #f0e797;
 </div>
 </div>
 </div>
- 
- 
-<!--<div class="calling-info">
-<div class="calling-content">
-<i class="fa fa-mobile"></i>
-<div class="calling-desc">
-CALL US NOW<br>
-<span><a>9878161852</a></span>
-</div>
-</div>
-</div>-->
- 
 
  <div class="main-navigation">
 <nav class="collapse navbar-collapse" id="main-collapse" role="navigation">
 <ul class="nav navbar-nav">
+    <li class="dropdown">
+<a href="frmprf.php" >My Profile&nbsp;<span class="caret"></span></a>
+</li>
+<li class="dropdown">
+<a href="frmmyprp.php">My Properties&nbsp;<span class="caret"></span></a>
+</li>
 <li class="dropdown">
     <a href="frmpg.php">Add PG &nbsp;<span class="caret"></span></a>
 
@@ -151,12 +145,7 @@ CALL US NOW<br>
 
 </li>
 
-<li class="dropdown">
-<a href="frmprf.php" >My Profile&nbsp;<span class="caret"></span></a>
-</li>
-<li class="dropdown">
-<a href="frmmyprp.php">My Properties&nbsp;<span class="caret"></span></a>
-</li>
+
 <li class="dropdown">
     <a href="ChangePassword.php">Change Password&nbsp;<span class="caret"></span></a>
 

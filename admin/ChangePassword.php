@@ -19,8 +19,10 @@ if(isset($_POST["buttonChangePassword"]))
     }
     else
     {
-        $msg="Change Password Completed Sucessfully";  
-        SendMessage($r);
+        $msg="Dear Admin Change Password Completed Sucessfully"; 
+        $ObjGeneralFunction= new GeneralFunction();
+        $ObjGeneralFunction->SendMessageByPhone($r, $msg);
+       
     }
   
  }
@@ -29,26 +31,6 @@ if(isset($_POST["buttonChangePassword"]))
       $msg="Password and Confirm Password are not same";  
   }
 
-}
-
-function SendMessage($phoneNumber)
-{
-       //------------------sms sending---------
-    $url = 'http://smslowprice.com/SendingSms.aspx';
-$fields = array('userid'=>urlencode('vickysingla'),
-'pass'=>urlencode('welcome@123'),
-'phone'=>urlencode($phoneNumber),
-'msg'=>urlencode('Dear Admin, Your password Updated Sucessfully .'));
-$fields_string='';
-foreach($fields as $key=>$value)
-{ $fields_string .=$key.'='.$value.'&';}
-rtrim($fields_string,'&');
-$url_final=$url.'?'.$fields_string;
-$ch = curl_init();
-curl_setopt($ch,CURLOPT_URL,$url_final);
-$result = curl_exec($ch);
-curl_close($ch);
-//------------------------------
 }
 
   include_once 'AdminHeader.php';

@@ -33,9 +33,16 @@ include_once 'header_1.php';
         for($i=0; $i<count($arr); $i++)
         {   
             $typ=  substr($arr[$i][2],0,1);
-echo'<article class="hentry"><div class="property-featured"><span class="featured"><i class="fa fa-star"></i></span><a class="content-thumb" href="property-details.html"><img src="../pgpics/';
- echo $arr[$i][7];    
-echo'" alt=""></a><span class="property-label">';
+echo'<article class="hentry">';
+echo'<div class="property-featured">';
+echo'<span class="featured">';
+echo'<i class="fa fa-star">';
+echo'</i>';
+echo'</span>';
+echo'<a class="content-thumb" href="property-details.html">';
+echo'<img src="../pgpics/'.$arr[$i][7].'" alt="">';
+echo'</a>';
+echo'<span class="property-label">';
 echo $arr[$i][2]; 
         echo '</span><span  class="property-category " ><input class="btn" type=button value="edit details"></div><div class="property-wrap"><h2 class="property-title"><a href="#" title="';
     echo ' TYPE:'.$arr[$i][2];
@@ -87,7 +94,7 @@ else
 
 <div class="clearfix"></div>
  
-<nav class="pagination-nav">
+<!--<nav class="pagination-nav">
 <ul class="pagination list-center">
 <li><a class="prev page-numbers" href="#"><i class="fa fa-angle-left"></i></a></li>
 <li><span class="page-numbers current">1</span></li>
@@ -97,7 +104,7 @@ else
 <li><a class="page-numbers" href="#">8</a></li>
 <li><a class="next page-numbers" href="#"><i class="fa fa-angle-right"></i></a></li>
 </ul>
-</nav>
+</nav>-->
  
 </div>
  

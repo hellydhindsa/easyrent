@@ -14,12 +14,12 @@ if(isset($_POST["Alert_submit"]))
    $stsAlert= $obj->SaveUserAlerts();
    if($stsAlert)
    {
- $msg="your Testimonial Added Sucessfully";
+ $msg="your Alert Added Sucessfully";
    }
    else
    {
 
-      $msg="your Testimonial Not Added Sucessfully";  
+      $msg="your Alert Not Added Sucessfully";  
    }
     
 }
@@ -32,11 +32,11 @@ if (isset($_REQUEST["AlterCod"]))
       $deleteStatus=  $obj->DeleteUserAlerts();
       if($deleteStatus)
       {
-          $msg="your Testimonial Deleted Sucessfully"; 
+          $msg="your Alert Deleted Sucessfully"; 
       }
       else
       {
-         $msg="your Testimonial Not Deleted Sucessfully";  
+         $msg="your Alert Not Deleted Sucessfully";  
       }
     }
 }

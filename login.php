@@ -208,6 +208,23 @@ if(isset($_POST["btnreg"]))
      
   
 }
+if(isset($_POST["submitPwdReset"])){
+      $obj= new clsreg();
+    $resetStatus=$obj->ResetPassword($_POST["ResetPhoneNumber"]);  
+  //  ActionAfterLogin($r);
+                if($resetStatus=='InvalidPhone')
+    {
+        $msg="Phone Number Incorrect";
+     
+    }
+    else
+    {
+        $msg='Password Reset sucessfully.Your new password send to your phone Number.';
+        $resetMessage='Password Reset sucessfully your new password is: '.$resetStatus;
+         $ObjGeneralFunction= new GeneralFunction();
+        $ObjGeneralFunction->SendMessageByPhone($_POST["ResetPhoneNumber"], $resetMessage);
+    }
+}
 function SendOtp($name,$phoneNumber,$otp)
 {
        //------------------sms sending---------
@@ -292,16 +309,13 @@ function getState(val) {
         ?>
 
 </div>
-<p class="logreg-desc">Lost your password? <a href="#">Click here to reset</a>
+<p class="logreg-desc">Lost your password? <a id="OnlickrestPwd" href="#">Click here to reset</a>
 </p>
 
 <p class="logreg-desc">Not register yet? <button type="button" class="btn-link" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Click Here to register</button>
 </p>
  </form>
 <!--   ------------------------------------------pop up------------------------------------------------------>
-
-
-
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog" >
@@ -429,8 +443,6 @@ function getState(val) {
       
     </div>
   </div>
-
-
 <!--          ---------------------------------------------------close  popup-------------------------------  -->
 <!-------------------model for otp OTPConfirmModel----------- -->
 <div class="modal fade" id="OTPConfirmModel" role="dialog" >
@@ -470,11 +482,47 @@ function getState(val) {
       
     </div>
   </div>
-
-
- 
-
 <!---------------------model end for otp---------------->
+<!-------------------model for reset pwd----------- -->
+<div class="modal fade" id="ResetPasswordModel" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title"> Reset Password</h2>
+        </div>
+        <div class="modal-body">
+          <form name="SubmitpwdRestform" id="registration-form" class="noo-form property-form" action="login.php" method="post">
+          
+                     <div class="col-md-12">
+<div class="form-group s-prop-title">
+<label for="phone">Phone Number&nbsp;&#42;</label>
+<input type="number" id="PhoneNumber" class="form-control" value="" name="ResetPhoneNumber" required="">
+</div>
+</div>
+
+       
+          <div class="form-actions">
+            <button type="submit" name="submitPwdReset" id="btnreg" class="btn11 navbar-btn btn-default">Submit</button>
+            
+          </div>
+  
+      </form>  
+
+
+    
+    
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<!---------------------model end for reset pwd---------------->
 </div>
     <?php if($showOTP_modal){?>
   <script> 
@@ -496,6 +544,10 @@ function getState(val) {
      
        $('#OTPConfirmModel').modal();
   }
+  
+  $( "#OnlickrestPwd" ).click(function() {
+$('#ResetPasswordModel').modal();
+});
         </script>
 
 </div>
