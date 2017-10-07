@@ -5,8 +5,6 @@ if(isset($sts))
  $(document).ready(function(){
    
         $("#myModal").modal({show: true});
-    
-  
     });
     </script>'; 
    }

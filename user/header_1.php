@@ -1,7 +1,4 @@
-<!doctype html>
 <html lang="en">
-
-<!-- Mirrored from html.nootheme.com/citilights/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2015 07:46:40 GMT -->
 <head>
 <meta charset="utf-8">
 <title>EasyRent - Home</title>
@@ -9,9 +6,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="../images/icon/favicon.jpg" type="image/x-icon">
-<!-- 
-<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic,400italic' rel='stylesheet' type='text/css'>
- -->
+
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -93,18 +88,6 @@
 </div>
 </div>
 </div>
- 
- 
-<!--<div class="calling-info">
-<div class="calling-content">
-<i class="fa fa-mobile"></i>
-<div class="calling-desc">
-CALL US NOW<br>
-<span><a>9878161852</a></span>
-</div>
-</div>
-</div>-->
- 
 
  <div class="main-navigation">
 <nav class="collapse navbar-collapse" id="main-collapse" role="navigation">
@@ -141,6 +124,4 @@ CALL US NOW<br>
 </nav>
 </div>
 </div>
- 
 </header>
- 

@@ -1,6 +1,5 @@
 <?php
 include_once '../buslogic.php';
-include_once 'header_1.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
  //function to set pg type and property code
@@ -13,6 +12,7 @@ if (isset($_REQUEST["pno"]) && isset($_REQUEST["typ"])) {
 if (isset($_REQUEST["picno"]) && isset($_REQUEST["exct"])) {
     $PropertyNO=$_REQUEST["pno"];
   $PropertyType=$_REQUEST["typ"];  
+  if($PropertyNO !="noimg"){
   $type=substr($PropertyType,0,1);
      $objDeletePic= new clspgpic();
      $objDeletePic->pgpiccod=$_REQUEST["picno"];
@@ -22,8 +22,66 @@ if (isset($_REQUEST["picno"]) && isset($_REQUEST["exct"])) {
        unlink ('../pgpics/'.$_REQUEST["picno"].$_REQUEST["exct"]);
    }
 }
-//test 
+}
+//form submit to save new uploaded pictures
+if(isset($_POST["AddPicture"]))
+{
+     $filename=$_FILES["fil"]["name"];
+   $filename=  substr($filename, strpos($filename, '.'));
+   $objAddpicture= new clspgpic();
+   $lpgpic=$objAddpicture->fndlstpgpic();
+   $lpgpic=$lpgpic+1;
+    $objAddpicture->pgpicdsc="Pg pic is updated";
+     $objAddpicture->pgpicpgcod=$PropertyNO;
+       $objAddpicture->pgpictyp=$PropertyType;
+    $objAddpicture->pgpicfil=$filename;
+  $AddpicSucessStatus=   $objAddpicture->save_pgpic(); 
+        if($AddpicSucessStatus){
 $msgreg="picture added sucessfully";
+// if($filename!="")
+//    {
+   move_uploaded_file ($_FILES["fil"]["tmp_name"],"../pgpics/".$lpgpic.$filename);
+  //  }
+        }
+}
+//form submit to make property MakePublic
+if(isset($_POST["MakePublic"]))
+{
+    $objChangePublicStatus= new clsprop();
+ 
+   $updateStatus= $objChangePublicStatus->UpdatePropertyStatus($PropertyNO, $PropertyType, 1);
+    if($updateStatus){
+$msgPublicStatus="Property is Updated to Public sucessfully";
+    }
+    else
+    {
+      $msgPublicStatus="Property Not Updated sucessfully";  
+    }
+}
+//form submit to make propertry private
+if(isset($_POST["MakePrivate"]))
+{
+     $objChangePublicStatus= new clsprop();
+ 
+   $updateStatus= $objChangePublicStatus->UpdatePropertyStatus($PropertyNO, $PropertyType, 0);
+    if($updateStatus){
+$msgPublicStatus="Property is Updated to Public sucessfully";
+    }
+    else
+    {
+      $msgPublicStatus="Property Not Updated sucessfully";  
+    } 
+}
+ 
+//form submit for edit click for property
+if(isset($_POST["EditButtonClick"]))
+{
+
+ header("location:formEditPG.php?pno=$PropertyNO");
+}
+
+
+// form to get all details for property by propert id and properrty type 
 $obj= new clsprf();
 $picarr = $obj->DisplayProfileByPropertyID($PropertyNO,$type);
 if(count($picarr)>0)
@@ -49,6 +107,7 @@ if(count($proparr)>0)
 {
             $city=$proparr[0]['city'];
             $Location=$proparr[0]['location'];
+            $IsActive=$proparr[0]['IsActive'];
     if($type=='P')
     {
             $propType= $ObjGeneralFunction->ReturnPropertyFor($proparr[0]['pgtyp']);
@@ -151,7 +210,7 @@ if(count($proparr)>0)
     }
     
   }
-
+include_once 'header_1.php';
 ?>
 <script>
     function GetParameterValues(param) {
@@ -165,7 +224,7 @@ return urlparam[1];
     }
     $('body').on('click', '.deletepictures', function() {
       var val=  $(this).data('id');
-      if(val=='noimg')
+      if(val !='noimg')
       {
       var extension=$(this).data('ext');
      var type=GetParameterValues('typ');
@@ -386,7 +445,7 @@ echo'<div class="has"><i class="fa fa-check-circle"></i>'.$arr[$i][1].'</div>';
 
     <div class="gsearch-content">
 <!--       <form class="gsearchform" method="post" role="search">-->
-  <form name="addpics-form"  action="frmEditProperties.php?typ=P&pno=44" method="post"  enctype="multipart/form-data" class="gsearchform" >
+  <form name="addpics-form"  action="frmEditProperties.php?typ=<?php if(isset($PropertyType)) echo $PropertyType; ?>&pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>" method="post"  enctype="multipart/form-data" class="gsearchform" >
      <!--   frmEditProperties.php?typ=P&pno=44-->
 <div class="gsearch-field">
 
@@ -394,7 +453,8 @@ echo'<div class="has"><i class="fa fa-check-circle"></i>'.$arr[$i][1].'</div>';
 </div>
 <div class="gsearch-action">
 <div class="gsubmit">
-<a class="btn btn-deault" href="#">Add Pictures</a>
+    <input type="submit" class="btn btn-deault" name="AddPicture" value="Add Pictures">
+<!--<a class="btn btn-deault" href="#">Add Pictures</a>-->
 <?php
         if(isset($msgreg))
             echo "<label>".$msgreg."</label>";
@@ -404,24 +464,44 @@ echo'<div class="has"><i class="fa fa-check-circle"></i>'.$arr[$i][1].'</div>';
         </form>
 </div>
     <div class="gsearch-content">
+         <form name="addpics-form"  action="frmEditProperties.php?typ=<?php if(isset($PropertyType)) echo $PropertyType; ?>&pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>" method="post"  class="gsearchform" >
+  
         <div class="gsearch-field">
             <h5>You can make your Property Public or Private</h5>
 </div>
 <div class="gsearch-action">
 <div class="gsubmit">
-<a class="btn btn-deault" href="#">Make Public</a>
+<!--<a class="btn btn-deault" href="#">Make Public</a>-->
+<?php
+if(!$IsActive){
+    ?>
+ <input type="submit" class="btn btn-deault" name="MakePublic" value="Make Public">
+ <?php }else{ ?>
+ <input type="submit" class="btn btn-deault" name="MakePrivate" value="Make Private">
+  <?php } ?>
+<!--<a class="btn btn-deault" href="#">Add Pictures</a>-->
+<?php
+        if(isset($msgPublicStatus))
+            echo "<label>".$msgPublicStatus."</label>";
+        ?>
 </div>
 </div>
+                    </form>
 </div>
     <div class="gsearch-content">
+         <form name="addpics-form"  action="frmEditProperties.php?typ=<?php if(isset($PropertyType)) echo $PropertyType; ?>&pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>" method="post"  class="gsearchform" >
+  
         <div class="gsearch-field">
             <h5>Edit All Other Details</h5>
 </div>
 <div class="gsearch-action">
 <div class="gsubmit">
-<a class="btn btn-deault" href="#">Edit</a>
+<!--<a class="btn btn-deault" href="#">Edit</a>-->
+<input type="submit" class="btn btn-deault" name="EditButtonClick" value="Edit">
+
 </div>
 </div>
+         </form>
 </div>
     <div class="gsearch-content">
         <div class="gsearch-field">
