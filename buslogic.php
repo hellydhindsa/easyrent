@@ -648,6 +648,25 @@ class clspg {
             return FALSE;
         }
     }
+ function Update_pg() {
+       $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call UpdatePG('$this->pgcod','$this->pgtit','$this->pgtyp','$this->pgloc','$this->pglndmrk','$this->pgadd','$this->pgrnt','$this->pgrntfor','$this->pgscrty','$this->pgocrg','$this->pgnoofseats','$this->pgavlfrm','$this->pgdsc','$this->pgnoper','$this->pgfursts','$this->pgdelsts','$this->pgmntcrg','$this->pgmntcrgfor')";
+        $res = mysqli_query($link, $qry)or die(mysqli_error($link));
+      //  $res1 = mysqli_query($link, "select @cod") or die(mysqli_error($link));
+       // $r = mysqli_fetch_row($res1);
+       // $pgcod = $r[0];
+        // echo $pgcod;
+        if (mysqli_affected_rows($link)) {
+           
+            $con->db_close();
+            return $res;
+        } else {
+          
+            $con->db_close();
+            return FALSE;
+        }
+    }
 
 }
 
@@ -864,10 +883,10 @@ class clsfacprp {
         }
     }
 
-    function delete_facprp() {
+    function DeleteAllFeaturesByUser() {
         $con = new clscon();
         $link = $con->db_connect();
-        $qry = "call delfacprp($this->code)";
+        $qry = "call DeleteAllFeaturesByUser('$this->prpcod','$this->type')";
         $res = mysqli_query($link, $qry);
         if (mysqli_affected_rows($link)) {
             $con->db_close();
@@ -1208,7 +1227,20 @@ class clsprop {
             return FALSE;
         }
     }
-
+    function UpdatePropertyDeleteStatus($cod, $type, $sts) {
+        $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call updatePropertyDeleteStatus($cod,'$type',$sts)";
+        // echo $qry;
+        $res = mysqli_query($link, $qry) or die(mysqli_error($link));
+        if (mysqli_affected_rows($link)) {
+            $con->db_close();
+            return TRUE;
+        } else {
+            $con->db_close();
+            return FALSE;
+        }
+    }
     function UpdatePropertyIndexStatus($cod, $type, $sts) {
         $con = new clscon();
         $link = $con->db_connect();

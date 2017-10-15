@@ -1,1 +1,0 @@
-[26-Jun-2015 13:50:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/preet/public_html/property/buslogic.php:307) in /home/preet/public_html/property/login.php on line 23

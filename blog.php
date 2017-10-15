@@ -431,7 +431,7 @@ by
 </p>
 </header>
 <div class="content-featured">
-<div id="noo-video-container3223" class="noo-video-container 16-9-ratio">
+<div id="noo-video-container3223" class="noo-video-container">
 <div class="video-inner">
 <iframe src="http://player.vimeo.com/video/93208319" width="500" height="281" allowfullscreen></iframe>
 <p><a href="http://vimeo.com/93208319">Nocturne</a> from <a href="http://vimeo.com/karicasady">Kari Casady</a> on <a href="https://vimeo.com/">Vimeo</a>.</p>

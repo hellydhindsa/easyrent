@@ -2,7 +2,6 @@
 include_once '../buslogic.php';
 
 include_once 'header_1.php';
-
 ?>
 <div class="noo-wrapper">
  

@@ -58,6 +58,20 @@ $msgPublicStatus="Property is Updated to Public sucessfully";
       $msgPublicStatus="Property Not Updated sucessfully";  
     }
 }
+//form to handel delete total property DeleteButtonClick
+if(isset($_POST["DeleteButtonClick"]))
+{
+    $objDeleteProperty= new clsprop();
+ 
+   $updateDeleteStatus= $objDeleteProperty->UpdatePropertyDeleteStatus($PropertyNO, $PropertyType, 1);
+    if($updateDeleteStatus){
+ header("location:frmmyprp.php");
+    }
+    else
+    {
+      $updateDeleteStatus="There is some problem Property is not Deleted sucessfully";  
+    }
+}
 //form submit to make propertry private
 if(isset($_POST["MakePrivate"]))
 {
@@ -74,10 +88,12 @@ $msgPublicStatus="Property is Updated to Public sucessfully";
 }
  
 //form submit for edit click for property
-if(isset($_POST["EditButtonClick"]))
-{
-
- header("location:formEditPG.php?pno=$PropertyNO");
+if (isset($_POST["EditButtonClick"])) {
+    if ($PropertyType == 'P') {
+        header("location:formEditPG.php?pno=$PropertyNO");
+    } else if ($PropertyType == 'F') {
+        header("location:formEditFloor.php?pno=$PropertyNO");
+    }
 }
 
 
@@ -504,14 +520,22 @@ if(!$IsActive){
          </form>
 </div>
     <div class="gsearch-content">
+         <form name="addpics-form"  action="frmEditProperties.php?typ=<?php if(isset($PropertyType)) echo $PropertyType; ?>&pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>" method="post"  class="gsearchform" >
+  
         <div class="gsearch-field">
             <h5>Delete Property</h5>
 </div>
 <div class="gsearch-action">
 <div class="gsubmit">
-<a class="btn btn-deault" href="#">Delete</a>
+<!--<a class="btn btn-deault" href="#">Delete</a>-->
+<input type="submit" class="btn btn-deault" name="DeleteButtonClick" value="Delete">
+<?php
+        if(isset($updateDeleteStatus))
+            echo "<label>".$updateDeleteStatus."</label>";
+        ?>
 </div>
 </div>
+             </form>
 </div>
 <div class="gsearch-content">
    
