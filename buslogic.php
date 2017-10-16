@@ -4,6 +4,141 @@ session_start();
 include_once 'config.php';
 
 class GeneralFunction {
+ function GeneratEmailHTML()
+        {
+          $bodyHtml='
+<table cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:1px solid #bcb5b9; font-size:90%; font-family:Arial,Helvetica,sans-serif; color:#454545; padding:0; margin:0; background-color:#e4e4e1; width:100%">
+<tbody>
+<tr>
+<td style="background:#d9d9d6; padding:10px 0px; font-family:Arial">
+<table cellspacing="0" cellpadding="0" style="border-collapse:collapse; width:100%">
+<tbody>
+<tr>
+<td style="padding:0px 10px">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="padding:0px; vertical-align:middle"><a href="http://www.easyrent.co.in" target="_blank" rel="noopener noreferrer"><img src="http://www.easyrent.co.in/images/logo/logo.png" alt="EasyRent.co.in"> </a></td>
+<td style="padding:0px; vertical-align:top">
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style="padding:0px">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="padding:15px 10px 5px 10px">
+<p style="margin:0px; font-family:arial; font-size:13px; font-weight:400; color:#000">
+Hi Aman, following properties match your requirement in Sector-44,Sector-37,Sector-21 </p>
+</td>
+</tr>
+<tr>
+<td width="100%" valign="top" style="border-collapse:collapse; border:0px solid #e5e5e5; padding:5px 10px">
+<table style="padding:0; width:100%; border-collapse:collapse">
+<tbody>
+<tr>
+<td style="font-weight:bold; color:rgb(0,0,0); padding:14px 0 8px; font-family:arial; font-size:15px">
+Sector-44, Chandigarh</td>
+</tr>
+<tr>
+<td style="margin:0; border:1px solid #d9d9d9; background:#fff; padding:13px 10px 7px">
+<table style="width:100%; border-collapse:collapse">
+<tbody>
+<tr>
+<td style="color:#000; padding:0 0 1px 1px; font-family:arial; font-size:15px"><strong>Rs 17,000</strong>, 2 BHK Residential House </td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="padding:5px 0 5px 1px; font-size:13px; line-height:16px; color:rgb(85,85,85)">
+Sector-44 </td>
+</tr>
+<tr>
+<td style="padding:5px 0 5px 0px; font-size:13px; line-height:16px; color:rgb(85,85,85)">
+2 Bathrooms | 1 Balcony | Semi-Furnished | 1 Balcony</td>
+</tr>
+<tr>
+<td style="padding:3px 0 0; font-size:11px"><a href="easyrent.co.in">CONTACT NOW</a> <a href="http://www.easyrent.co.in" target="_blank" rel="noopener noreferrer" style="color: #75b08a;text-decoration:underline;font-size:12px;padding:5px;display:inline-block;font-weight:bold;margin-left:12px;">View Details &gt;</a> </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr></tbody>
+</table>
+</td>
+</tr><tr>
+<td height="6"></td>
+</tr>
+<tr>
+<td style="border:solid 1px #d7d7d7; border-radius:2px; padding:8px 8px 3px">
+<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
+<tbody>
+<tr>
+<td style="color:#333333; padding:0 10px; text-align:center; font:14px/18px Arial,Helvetica,sans-serif">
+We would love to hear about your experience with EasyRent</td>
+</tr>
+<tr>
+<td style="color:#333333; padding:10px; text-align:center"><a href="" target="_blank" rel="noopener noreferrer" style="padding:0 28px;color: #75b08a;font:13px Arial,Helvetica,sans-serif;text-decoration:none;border: solid 1px #75b08a;height:30px;border-radius:3px;display:inline-block;text-align:center;line-height:29px;font-weight:bold;">Share Feedback</a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style="font-family:arial; font-size:11px; color:#333333; padding:10px 10px">
+<div style="padding: 0px 0px 10px; margin: 0px; color: rgb(153, 153, 153); float: left; min-width: 280px; width: 75%; font-family: arial, serif, EmojiFont;">
+© Copyright 2017 EasyRent.co.in.<br>
+</div>
+<div style="padding: 0px; margin: 0px; color: rgb(153, 153, 153); float: left; font-family: arial, serif, EmojiFont;">
+<div style="text-align:center"><a href="https://www.facebook.com/EasyRent/" target="_blank" rel="noopener noreferrer"><span style="display:inline-block; width:17px; height:17px"></span></a><a href="https://www.twitter.com/magicbricks" target="_blank" rel="noopener noreferrer"><span style="display:inline-block; width:17px; height:17px"></span></a><a href="http://www.linkedin.com/groups?mostPopular=&amp;gid=2373727" target="_blank" rel="noopener noreferrer"><span style="display:inline-block; width:16px; height:17px"></span></a></div>
+<div style="color:#333"></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+';
+          return $bodyHtml;
+        }
+        function SenMail($body,$toMail,$toName) {
+       //error_reporting(E_ALL);
+            error_reporting(E_STRICT);
+            date_default_timezone_set('Asia/Kolkata');
+            require_once('mail2/class.phpmailer.php');
+            $mail = new PHPMailer();
+            $mail->IsSMTP(); // telling the class to use SMTP
+            $mail->Host = "bh-63.webhostbox.net"; // SMTP server
+            $mail->SMTPDebug = 1; 
+            $mail->SMTPAuth = true;                  // enable SMTP authentication
+            $mail->Host = "bh-63.webhostbox.net"; // sets the SMTP server
+            $mail->Port = 587;                    // set the SMTP port for the GMAIL server
+            $mail->Username = "test@seahawkii.com"; // SMTP account username
+            $mail->Password = "Test123";        // SMTP account password
+            $mail->SMTPSecure = "tls";
+            $mail->SetFrom('test@seahawkii.com', 'EasyRent Mail Server');
+            $mail->AddReplyTo("test@seahawkii.com", "EasyRent Mail Server ");
+            $mail->Subject = "Property Found";
+            $mail->AltBody = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+            $mail->MsgHTML($body);
+            $mail->AddAddress($toMail,$toName);
+            if (!$mail->Send()) {
+                
+            } else {
+             
+            }     
+  }
 
     function ReturnRentFor($type) {
         $returnType = '';
@@ -160,11 +295,40 @@ class GeneralFunction {
        // return array_slice($Numbers,0,$arrayLength);
        return $Numbers;
     }
+     function ReturnBoolStatusArray() {
+        
+           $BoolArray = array
+            (
+            array('Y', "Yes"),
+            array('N', "No"));
+        return $BoolArray;
+    }
+     function ReturnAreaUnitsArray() {
+        
+           $AreaUnitsArray = array
+            (
+            array('sqr-ft', "sqr-ft"),
+               array('sqr-m', "sqr-m"),
+               array('bigha', "bigha"),
+               array('hectare', "hectare"),
+               array('marla', "marla"),
+            array('kanal', "kanal"));
+        return $AreaUnitsArray;
+        
+    }
     function ReturnPGTypeArray() {
          $PgTypeArray = array
             (
             array('B', "Boys"),
             array('G', "Girls"));
+        return $PgTypeArray;
+    }
+     function ReturnFloorForArray() {
+         $PgTypeArray = array
+            (
+            array('B', "Boys"),
+            array('G', "Girls"),
+             array('F', "Family"));
         return $PgTypeArray;
     }
       function ReturnRentStructureArray() {
@@ -916,7 +1080,7 @@ class clsfacprp {
 
 class clsflo {
 
-    public $flofor, $floloc, $flolndmrk, $floadd, $flobdrm, $flobthrm, $floblcny, $floktchn, $flolvrm, $flofursts, $floflono, $floflotot, $flornt, $florntfor, $floocrg, $floscrty, $flomntcrg, $flomntcrgfor, $flosts, $floregcod, $floavlfrm, $flodsc, $flodelsts, $flolat, $flolong, $flototare, $floareunt, $floregdat;
+    public $flocode, $flofor, $floloc, $flolndmrk, $floadd, $flobdrm, $flobthrm, $floblcny, $floktchn, $flolvrm, $flofursts, $floflono, $floflotot, $flornt, $florntfor, $floocrg, $floscrty, $flomntcrg, $flomntcrgfor, $flosts, $floregcod, $floavlfrm, $flodsc, $flodelsts, $flolat, $flolong, $flototare, $floareunt, $floregdat;
 
     function save_flo() {
         $con = new clscon();
@@ -936,6 +1100,22 @@ class clsflo {
             return TRUE;
         } else {
             $_SESSION["flocod"] = 0;
+            $con->db_close();
+            return FALSE;
+        }
+    }
+     function Update_pg() {
+       $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call UpdatePG('$this->flocode','$this->flofor','$this->floloc','$this->flolndmrk','$this->floadd','$this->flobdrm','$this->flobthrm','$this->floblcny','$this->floktchn','$this->flolvrm','$this->flofursts','$this->floflono','$this->floflotot','$this->flornt','$this->florntfor','$this->floocrg','$this->floscrty','$this->flomntcrg','$this->flomntcrgfor','$this->flosts','$this->floregcod','$this->floavlfrm','$this->flodsc','$this->flodelsts','$this->flolat','$this->flolong','$this->flototare','$this->floareunt','$this->floregdat')";
+        $res = mysqli_query($link, $qry)or die(mysqli_error($link));
+     
+        if (mysqli_affected_rows($link)) {
+           
+            $con->db_close();
+            return $res;
+        } else {
+          
             $con->db_close();
             return FALSE;
         }

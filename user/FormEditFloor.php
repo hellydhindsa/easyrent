@@ -50,6 +50,7 @@ if(isset($citycod))
 if(isset($_POST["property_submit"]))
 {
     $obj= new clsflo();
+     $obj->flocode=$PropertyNO;
     $obj->flofor=$_POST["flofor"];
     $obj->floloc=$_POST["pgloc"];
     $obj->flolndmrk=$_POST["lndmrk"];
@@ -68,19 +69,19 @@ if(isset($_POST["property_submit"]))
     $obj->floscrty=$_POST["scrty"];
     $obj->flomntcrg=$_POST["mntcrg"];
      $obj->flomntcrgfor=$_POST["mntcrgfor"];
-    $obj->flosts="P";
-       $obj->floregcod=$_SESSION["lcod"];
+  //  $obj->flosts="P";
+     //  $obj->floregcod=$_SESSION["lcod"];
     //$obj->floregcod=2;
        $cls_date = new DateTime($_POST["avlfrm"]);
     $obj->floavlfrm=$cls_date->format('y-m-d');
    // $obj->floavlfrm=$_POST["avlfrm"];
     $obj->flodsc=$_POST["desc"];
  //   $obj->flodelsts=$_POST["avlfrm"];
-     $obj->flolat=$_POST["lat"];
-    $obj->flolong=$_POST["long"];
+   //  $obj->flolat=$_POST["lat"];
+    //$obj->flolong=$_POST["long"];
     $obj->flototare=$_POST["totare"];
     $obj->floareunt=$_POST["areunt"];
-    $obj->floregdat=date('y-m-d');
+   // $obj->floregdat=date('y-m-d');
  
 
     if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
@@ -96,18 +97,20 @@ if(isset($_POST["property_submit"]))
    $sts= $obj->save_flo();
    if($sts)
    {
- 
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["flocod"];
-     $obj1->type='F';
-       $obj1->save_facprp();
-}
-   }
+    if (isset($_POST["pfac"])) {
+        $objPropertFacility=new clsfacprp();
+        $objPropertFacility->type='F';
+        $objPropertFacility->prpcod=$PropertyNO;
+        $objPropertFacility->DeleteAllFeaturesByUser();
+            foreach ($_POST["pfac"] as $check) {
+              //  $obj1 = new clsfacprp();
+                $objPropertFacility->faccode = $check;
+              //  $obj1->prpcod = $_SESSION["pgcod"];
+               // $obj1->type = 'P';
+                $objPropertFacility->save_facprp();
+            }
+        }
+         header("location:frmEditProperties.php?pno=$PropertyNO&typ=P");
    }
    else
    {
@@ -155,9 +158,19 @@ function getState(val) {
 <div class="dropdown label-select" >
     <select class="form-control"  name="flofor" required>
 <option value="">select one</option>
-<option value="B">Boys</option>
-<option value="G">Girls</option>
-<option value="F">Family</option>
+
+ <?php
+                                                    $PGTypeArray = $ObjGeneralFunction->ReturnFloorForArray();
+                                                    for ($i = 0; $i < count($PGTypeArray); $i++) {
+                                                        if(isset($propType)&& $propType==$PGTypeArray[$i][0]){
+                                                        echo " <option value=" . $PGTypeArray[$i][0] . " selected>" . $PGTypeArray[$i][1] . "</option>";
+                                                        }
+                                                        else
+                                                        {
+                                                           echo " <option value=" . $PGTypeArray[$i][0] . ">" . $PGTypeArray[$i][1] . "</option>";  
+                                                        }
+                                                    }
+                                                    ?>
 </select>
 </div>
 </div>
@@ -169,17 +182,17 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="flono" required>
  <option value="">select one</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-<option value="4">Four</option>
-<option value="5">Five</option>
-<option value="6">Six</option>
-<option value="7">Seven</option>
-<option value="8">Eight</option>
-<option value="9">Nine</option>
-<option value="10">Ten</option>
-
+<?php
+$NoOfSeatsArray = $ObjGeneralFunction->ReturnArrayForNumbers();
+for ($i = 0; $i < 10; $i++) {
+     if(isset($FloorNo)&& $FloorNo==$NoOfSeatsArray[$i][0]){
+                                                        echo " <option value=" . $NoOfSeatsArray[$i][0] . " selected>" . $NoOfSeatsArray[$i][1] . "</option>";
+                                                        }
+ else {
+    echo " <option value=" . $NoOfSeatsArray[$i][0] . ">" . $NoOfSeatsArray[$i][1] . "</option>";
+ }
+}
+?>
 </select>
 </div>
 </div>
@@ -190,17 +203,17 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="totflo" required>
 <option value="">select one</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-<option value="4">Four</option>
-<option value="5">Five</option>
-<option value="6">Six</option>
-<option value="7">Seven</option>
-<option value="8">Eight</option>
-<option value="9">Nine</option>
-<option value="10">Ten</option>
-
+<?php
+$NoOfSeatsArray = $ObjGeneralFunction->ReturnArrayForNumbers();
+for ($i = 0; $i < 10; $i++) {
+     if(isset($TotalFloor)&& $TotalFloor==$NoOfSeatsArray[$i][0]){
+                                                        echo " <option value=" . $NoOfSeatsArray[$i][0] . " selected>" . $NoOfSeatsArray[$i][1] . "</option>";
+                                                        }
+ else {
+    echo " <option value=" . $NoOfSeatsArray[$i][0] . ">" . $NoOfSeatsArray[$i][1] . "</option>";
+ }
+}
+?>
 </select>
 </div>
 </div>
@@ -209,7 +222,7 @@ function getState(val) {
 <div class="form-group s-prop-bedrooms">
 <label for="avlfrm">Available From</label>
 <div class="input-group date datepicker" id="datetimepicker">
-<input type="text" id="avlfrm" class="form-control" value="" name="avlfrm">
+<input type="text" id="avlfrm" class="form-control" value="<?php if(isset($AvalibleFrom)) echo $AvalibleFrom; ?>" name="avlfrm">
  <span class="input-group-addon">
     <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -220,14 +233,21 @@ function getState(val) {
 <div class="col-md-12">
 <div class="form-group s-prop-desc">
 <label for="desc">Description&nbsp;&#42;</label>
-<textarea id="desc" name="desc" rows="10" required="" ></textarea>
+<textarea id="desc" name="desc" rows="10" required="" ><?php if(isset($PropDescription)) echo $PropDescription; ?></textarea>
 </div>
 </div>
 <div class="col-md-12">
 <div class="form-group s-prop-_noo_property_feature_attic">
 <input type="hidden" name="noo_property_feature[attic]" class="" value="0">
 <label for="delsts" class="checkbox-label">
-<input type="checkbox" id="delsts" name="delsts" class="" value="1">&nbsp;I am not interested in getting response from brokers. <i></i>
+ <?php
+                                                if(isset($delerStatus) && $delerStatus){
+                                                    echo ' <input type="checkbox" id="delsts" name="delsts" class="" value="1" checked>&nbsp;I am not interested in getting response from brokers. <i></i>';
+                                                }
+                                                else{
+                                                    echo ' <input type="checkbox" id="delsts" name="delsts" class="" value="1">&nbsp;I am not interested in getting response from brokers. <i></i>';
+                                                }
+                                                ?>
 </label>
 </div>
 </div>
@@ -245,16 +265,17 @@ function getState(val) {
 
     
       <?php
-                                         $obj= new clscat();         
-                                                  $arr = $obj->dsp_cat();
-     
-        for($i=0; $i<count($arr); $i++)
-        {
-           
-        echo " <option value=".$arr[$i][0]." />".$arr[$i][1]."</option>";
-           
+         $obj = new clscat();
+                                                    $CityArray = $obj->dsp_cat();
 
-        }
+                                                    for ($i = 0; $i < count($CityArray); $i++) {
+                                                     if(isset($citycod)&& $citycod==$CityArray[$i][0]){
+                                                        echo " <option value=" . $CityArray[$i][0] . " selected>" . $CityArray[$i][1] . "</option>";
+                                                        }  
+                                                        else
+                                                        {
+                                                        echo " <option value=" . $CityArray[$i][0] . " />" . $CityArray[$i][1] . "</option>";
+                                                    }}
         ?>
     </select>
 </div>
@@ -266,7 +287,15 @@ function getState(val) {
 <div class="dropdown label-select">
     <select class="form-control" name="pgloc" id="pgloc" required>
 <option value="">Select Location</option>
-
+ <?php
+                                                    for ($i = 0; $i < count($LocationArray); $i++) {
+                                                        if (isset($Locationcod) && $Locationcod == $LocationArray[$i][0]) {
+                                                            echo " <option value=" . $LocationArray[$i][0] . " selected>" . $LocationArray[$i][1] . "</option>";
+                                                        } else {
+                                                            echo " <option value=" . $LocationArray[$i][0] . ">" . $LocationArray[$i][1] . "</option>";
+                                                        }
+                                                    }
+                                                    ?>
 </select>
 </div>
 </div>
@@ -274,14 +303,14 @@ function getState(val) {
 <div class="col-md-6">
 <div class="form-group s-prop-address">
 <label for="address">Address&nbsp;&#42;</label>
-<textarea id="address" class="form-control" name="address" rows="1" required=""></textarea>
+<textarea id="address" class="form-control" name="address" rows="1" required=""><?php if(isset($propAddress)) echo $propAddress; ?></textarea>
 </div>
 </div>
 
 <div class="col-md-6">
 <div class="form-group s-prop-address">
 <label for="lndmrk">LandMark&nbsp;</label>
-<textarea id="lndmrk" class="form-control" name="lndmrk" rows="1" required=""></textarea>
+<textarea id="lndmrk" class="form-control" name="lndmrk" rows="1" required=""><?php if(isset($LandMark)) echo $LandMark; ?></textarea>
 </div>
 </div>
 
@@ -296,11 +325,16 @@ function getState(val) {
 <div class="dropdown label-select">
     <select class="form-control" name="bdrm" required>
 <option value="">select one</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-<option value="4">Four</option>
-<option value="5">Five</option>
+  <?php
+                                                    $NoOfpersonArray = $ObjGeneralFunction->ReturnArrayForNumbers();
+                                                    for ($i = 0; $i < 5; $i++) {
+                                                          if(isset($BedRooms)&& $BedRooms==$NoOfpersonArray[$i][0]){
+                                                        echo " <option value=" . $NoOfpersonArray[$i][0] . " selected>" . $NoOfpersonArray[$i][1] . "</option>";
+                                                        }
+                                                        else{
+                                                        echo " <option value=" . $NoOfpersonArray[$i][0] . ">" . $NoOfpersonArray[$i][1] . "</option>";
+                                                    }}
+                                                    ?>
 </select>
 </div>
 </div>
@@ -311,11 +345,16 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="bthrm">
 <option value="">select one</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-<option value="4">Four</option>
-<option value="5">Five</option>
+  <?php
+                                                    $NoOfpersonArray = $ObjGeneralFunction->ReturnArrayForNumbers();
+                                                    for ($i = 0; $i < 5; $i++) {
+                                                          if(isset($BathRooms)&& $BathRooms==$NoOfpersonArray[$i][0]){
+                                                        echo " <option value=" . $NoOfpersonArray[$i][0] . " selected>" . $NoOfpersonArray[$i][1] . "</option>";
+                                                        }
+                                                        else{
+                                                        echo " <option value=" . $NoOfpersonArray[$i][0] . ">" . $NoOfpersonArray[$i][1] . "</option>";
+                                                    }}
+                                                    ?>
 </select>
 </div>
 </div>
@@ -326,11 +365,16 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="blcny">
 <option value="">select one</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-<option value="4">Four</option>
-<option value="5">Five</option>
+  <?php
+                                                    $NoOfpersonArray = $ObjGeneralFunction->ReturnArrayForNumbers();
+                                                    for ($i = 0; $i < 5; $i++) {
+                                                          if(isset($Balcony)&& $Balcony==$NoOfpersonArray[$i][0]){
+                                                        echo " <option value=" . $NoOfpersonArray[$i][0] . " selected>" . $NoOfpersonArray[$i][1] . "</option>";
+                                                        }
+                                                        else{
+                                                        echo " <option value=" . $NoOfpersonArray[$i][0] . ">" . $NoOfpersonArray[$i][1] . "</option>";
+                                                    }}
+                                                    ?>
 </select>
 </div>
 </div>
@@ -342,8 +386,16 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="ktchn">
     <option value="">select one</option>
-<option value="Y">Yes</option>
-<option value="N">No</option>
+    <?php
+    $KitchenStatusArray = $ObjGeneralFunction->ReturnBoolStatusArray();
+    for ($i = 0; $i < count($KitchenStatusArray); $i++) {
+        if (isset($Kitchen) && $Kitchen == $KitchenStatusArray[$i][0]) {
+            echo " <option value=" . $KitchenStatusArray[$i][0] . " selected>" . $KitchenStatusArray[$i][1] . "</option>";
+        } else {
+            echo " <option value=" . $KitchenStatusArray[$i][0] . ">" . $KitchenStatusArray[$i][1] . "</option>";
+        }
+    }
+    ?>
 </select>
 </div>
 </div>
@@ -354,8 +406,16 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="lvrm" required>
     <option value="">select one</option>
-<option value="Y">Yes</option>
-<option value="N">No</option>
+        <?php
+    $LivingRoomStatusArray = $ObjGeneralFunction->ReturnBoolStatusArray();
+    for ($i = 0; $i < count($LivingRoomStatusArray); $i++) {
+        if (isset($LivingRoom) && $LivingRoom == $LivingRoomStatusArray[$i][0]) {
+            echo " <option value=" . $LivingRoomStatusArray[$i][0] . " selected>" . $LivingRoomStatusArray[$i][1] . "</option>";
+        } else {
+            echo " <option value=" . $LivingRoomStatusArray[$i][0] . ">" . $LivingRoomStatusArray[$i][1] . "</option>";
+        }
+    }
+    ?>
 </select>
 </div>
 </div>
@@ -367,9 +427,16 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="fursts" required>
  <option value="">select one</option>
-<option value="F">Fully-Furnished</option>
-<option value="S">Semi-Furnished</option>
-<option value="U"> Un-Furnished</option>
+  <?php
+ $FurnishedStatusArray = $ObjGeneralFunction->ReturnFurnishedStatusArray();
+ for ($i = 0; $i < count($FurnishedStatusArray); $i++) {
+     if (isset($PropFurnishedStatus) && $PropFurnishedStatus == $FurnishedStatusArray[$i][0]) {
+         echo " <option value=" . $FurnishedStatusArray[$i][0] . " selected>" . $FurnishedStatusArray[$i][1] . "</option>";
+     } else {
+         echo " <option value=" . $FurnishedStatusArray[$i][0] . ">" . $FurnishedStatusArray[$i][1] . "</option>";
+     }
+ }
+ ?>
 </select>
 </div>
 </div>
@@ -378,7 +445,7 @@ function getState(val) {
 <div class="form-group s-prop-bathrooms">
 <div class="form-group s-prop-_noo_property_field_lot_area">
 <label for="totare">Total Area Covered</label>
-<input type="number" id="totare" name="totare" class="form-control" value="" required>
+<input type="number" id="totare" name="totare" class="form-control" value="<?php if(isset($TotalArea)) echo $TotalArea; ?>" required>
 </div>
 </div>
 </div> 
@@ -388,13 +455,16 @@ function getState(val) {
 <div class="dropdown label-select">
 <select class="form-control" name="areunt" required>
   <option value="">select one</option>
-<option value="sqr-ft">sqr-ft</option>
-<option value="sqr-m">sqr-m</option>
-<option value="bigha">bigha</option>
-<option value="hectare">hectare</option>
-<option value="marla">marla</option>
-<option value="kanal">kanal</option>
-
+  <?php
+  $AreaUnitsArray = $ObjGeneralFunction->ReturnAreaUnitsArray();
+  for ($i = 0; $i < count($AreaUnitsArray); $i++) {
+      if (isset($AreaUnits) && $AreaUnits == $AreaUnitsArray[$i][0]) {
+          echo " <option value=" . $AreaUnitsArray[$i][0] . " selected>" . $AreaUnitsArray[$i][1] . "</option>";
+      } else {
+          echo " <option value=" . $AreaUnitsArray[$i][0] . ">" . $AreaUnitsArray[$i][1] . "</option>";
+      }
+  }
+  ?>
 </select>
 </div>
 </div>
@@ -452,7 +522,7 @@ function getState(val) {
 <div class="col-md-7">
 <div class="form-group s-prop-bedrooms">
 <label for="exprnt">Expected Rent&nbsp;(rupees)</label>
-<input type="number" id="exprnt" class="form-control" value="" name="exprnt" required>
+<input type="number" id="exprnt" class="form-control" value="<?php if(isset($propRent)) echo $propRent; ?>" name="exprnt" required>
 </div>
 </div>
 <div class="col-md-5">
@@ -460,30 +530,37 @@ function getState(val) {
 <label> Structure</label>
 <div class="dropdown label-select">
     <select class="form-control" name="rntfor" >
-<option value="M">Monthly</option>
-<option value="Q">Quarterly</option>
-<option value="Y">Yearly</option>
-</select>
+        <?php
+$RentChargeArray = $ObjGeneralFunction->ReturnRentStructureArray();
+                                                    for ($i = 0; $i < count($RentChargeArray); $i++) {
+                                                         if(isset($rentFor)&& $rentFor==$RentChargeArray[$i][0]){
+                                                        echo " <option value=" . $RentChargeArray[$i][0] . " selected>" . $RentChargeArray[$i][1] . "</option>";
+                                                        } 
+                                                        else{
+                                                        echo " <option value=" . $RentChargeArray[$i][0] . ">" . $RentChargeArray[$i][1] . "</option>";
+                                                    }}
+?>
+                                                    </select>
 </div>
 </div>
 </div>
 <div class="col-md-6">
 <div class="form-group s-prop-type">
 <label for="scrty">Security Charges (rupees)</label>
-<input type="number" id="scrty" class="form-control" value="" name="scrty">
+<input type="number" id="scrty" class="form-control" value="<?php if(isset($PropSecurity)) echo $PropSecurity; ?>" name="scrty">
 </div>
 </div>
 <div class="col-md-6">
 <div class="form-group s-prop-bedrooms">
 <label for="ocrg">Other Charges (rupees)</label>
-<input type="number" id="ocrg" class="form-control" value="" name="ocrg">
+<input type="number" id="ocrg" class="form-control" value="<?php if(isset($PropOtherCharges)) echo $PropOtherCharges; ?>" name="ocrg">
 </div>
 </div>
 
 <div class="col-md-7">
 <div class="form-group s-prop-bedrooms">
 <label for="mntcrg">Maintenance Charges&nbsp;(rupees)</label>
-<input type="number" id="mntcrg" class="form-control" value="" name="mntcrg">
+<input type="number" id="mntcrg" class="form-control" value="<?php if(isset($MainTainCharges)) echo $MainTainCharges; ?>" name="mntcrg">
 </div>
 </div>
 <div class="col-md-5">
@@ -491,11 +568,16 @@ function getState(val) {
 <label> Structure</label>
 <div class="dropdown label-select">
     <select class="form-control" name="mcrgfor" >
-    <option value="M">Monthly</option>
-<option value="Q">Quarterly</option>
-<option value="Y">Yearly</option>
-
-
+    <?php
+                                                    $MaintainenceChargeArray = $ObjGeneralFunction->ReturnMaintainesStructureArray();
+                                                    for ($i = 0; $i < count($MaintainenceChargeArray); $i++) {
+                                                         if(isset($MntChargesFor)&& $MntChargesFor==$MaintainenceChargeArray[$i][0]){
+                                                        echo " <option value=" . $MaintainenceChargeArray[$i][0] . " selected>" . $MaintainenceChargeArray[$i][1] . "</option>";
+                                                        } 
+                                                        else{
+                                                        echo " <option value=" . $MaintainenceChargeArray[$i][0] . ">" . $MaintainenceChargeArray[$i][1] . "</option>";
+                                                    }}
+                                                    ?>
 </select>
 </div>
 </div>

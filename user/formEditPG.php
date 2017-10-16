@@ -364,35 +364,13 @@ for ($i = 0; $i < 20; $i++) {
                                         </div>
                                     </div>
 
-                                    <!--<div class="col-md-4">
-                                    <div class="form-group s-prop-lat">
-                                    <label for="lat">Latitude (for Maps)</label>
-                                    <input type="text" id="lat" class="form-control" value="40.714398" name="lat" readonly>
-                                    </div>
-                                    </div>-->
                                     <div class="col-md-6">
                                         <div class="form-group s-prop-address">
                                             <label for="lndmrk">LandMark&nbsp;</label>
                                             <textarea id="lndmrk" class="form-control" name="lndmrk" rows="1" required=""><?php if(isset($LandMark)) echo $LandMark; ?></textarea>
                                         </div>
                                     </div>
-                                    <!--<div class="col-md-4">
-                                    <div class="form-group s-prop-long">
-                                    <label for="long">Longitude (for Maps)</label>
-                                    <input type="text" id="long" class="form-control" value="-74.005279" name="long" readonly>
-                                    </div>
-                                    </div>-->
-
-                                    <!--<div class="col-md-12">
-                                    <div class="noo_property_google_map">
-                                    <div id="noo_property_google_map" class="form-group noo_property_google_map" style="height: 300px; margin-top: 25px; overflow: hidden;position: relative;width: 100%;">
-                                    </div>
-                                    <div class="noo_property_google_map_search">
-                                    <input placeholder="Search your map" type="text" autocomplete="off" id="noo_property_google_map_search_input">
-                                    </div>
-                                    </div>
-                                     
-                                    </div>-->
+                                   
                                 </div>
                             </div>
 
