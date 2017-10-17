@@ -94,6 +94,12 @@ if (isset($_POST["EditButtonClick"])) {
     } else if ($PropertyType == 'F') {
         header("location:formEditFloor.php?pno=$PropertyNO");
     }
+     else if ($PropertyType == 'H') {
+        header("location:formEditHouse.php?pno=$PropertyNO");
+    }
+     else if ($PropertyType == 'C') {
+        header("location:formEditCommercial.php?pno=$PropertyNO");
+    }
 }
 
 

@@ -331,6 +331,15 @@ We would love to hear about your experience with EasyRent</td>
              array('F', "Family"));
         return $PgTypeArray;
     }
+      function ReturnCommercialTypeArray() {
+         $commercialTypeArray = array
+            (
+            array('O', "Office"),
+            array('S', "Shop"),
+             array('SH', "ShowRoom"),
+              array('G', "Godown"));
+        return $commercialTypeArray;
+    }
       function ReturnRentStructureArray() {
            $RentStructureArray = array
             (
@@ -1104,10 +1113,10 @@ class clsflo {
             return FALSE;
         }
     }
-     function Update_pg() {
+     function Update_Floor() {
        $con = new clscon();
         $link = $con->db_connect();
-        $qry = "call UpdatePG('$this->flocode','$this->flofor','$this->floloc','$this->flolndmrk','$this->floadd','$this->flobdrm','$this->flobthrm','$this->floblcny','$this->floktchn','$this->flolvrm','$this->flofursts','$this->floflono','$this->floflotot','$this->flornt','$this->florntfor','$this->floocrg','$this->floscrty','$this->flomntcrg','$this->flomntcrgfor','$this->flosts','$this->floregcod','$this->floavlfrm','$this->flodsc','$this->flodelsts','$this->flolat','$this->flolong','$this->flototare','$this->floareunt','$this->floregdat')";
+        $qry = "call UpdateFloor('$this->flocode','$this->flofor','$this->floloc','$this->flolndmrk','$this->floadd','$this->flobdrm','$this->flobthrm','$this->floblcny','$this->floktchn','$this->flolvrm','$this->flofursts','$this->floflono','$this->floflotot','$this->flornt','$this->florntfor','$this->floocrg','$this->floscrty','$this->flomntcrg','$this->flomntcrgfor','$this->floavlfrm','$this->flodsc','$this->flodelsts','$this->flototare','$this->floareunt')";
         $res = mysqli_query($link, $qry)or die(mysqli_error($link));
      
         if (mysqli_affected_rows($link)) {
