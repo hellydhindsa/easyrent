@@ -49,6 +49,7 @@ if(isset($citycod))
 if(isset($_POST["property_submit"]))
 {
     $obj= new clshus();
+     $obj->huscode=$PropertyNO;
     $obj->husfor=$_POST["husfor"];
     $obj->husloc=$_POST["pgloc"];
     $obj->huslndmrk=$_POST["lndmrk"];
@@ -66,20 +67,20 @@ if(isset($_POST["property_submit"]))
     $obj->husocrg=$_POST["ocrg"];
     $obj->husscrty=$_POST["scrty"];
     $obj->husmntcrg=$_POST["mntcrg"];
-     $obj->husmntcrgfor=$_POST["mntcrgfor"];
-    $obj->hussts="P";
-       $obj->husregcod=$_SESSION["lcod"];
+     $obj->husmntcrgfor=$_POST["mcrgfor"];
+   // $obj->hussts="P";
+    //   $obj->husregcod=$_SESSION["lcod"];
   //  $obj->husregcod=2;
        $cls_date = new DateTime($_POST["avlfrm"]);
     $obj->husavlfrm=$cls_date->format('y-m-d');
    // $obj->husavlfrm=$_POST["avlfrm"];
     $obj->husdsc=$_POST["desc"];
  //   $obj->flodelsts=$_POST["avlfrm"];
-     $obj->huslat=$_POST["lat"];
-    $obj->huslong=$_POST["long"];
+   //  $obj->huslat=$_POST["lat"];
+   // $obj->huslong=$_POST["long"];
     $obj->husstryblt=$_POST["strblt"];
     $obj->husareunt=$_POST["areunt"];
-    $obj->husregdat=date('y-m-d');
+   // $obj->husregdat=date('y-m-d');
  
 
     if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
@@ -92,21 +93,23 @@ if(isset($_POST["property_submit"]))
      $obj->husdelsts="N";
  }}
     
-   $sts= $obj->save_hus();
+   $sts= $obj->Update_house();
    if($sts)
    {
- 
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["huscod"];
-     $obj1->type='H';
-       $obj1->save_facprp();
-}
-   }
+   if (isset($_POST["pfac"])) {
+        $objPropertFacility=new clsfacprp();
+        $objPropertFacility->type='H';
+        $objPropertFacility->prpcod=$PropertyNO;
+        $objPropertFacility->DeleteAllFeaturesByUser();
+            foreach ($_POST["pfac"] as $check) {
+              //  $obj1 = new clsfacprp();
+                $objPropertFacility->faccode = $check;
+              //  $obj1->prpcod = $_SESSION["pgcod"];
+               // $obj1->type = 'P';
+                $objPropertFacility->save_facprp();
+            }
+        }
+         header("location:frmEditProperties.php?pno=$PropertyNO&typ=H");
    }
    else
    {
@@ -145,7 +148,7 @@ function getState(val) {
 <h1 class="page-title">Update House</h1>
 </div>
 <div class="submit-content">
-    <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="frmhou.php">
+    <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="formEditHouse.php?pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>">
 <div class="noo-control-group">
 <div class="group-title">House Description</div>
 <div class="group-container row">

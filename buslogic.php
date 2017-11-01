@@ -4,7 +4,7 @@ session_start();
 include_once 'config.php';
 
 class GeneralFunction {
- function GeneratEmailHTML()
+ function GeneratEmailHTML($CityName,$LocationName,$RentString,$type,$FeatureListingString)
         {
           $bodyHtml='
 <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:1px solid #bcb5b9; font-size:90%; font-family:Arial,Helvetica,sans-serif; color:#454545; padding:0; margin:0; background-color:#e4e4e1; width:100%">
@@ -37,7 +37,7 @@ class GeneralFunction {
 <tr>
 <td style="padding:15px 10px 5px 10px">
 <p style="margin:0px; font-family:arial; font-size:13px; font-weight:400; color:#000">
-Hi Aman, following properties match your requirement in Sector-44,Sector-37,Sector-21 </p>
+Dear Customer new Property added according to your requirement in  '.$CityName.' </p>
 </td>
 </tr>
 <tr>
@@ -46,14 +46,14 @@ Hi Aman, following properties match your requirement in Sector-44,Sector-37,Sect
 <tbody>
 <tr>
 <td style="font-weight:bold; color:rgb(0,0,0); padding:14px 0 8px; font-family:arial; font-size:15px">
-Sector-44, Chandigarh</td>
+'.$CityName.' ,'.$LocationName.'</td>
 </tr>
 <tr>
 <td style="margin:0; border:1px solid #d9d9d9; background:#fff; padding:13px 10px 7px">
 <table style="width:100%; border-collapse:collapse">
 <tbody>
 <tr>
-<td style="color:#000; padding:0 0 1px 1px; font-family:arial; font-size:15px"><strong>Rs 17,000</strong>, 2 BHK Residential House </td>
+<td style="color:#000; padding:0 0 1px 1px; font-family:arial; font-size:15px"><strong>'.$RentString.'</strong>, '.$type.' </td>
 </tr>
 <tr>
 </tr>
@@ -63,7 +63,7 @@ Sector-44 </td>
 </tr>
 <tr>
 <td style="padding:5px 0 5px 0px; font-size:13px; line-height:16px; color:rgb(85,85,85)">
-2 Bathrooms | 1 Balcony | Semi-Furnished | 1 Balcony</td>
+'.$FeatureListingString.' </td>
 </tr>
 <tr>
 <td style="padding:3px 0 0; font-size:11px"><a href="easyrent.co.in">CONTACT NOW</a> <a href="http://www.easyrent.co.in" target="_blank" rel="noopener noreferrer" style="color: #75b08a;text-decoration:underline;font-size:12px;padding:5px;display:inline-block;font-weight:bold;margin-left:12px;">View Details &gt;</a> </td>
@@ -116,7 +116,7 @@ We would love to hear about your experience with EasyRent</td>
        //error_reporting(E_ALL);
             error_reporting(E_STRICT);
             date_default_timezone_set('Asia/Kolkata');
-            require_once('mail2/class.phpmailer.php');
+            require_once('mail/class.phpmailer.php');
             $mail = new PHPMailer();
             $mail->IsSMTP(); // telling the class to use SMTP
             $mail->Host = "bh-63.webhostbox.net"; // SMTP server
@@ -139,7 +139,60 @@ We would love to hear about your experience with EasyRent</td>
              
             }     
   }
+   function SenMailBulk($body,$EmailListArray) {
+            //demo testing to end mail 
+//              $EmailListArray = array
+//            (
+//            array('preet.dhindsa@hotmail.com', "preet"),
+//               array('dhindsa.preetinder@gmail.com', "helly")
+//             );
+       //error_reporting(E_ALL);
+            error_reporting(E_STRICT);
+            date_default_timezone_set('Asia/Kolkata');
+            require_once('mail/class.phpmailer.php');
+            $mail = new PHPMailer();
+            $mail->IsSMTP(); // telling the class to use SMTP
+            $mail->Host = "bh-63.webhostbox.net"; // SMTP server
+            $mail->SMTPDebug = 1; 
+            $mail->SMTPAuth = true;                  // enable SMTP authentication
+            $mail->Host = "bh-63.webhostbox.net"; // sets the SMTP server
+            $mail->Port = 587;                    // set the SMTP port for the GMAIL server
+            $mail->Username = "test@seahawkii.com"; // SMTP account username
+            $mail->Password = "Test123";        // SMTP account password
+            $mail->SMTPSecure = "tls";
+            $mail->SetFrom('info@easyrent.co.in', 'EasyRent Mail Server');
+            $mail->AddReplyTo("test@seahawkii.com", "EasyRent Mail Server ");
+            $mail->Subject = "Property Found";
+            $mail->AltBody = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+            $mail->MsgHTML($body);
+            //$mail->AddAddress($toMail,$toName);
+              for ($i = 0; $i < count($EmailListArray); $i++) {
+                                $mail->AddAddress($EmailListArray[$i][1],$EmailListArray[$i][2]);                        
+                                                         //  $PGTypeArray[$i][1] 
+                                                        }
+            if (!$mail->Send()) {
+                
+            } else {
+             
+            }     
+  }
 
+function GetUserdetailsForAlerts($location,$type)
+{
+    //GetUserdetailsForAlerts
+    $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call GetUserdetailsForAlerts($location,'$type')";
+        $res = mysqli_query($link, $qry);
+        $i = 0;
+         $UserDetailArray = array();
+        while ($r = mysqli_fetch_row($res)) {
+            $UserDetailArray[$i] = $r;
+           $i ++;
+        }
+        $con->db_close();
+          return $UserDetailArray;
+}
     function ReturnRentFor($type) {
         $returnType = '';
         if ($type == 'M') {
@@ -379,7 +432,36 @@ We would love to hear about your experience with EasyRent</td>
         curl_close($ch);
 //------------------------------
     }
+function SendSMSBulk($phoneNumbersComaString,$message)
+{
+$url = 'http://smslowprice.com/postsms.aspx';
+$fields = array('userid'=>urlencode('vickysingla'),
+                'pass'=>urlencode('welcome@123'),
+                'phone'=>urlencode($phoneNumbersComaString),
+                'msg'=>urlencode($message));
+$fields_string = '';
+//url-ify the data for the POST 
+foreach($fields as $key=>$value) 
+{
+ $fields_string .= $key.'='.$value.'&'; 
+} 
+rtrim($fields_string,'&');
 
+//open connection 
+$ch = curl_init();
+
+//set the url, number of POST vars, POST data 
+curl_setopt($ch,CURLOPT_URL,$url);
+curl_setopt($ch,CURLOPT_POST,count($fields));
+curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string);
+
+//execute post 
+$result = curl_exec($ch);
+
+//close connection 
+curl_close($ch);
+
+}
 }
 
 class clscat {
@@ -1134,7 +1216,7 @@ class clsflo {
 
 class clshus {
 
-    public $husfor, $husloc, $huslndmrk, $husadd, $husbdrm, $husbthrm, $husblcny, $huslby, $huslvrm, $husktchn, $husfursts, $hustotare, $husrnt, $husrntfor, $husscrty, $husmntcrg, $husmntcrgfor, $husocrg, $husavlfrm, $husdsc, $hussts, $husregcod, $husdelsts, $huslat, $huslong, $husareunt, $husstryblt, $husregdat;
+    public $huscode, $husfor, $husloc, $huslndmrk, $husadd, $husbdrm, $husbthrm, $husblcny, $huslby, $huslvrm, $husktchn, $husfursts, $hustotare, $husrnt, $husrntfor, $husscrty, $husmntcrg, $husmntcrgfor, $husocrg, $husavlfrm, $husdsc, $hussts, $husregcod, $husdelsts, $huslat, $huslong, $husareunt, $husstryblt, $husregdat;
 
     function save_hus() {
         $con = new clscon();
@@ -1158,12 +1240,28 @@ class clshus {
             return FALSE;
         }
     }
+  function Update_house() {
+       $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call UpdateHouse('$this->huscode','$this->husfor','$this->husloc','$this->huslndmrk','$this->husadd','$this->husbdrm','$this->husbthrm','$this->husblcny','$this->huslby','$this->huslvrm','$this->husktchn','$this->husfursts','$this->hustotare','$this->husrnt','$this->husrntfor','$this->husscrty','$this->husmntcrg','$this->husmntcrgfor','$this->husocrg','$this->husavlfrm','$this->husdsc','$this->husdelsts','$this->husareunt','$this->husstryblt')";
+        $res = mysqli_query($link, $qry)or die(mysqli_error($link));
+     
+        if (mysqli_affected_rows($link)) {
+           
+            $con->db_close();
+            return $res;
+        } else {
+          
+            $con->db_close();
+            return FALSE;
+        }
+    }
 
 }
 
 class clscp {
 
-    public $cptyp, $cploc, $cplndmrk, $cpadd, $cppbthrm, $cpppntry, $cpflono, $cptotflo, $cparecov, $cprdfac, $cprnt, $cprntfor, $cpmntcrg, $cpmntcrgfor, $cpocrg, $cpavlfrm, $cpagefconst, $cpdsc, $cpregcod, $cpsts, $cpregdat, $cpdelsts, $cplat, $cplong, $cpscrty, $cpareunt, $cpfursts;
+    public $cpcode,$cptyp, $cploc, $cplndmrk, $cpadd, $cppbthrm, $cpppntry, $cpflono, $cptotflo, $cparecov, $cprdfac, $cprnt, $cprntfor, $cpmntcrg, $cpmntcrgfor, $cpocrg, $cpavlfrm, $cpagefconst, $cpdsc, $cpregcod, $cpsts, $cpregdat, $cpdelsts, $cplat, $cplong, $cpscrty, $cpareunt, $cpfursts;
 
     function save_cp() {
         $con = new clscon();
@@ -1183,6 +1281,22 @@ class clscp {
             return TRUE;
         } else {
             $_SESSION["cpcod"] = 0;
+            $con->db_close();
+            return FALSE;
+        }
+    }
+function Update_Commercial() {
+       $con = new clscon();
+        $link = $con->db_connect();
+       $qry = "call UpdateCommercial('$this->cpcode','$this->cptyp','$this->cploc','$this->cplndmrk','$this->cpadd','$this->cppbthrm','$this->cpppntry','$this->cpflono','$this->cptotflo','$this->cparecov','$this->cprdfac','$this->cprnt','$this->cprntfor','$this->cpmntcrg','$this->cpmntcrgfor','$this->cpocrg','$this->cpavlfrm','$this->cpagefconst','$this->cpdsc','$this->cpdelsts','$this->cpscrty','$this->cpareunt','$this->cpfursts',)";
+         $res = mysqli_query($link, $qry)or die(mysqli_error($link));
+     
+        if (mysqli_affected_rows($link)) {
+           
+            $con->db_close();
+            return $res;
+        } else {
+          
             $con->db_close();
             return FALSE;
         }
@@ -1367,6 +1481,20 @@ class clsprf {
         $con->db_close();
         return $arr;
     }
+     function DisplayUserByUserId($AgentId) {
+        $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call DisplayUserByUserId('$AgentId')";
+        $res = mysqli_query($link, $qry)or die(mysqli_error($link));
+        $i = 0;
+        $arr = array();
+        while ($r = mysqli_fetch_row($res)) {
+            $arr[$i] = $r;
+            $i++;
+        }
+        $con->db_close();
+        return $arr;
+    }
 
 }
 
@@ -1386,7 +1514,36 @@ class clsprop {
         $con->db_close();
         return $arr;
     }
-
+      function GetOtpByEmail($email) {
+        $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call GetResendOTP('$email')";
+        $res = mysqli_query($link, $qry);
+         $i = 0;
+        $arr = array();
+     while ($r = mysqli_fetch_row($res)) {
+            $arr[$i] = $r;
+            $i++;
+        }
+        $con->db_close();
+        return $arr;
+    }
+   
+function GetCityAndLocationNamesByLocationId($lcod)
+{
+   $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call GetCityAndLocationNamesByLocationId($lcod)";
+        $res = mysqli_query($link, $qry);
+        $i = 0;
+        $arr = array();
+        while ($r = mysqli_fetch_row($res)) {
+            $arr[$i] = $r;
+            $i++;
+        }
+        $con->db_close();
+        return $arr;  
+}
     function dsp_propertiesForAdmin() {
         $con = new clscon();
         $link = $con->db_connect();

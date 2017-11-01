@@ -52,6 +52,33 @@ if(isset($_POST["pfac"]))
        $obj1->save_facprp();
 }
    }
+   
+   //process to send Email and SMS to Alert Users
+   $ObjGeneralFunction = new GeneralFunction();
+   //get info for alerts
+   $AlertUserDetailArray=$ObjGeneralFunction->GetUserdetailsForAlerts($_POST["pgloc"],'P');
+   if(isset($AlertUserDetailArray) && count($AlertUserDetailArray)>0)
+   {
+      //get location and city name location and others fields to send email and sms alerts 
+   $ObjPoperty = new clsprop();
+   $CityLOcationNameARRAY=$ObjPoperty->GetCityAndLocationNamesByLocationId($_POST["pgloc"]);
+   if(count($CityLOcationNameARRAY)>0){$CityName=$CityLOcationNameARRAY[0][0]; $LocationName=$CityLOcationNameARRAY[0][1];} else{$CityName='';$LocationName='';}
+   $rentFor= $ObjGeneralFunction->ReturnRentFor($_POST["rntfor"]);
+   $PropFurnishedStatus=$ObjGeneralFunction->ReturnFurnishedStatus($_POST["fursts"]);
+   $RentString='Rs '.$_POST["ernt"].' /'.$rentFor;
+   $SMSString='Dear Customer new Property added according to your requirement in '.$CityName.' ,'.$LocationName.' at '.$RentString.'.'.$PropFurnishedStatus;
+   $phoneNumbersComaString='';
+       for ($i = 0; $i < count($AlertUserDetailArray); $i++) {
+       $phoneNumbersComaString .= $AlertUserDetailArray[$i][0].','; 
+          
+           }
+           rtrim($phoneNumbersComaString,',');
+   $ObjGeneralFunction->SendSMSBulk($phoneNumbersComaString, $SMSString);
+   $FeatureListingString=$PropFurnishedStatus.' | PG  For '.$ObjGeneralFunction->ReturnPropertyFor($_POST["pgtyp"]).' | No of Seats '.$_POST["noseat"];
+   $body=$ObjGeneralFunction->GeneratEmailHTML($CityName,$LocationName,$RentString,'PG',$FeatureListingString);
+   $ObjGeneralFunction->SenMailBulk($body, $AlertUserDetailArray);
+  //InformUsersAfterPropertyAdded
+   }
    }
    else
    {

@@ -63,14 +63,14 @@ background-color: #f0e797;
 <div class="top-header">
 <div class="container">
 <div class="top-header-inner">
-<!--<ul class="social-top">
-<li><a href="#" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-<li><a href="#" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-<li><a href="#" title="Pinterest" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-<li><a href="#" title="RSS" target="_blank"><i class="fa fa-rss"></i></a></li>
-</ul>-->
+<ul class="social-top">
+<li><a href="https://www.facebook.com/easyrent.co.in" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li><a href="https://www.facebook.com/easyrent.co.in" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+
+</ul>
 <div class="top-header-content">
 <div class="emailto content-item">
+<a href="#"><i class="fa fa-envelope-o"></i>&nbsp;Email:info@easyrent.com</a>
 </div>
 <div class="register content-item">
 
@@ -94,8 +94,8 @@ background-color: #f0e797;
    ?>
  
 <div class="header-search">
-<label for="input-header-search"><i class="fa fa-search"></i></label>
-<input type="text" id="input-header-search" placeholder="Search">
+<!--<label for="input-header-search"><i class="fa fa-search"></i></label>
+<input type="text" id="input-header-search" placeholder="Search">-->
 </div>
 </div>
 </div>

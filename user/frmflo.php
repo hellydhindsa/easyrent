@@ -22,7 +22,7 @@ if(isset($_POST["property_submit"]))
     $obj->floocrg=$_POST["ocrg"];
     $obj->floscrty=$_POST["scrty"];
     $obj->flomntcrg=$_POST["mntcrg"];
-     $obj->flomntcrgfor=$_POST["mntcrgfor"];
+     $obj->flomntcrgfor=$_POST["mcrgfor"];
     $obj->flosts="P";
        $obj->floregcod=$_SESSION["lcod"];
     //$obj->floregcod=2;

@@ -22,7 +22,7 @@ if(isset($_POST["property_submit"]))
     $obj->husocrg=$_POST["ocrg"];
     $obj->husscrty=$_POST["scrty"];
     $obj->husmntcrg=$_POST["mntcrg"];
-     $obj->husmntcrgfor=$_POST["mntcrgfor"];
+     $obj->husmntcrgfor=$_POST["mcrgfor"];
     $obj->hussts="P";
        $obj->husregcod=$_SESSION["lcod"];
   //  $obj->husregcod=2;

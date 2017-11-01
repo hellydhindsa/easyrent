@@ -22,7 +22,7 @@ if(isset($_POST["property_submit"]))
     $obj->cpocrg=$_POST["ocrg"];
     $obj->cpscrty=$_POST["scrty"];
     $obj->cpmntcrg=$_POST["mntcrg"];
-     $obj->cpmntcrgfor=$_POST["mntcrgfor"];
+     $obj->cpmntcrgfor=$_POST["mcrgfor"];
     $obj->cpsts="P";
        $obj->cpregcod=$_SESSION["lcod"];
   //  $obj->cpregcod=2;

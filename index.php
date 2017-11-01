@@ -19,7 +19,7 @@ if(isset($_POST["SearchResults"]))
            $_SESSION["MoreDetailPType"]=$PropertyType;
    if(isset($_SESSION["lcod"]))
    {
-       header("location:user/FrmMoreDetailView.php");
+       header("location:user/FrmMoreDetailView.php?pno=$PropertyNO&typ=$PropertyType");
    }
    else
    {

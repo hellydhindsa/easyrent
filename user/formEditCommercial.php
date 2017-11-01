@@ -1,8 +1,10 @@
 <?php
 include_once '../buslogic.php';
 //code check user is login or not
- if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
-  //function to set  property code
+if (!isset($_SESSION["lcod"])) {
+    header("location:../login.php");
+}
+//function to set  property code
 if (isset($_REQUEST["pno"])) {
     $PropertyNO = $_REQUEST["pno"];
 }
@@ -17,102 +19,95 @@ if (count($proparr) > 0) {
     $Location = $proparr[0]['location'];
     $Locationcod = $proparr[0]['cploc'];
     $IsActive = $proparr[0]['IsActive'];
-        $propType= $proparr[0]['cptyp'];
-        $rentFor=$proparr[0]['cprntfor'];
-        $MntChargesFor= $proparr[0]['cpmntcrgfor'];
-        $PropFurnishedStatus=$proparr[0]['cpfursts'];
-        $AreaUnits=$proparr[0]['cpareunit'];
-       
-        $PropDescription=$proparr[0]['cpdsc'];
-            $LandMark=$proparr[0]['cplndmrk'];
-            $propAddress=$proparr[0]['cpadd'];
-            $propRent=$proparr[0]['cprnt'];
-            $PropSecurity=$proparr[0]['cpscrty'];
-            $PropOtherCharges=$proparr[0]['cpocry']; 
-            $AvalibleFrom=$proparr[0]['cpavlfrm'];
-            $MainTainCharges=$proparr[0]['cpmntcrg'];
-            $WashRooms=$proparr[0]['cppwshrm'];
-          $Pentry=$proparr[0]['cpppentry'];
-            $Roadfacing=$proparr[0]['cprdfac'];
-            $AgeofConstruction=$proparr[0]['cpageofcnst'];
-            $TotalArea=$proparr[0]['cptotarecov'];
-             $FloorNo=$proparr[0]['cpflono'];
-        $TotalFloor=$proparr[0]['cptotflo'];
+    $propType = $proparr[0]['cptyp'];
+    $rentFor = $proparr[0]['cprntfor'];
+    $MntChargesFor = $proparr[0]['cpmntcrgfor'];
+    $PropFurnishedStatus = $proparr[0]['cpfursts'];
+    $AreaUnits = $proparr[0]['cpareunit'];
+
+    $PropDescription = $proparr[0]['cpdsc'];
+    $LandMark = $proparr[0]['cplndmrk'];
+    $propAddress = $proparr[0]['cpadd'];
+    $propRent = $proparr[0]['cprnt'];
+    $PropSecurity = $proparr[0]['cpscrty'];
+    $PropOtherCharges = $proparr[0]['cpocry'];
+    $AvalibleFrom = $proparr[0]['cpavlfrm'];
+    $MainTainCharges = $proparr[0]['cpmntcrg'];
+    $WashRooms = $proparr[0]['cppwshrm'];
+    $Pentry = $proparr[0]['cpppentry'];
+    $Roadfacing = $proparr[0]['cprdfac'];
+    $AgeofConstruction = $proparr[0]['cpageofcnst'];
+    $TotalArea = $proparr[0]['cptotarecov'];
+    $FloorNo = $proparr[0]['cpflono'];
+    $TotalFloor = $proparr[0]['cptotflo'];
 }
 //Approch to get location list by city id
-if(isset($citycod))
-{
- $objlocation= new clssubcat();
-            $LocationArray = $objlocation->dsp_subcat($citycod);
+if (isset($citycod)) {
+    $objlocation = new clssubcat();
+    $LocationArray = $objlocation->dsp_subcat($citycod);
 }
-if(isset($_POST["property_submit"]))
-{
-    $obj= new clscp();
-    $obj->cptyp=$_POST["cptyp"];
-    $obj->cploc=$_POST["pgloc"];
-    $obj->cplndmrk=$_POST["lndmrk"];
-    $obj->cpadd=$_POST["address"];
-   // $obj->husbdrm=$_POST["bdrm"];
-    $obj->cppbthrm=$_POST["pwash"];
-    $obj->cpppntry=$_POST["ppntry"];
-    $obj->cpflono=$_POST["flono"];
-    $obj->cptotflo=$_POST["totflo"];
-    $obj->cparecov=$_POST["totare"];
-   $obj->cprdfac=$_POST["rdfac"];
-     $obj->cpagefconst=$_POST["ageofconst"];
-    $obj->cprnt=$_POST["rnt"];
-    $obj->cprntfor=$_POST["rntfor"];
-    $obj->cpocrg=$_POST["ocrg"];
-    $obj->cpscrty=$_POST["scrty"];
-    $obj->cpmntcrg=$_POST["mntcrg"];
-     $obj->cpmntcrgfor=$_POST["mntcrgfor"];
-    $obj->cpsts="P";
-       $obj->cpregcod=$_SESSION["lcod"];
-  //  $obj->cpregcod=2;
-       $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->cpavlfrm=$cls_date->format('y-m-d');
-   // $obj->cpavlfrm=$_POST["avlfrm"];
-    $obj->cpdsc=$_POST["desc"];
-    $obj->cpfursts=$_POST["fursts"];
-     $obj->cplat=$_POST["lat"];
-    $obj->cplong=$_POST["long"];
-   // $obj->husstryblt=$_POST["strblt"];
-    $obj->cpareunt=$_POST["areunt"];
-    $obj->cpregdat=date('y-m-d');
- 
+if (isset($_POST["property_submit"])) {
+    $obj = new clscp();
+    $obj->cpcode=$PropertyNO;
+    $obj->cptyp = $_POST["cptyp"];
+    $obj->cploc = $_POST["pgloc"];
+    $obj->cplndmrk = $_POST["lndmrk"];
+    $obj->cpadd = $_POST["address"];
+    // $obj->husbdrm=$_POST["bdrm"];
+    $obj->cppbthrm = $_POST["pwash"];
+    $obj->cpppntry = $_POST["ppntry"];
+    $obj->cpflono = $_POST["flono"];
+    $obj->cptotflo = $_POST["totflo"];
+    $obj->cparecov = $_POST["totare"];
+    $obj->cprdfac = $_POST["rdfac"];
+    $obj->cpagefconst = $_POST["ageofconst"];
+    $obj->cprnt = $_POST["rnt"];
+    $obj->cprntfor = $_POST["rntfor"];
+    $obj->cpocrg = $_POST["ocrg"];
+    $obj->cpscrty = $_POST["scrty"];
+    $obj->cpmntcrg = $_POST["mntcrg"];
+    $obj->cpmntcrgfor = $_POST["mcrgfor"];
+   // $obj->cpsts = "P";
+   // $obj->cpregcod = $_SESSION["lcod"];
+    //  $obj->cpregcod=2;
+    $cls_date = new DateTime($_POST["avlfrm"]);
+    $obj->cpavlfrm = $cls_date->format('y-m-d');
+    // $obj->cpavlfrm=$_POST["avlfrm"];
+    $obj->cpdsc = $_POST["desc"];
+    $obj->cpfursts = $_POST["fursts"];
+   // $obj->cplat = $_POST["lat"];
+   // $obj->cplong = $_POST["long"];
+    // $obj->husstryblt=$_POST["strblt"];
+    $obj->cpareunt = $_POST["areunt"];
+    $obj->cpregdat = date('y-m-d');
 
-    if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
-    {
-    $obj->cpdelsts="Y";
+
+    if (isset($_POST["delsts"]) && $_POST["delsts"] == 1) {
+        $obj->cpdelsts = "Y";
+    } else { {
+            $obj->cpdelsts = "N";
+        }
     }
- else {
+
+    $sts = $obj->Update_Commercial();
+    if ($sts) {
+  if (isset($_POST["pfac"])) {
+        $objPropertFacility=new clsfacprp();
+        $objPropertFacility->type='C';
+        $objPropertFacility->prpcod=$PropertyNO;
+        $objPropertFacility->DeleteAllFeaturesByUser();
+            foreach ($_POST["pfac"] as $check) {
+              //  $obj1 = new clsfacprp();
+                $objPropertFacility->faccode = $check;
+              //  $obj1->prpcod = $_SESSION["pgcod"];
+               // $obj1->type = 'P';
+                $objPropertFacility->save_facprp();
+            }
+        }
+         header("location:frmEditProperties.php?pno=$PropertyNO&typ=C");
+    } else {
         
- {
-     $obj->cpdelsts="N";
- }}
-    
-   $sts= $obj->save_cp();
-   if($sts)
-   {
- 
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["cpcod"];
-     $obj1->type='C';
-       $obj1->save_facprp();
-}
-   }
-   }
-   else
-   {
-
-       
-   }
-
+    }
 }
 include_once 'header.php';
 ?>
@@ -141,7 +136,7 @@ function getState(val) {
 <h1 class="page-title">Update commercial Property</h1>
 </div>
 <div class="submit-content">
-<form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form">
+    <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="formEditCommercial.php?pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>">
 <div class="noo-control-group">
 <div class="group-title">Property Description</div>
 <div class="group-container row">

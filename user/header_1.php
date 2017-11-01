@@ -33,14 +33,13 @@
 <div class="container">
 <div class="top-header-inner">
 <ul class="social-top">
-<li><a href="#" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-<li><a href="#" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+<li><a href="https://www.facebook.com/easyrent.co.in" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li><a href="https://www.facebook.com/easyrent.co.in" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
 </ul>
 <div class="top-header-content">
 <div class="emailto content-item">
-<a href="#"><i class="fa fa-envelope-o"></i>&nbsp;Email:info@easyrent.co.in<script cf-hash='f9e31' type="text/javascript">
-/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script></a>
+<a href="#"><i class="fa fa-envelope-o"></i>&nbsp;Email:info@easyrent.com</a>
 </div>
 <div class="register content-item">
 <a href="login.php"><i class="fa fa-key"></i>&nbsp;Register</a>
@@ -64,8 +63,8 @@
    ?>
  
 <div class="header-search">
-<label for="input-header-search"><i class="fa fa-search"></i></label>
-<input type="text" id="input-header-search" placeholder="Search">
+<!--<label for="input-header-search"><i class="fa fa-search"></i></label>
+<input type="text" id="input-header-search" placeholder="Search">-->
 </div>
 </div>
 </div>

@@ -95,7 +95,7 @@
 <div class="col-md-6">
 <div class="form-group s-prop-lat">
 <!--<label for="lat">start</label>-->
-<input type="number" id="lat" class="form-control" placeholder="start" name="pricestart">
+<input type="number" id="lat" class="form-control" placeholder="start"  name="pricestart">
 </div>
 </div>
 <div class="col-md-6">

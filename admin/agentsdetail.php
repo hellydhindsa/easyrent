@@ -16,7 +16,7 @@ else if($_REQUEST["ano"]){
 if(isset($AgentCode)){
    
     $obj= new clsprf();
-$AgentDetailArray = $obj->DisplayAgentsByAgentId($AgentCode);
+$AgentDetailArray = $obj->DisplayUserByUserId($AgentCode);
 if(count($AgentDetailArray)>0)
 {
       $pi=$AgentDetailArray[0][4];

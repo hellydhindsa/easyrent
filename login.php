@@ -52,7 +52,9 @@ if(isset($_REQUEST["sts"])&& $_REQUEST["sts"]=='S')
 //   }
 //  
 //     }
-
+if(isset($_POST['resendOTP'])){
+   //myFunction(); //here goes the function call
+}
 if(isset($_POST["btnlogin"]))
 {
  
@@ -273,6 +275,19 @@ function getState(val) {
 	}
 	});
 }
+$(document).ready(function(){
+$("#ResendOTP").click(function(){
+   
+   $.ajax({
+	type: "POST",
+	url: "user/ReSendOtpAjax.php",
+	//data:'country_id='+val,
+	success: function(data){
+		$("#resentOtpMessages").html(data);
+	}
+	});
+});
+});
 </script>
 <div class="noo-wrapper">
  
@@ -466,7 +481,11 @@ function getState(val) {
        
           <div class="form-actions">
             <button type="submit" name="submitOtpVerification" id="btnreg" class="btn11 navbar-btn btn-default">Submit</button>
-             <button type="reset" class="btn11 navbar-btn btn-default">Resend Otp</button>
+    
+            <button type="button" id="ResendOTP" name="resendOTP" class="btn11 navbar-btn btn-default">Resend Otp</button>
+         <label id="resentOtpMessages" style="color: green;
+    font-weight: bold;" ></label>
+        
           </div>
   
       </form>  

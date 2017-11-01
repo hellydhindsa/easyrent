@@ -1,20 +1,20 @@
 <?php
 include_once 'buslogic.php';
- if(isset($_POST["SearchResults"]))
-{
-    $location=$_POST["SearchLocation"];
-    $type=$_POST["SearchType"];
-    $category=$_POST["SearchCategory"];
-    $commercial=$_POST["commercialSelect"];
-     $NoOfBedrooms=$_POST["bedroomSelect"];
-      $FurnishedStatus=$_POST["furnishedStatusSelect"];
-         $PriceStart=$_POST["pricestart"];
-            $PriceEnd=$_POST["priceend"];
-               $PriceUnits=$_POST["pricefor"];
-$obj= new clsprop();
-        $arr = $obj->DisplayInnerSearch($location,$type,$category,$FurnishedStatus,$NoOfBedrooms,$commercial,$PriceStart,$PriceEnd,$PriceUnits);
-     
-}
+// if(isset($_POST["SearchResults"]))
+//{
+//    $location=$_POST["SearchLocation"];
+//    $type=$_POST["SearchType"];
+//    $category=$_POST["SearchCategory"];
+//    $commercial=$_POST["commercialSelect"];
+//     $NoOfBedrooms=$_POST["bedroomSelect"];
+//      $FurnishedStatus=$_POST["furnishedStatusSelect"];
+//         $PriceStart=$_POST["pricestart"];
+//            $PriceEnd=$_POST["priceend"];
+//               $PriceUnits=$_POST["pricefor"];
+//$obj= new clsprop();
+//        $arr = $obj->DisplayInnerSearch($location,$type,$category,$FurnishedStatus,$NoOfBedrooms,$commercial,$PriceStart,$PriceEnd,$PriceUnits);
+//     
+//}
 
   if(isset($_REQUEST["Agentno"]))
 {
@@ -48,8 +48,10 @@ function getState(val) {
 }
 
 function getLocation(val) {
-   
-	 window.location = 'http://localhost:8080/property/FrmAgentListing.php?loc=' + val;
+       var baseurl = window.location.origin+window.location.pathname;
+    var UrltoHit= baseurl+'?loc='+val;
+window.location = UrltoHit;
+	// window.location = 'http://localhost:8080/property/FrmAgentListing.php?loc=' + val;
 }
 </script>
 <div class="noo-wrapper">
