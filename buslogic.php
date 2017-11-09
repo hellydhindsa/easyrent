@@ -152,13 +152,13 @@ We would love to hear about your experience with EasyRent</td>
             require_once('mail/class.phpmailer.php');
             $mail = new PHPMailer();
             $mail->IsSMTP(); // telling the class to use SMTP
-            $mail->Host = "bh-63.webhostbox.net"; // SMTP server
+            $mail->Host = "smtp.gmail.com"; // SMTP server
             $mail->SMTPDebug = 1; 
             $mail->SMTPAuth = true;                  // enable SMTP authentication
-            $mail->Host = "bh-63.webhostbox.net"; // sets the SMTP server
+          //  $mail->Host = "bh-63.webhostbox.net"; // sets the SMTP server
             $mail->Port = 587;                    // set the SMTP port for the GMAIL server
-            $mail->Username = "test@seahawkii.com"; // SMTP account username
-            $mail->Password = "Test123";        // SMTP account password
+             $mail->Username = 'vicky.easyrent@gmail.com';
+             $mail->Password = 'Easyrent123#';        // SMTP account password
             $mail->SMTPSecure = "tls";
             $mail->SetFrom('info@easyrent.co.in', 'EasyRent Mail Server');
             $mail->AddReplyTo("test@seahawkii.com", "EasyRent Mail Server ");

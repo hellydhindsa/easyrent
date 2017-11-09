@@ -400,7 +400,7 @@ echo'<span class="col-xs-6 col-md-5 detail-field-label">Stories Build</span>
 <div class="col-md-8">
 <div class="property-desc">
 <h4 class="property-detail-title">Property Description</h4>
-<p><?php if(isset($PropDescription)) echo $PropDescription; ?>
+<p style="word-wrap:break-word;"><?php if(isset($PropDescription)) echo $PropDescription; ?>
 </p>
 
 </div>
