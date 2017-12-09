@@ -958,6 +958,21 @@ class ContactForm {
         $con->db_close();
         return $arr;
     }
+    // update is deleted true for contact form 
+      function UpdateContactFormStatus($cod, $sts) {
+        $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call updateContactFormStatus($cod,$sts)";
+        // echo $qry;
+        $res = mysqli_query($link, $qry) or die(mysqli_error($link));
+        if (mysqli_affected_rows($link)) {
+            $con->db_close();
+            return TRUE;
+        } else {
+            $con->db_close();
+            return FALSE;
+        }
+    }
 
 }
 

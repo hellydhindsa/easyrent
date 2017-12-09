@@ -89,7 +89,14 @@ include_once 'AdminHeader.php';
             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             if($arr[$i][11]==1)
             {
+                if($arr[$i][10]==1)
+            {
              echo"<td width='10%'><a href=frmManageProperty.php?prpcod=".$arr[$i][8]."&mode=S&typ=".$type." >Shown</a> </td>";
+            }
+ else {
+      echo"<td width='10%'>Not Active </td>";
+ }
+            
             }
             else
             {

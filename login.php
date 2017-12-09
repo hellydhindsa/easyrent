@@ -84,6 +84,12 @@ if(isset($_POST["btnlogin"]))
              unset($_SESSION["MoreDetailAgentno"]);
               //header("location:user/agentsdetail.php"); 
          }
+           elseif(isset($_SESSION["TypeAlerts"]))
+         {
+             header("location:user/frmAlerts.php");
+             unset($_SESSION["TypeAlerts"]);
+             
+         }
          else
          {
     header("location:user/frmpg.php");
@@ -134,6 +140,12 @@ if(isset($_POST["submitOtpVerification"]))
              header("location:user/agentsdetail.php?ano=$Agentno");
              unset($_SESSION["MoreDetailAgentno"]);
              // header("location:user/agentsdetail.php"); 
+         }
+           elseif(isset($_SESSION["TypeAlerts"]))
+         {
+             header("location:user/frmAlerts.php");
+             unset($_SESSION["TypeAlerts"]);
+             
          }
          else
          {

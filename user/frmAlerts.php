@@ -2,7 +2,9 @@
 include_once '../buslogic.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"]))
-   {   header("location:../login.php");}
+   {
+     $_SESSION["TypeAlerts"]="Alert";
+     header("location:../login.php");}
    
 if(isset($_POST["Alert_submit"]))
 {

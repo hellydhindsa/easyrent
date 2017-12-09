@@ -42,7 +42,7 @@
 <a href="#"><i class="fa fa-envelope-o"></i>&nbsp;Email:info@easyrent.com</a>
 </div>
 <div class="register content-item">
-<a href="login.php"><i class="fa fa-key"></i>&nbsp;Register</a>
+<!--<a href="login.php"><i class="fa fa-key"></i>&nbsp;Register</a>-->
 </div>
 <!--<div class="login content-item">
 <a href="login.php"><i class="fa fa-sign-in"></i>&nbsp;Login</a>
