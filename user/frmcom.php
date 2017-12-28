@@ -2,74 +2,65 @@
 include_once '../buslogic.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
-if(isset($_POST["property_submit"]))
-{
-    $obj= new clscp();
-    $obj->cptyp=$_POST["cptyp"];
-    $obj->cploc=$_POST["pgloc"];
-    $obj->cplndmrk=$_POST["lndmrk"];
-    $obj->cpadd=$_POST["address"];
-   // $obj->husbdrm=$_POST["bdrm"];
-    $obj->cppbthrm=$_POST["pwash"];
-    $obj->cpppntry=$_POST["ppntry"];
-    $obj->cpflono=$_POST["flono"];
-    $obj->cptotflo=$_POST["totflo"];
-    $obj->cparecov=$_POST["totare"];
-   $obj->cprdfac=$_POST["rdfac"];
-     $obj->cpagefconst=$_POST["ageofconst"];
-    $obj->cprnt=$_POST["rnt"];
-    $obj->cprntfor=$_POST["rntfor"];
-    $obj->cpocrg=$_POST["ocrg"];
-    $obj->cpscrty=$_POST["scrty"];
-    $obj->cpmntcrg=$_POST["mntcrg"];
-     $obj->cpmntcrgfor=$_POST["mcrgfor"];
-    $obj->cpsts="P";
-       $obj->cpregcod=$_SESSION["lcod"];
-  //  $obj->cpregcod=2;
-       $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->cpavlfrm=$cls_date->format('y-m-d');
-   // $obj->cpavlfrm=$_POST["avlfrm"];
-    $obj->cpdsc=$_POST["desc"];
-    $obj->cpfursts=$_POST["fursts"];
-     $obj->cplat=$_POST["lat"];
-    $obj->cplong=$_POST["long"];
-   // $obj->husstryblt=$_POST["strblt"];
-    $obj->cpareunt=$_POST["areunt"];
-    $obj->cpregdat=date('y-m-d');
- 
+if (isset($_POST["property_submit"])) {
+    $obj = new clscp();
+    $obj->cptyp = $_POST["cptyp"];
+    $obj->cploc = $_POST["pgloc"];
+    $obj->cplndmrk = $_POST["lndmrk"];
+    $obj->cpadd = $_POST["address"];
+    // $obj->husbdrm=$_POST["bdrm"];
+    $obj->cppbthrm = $_POST["pwash"];
+    $obj->cpppntry = $_POST["ppntry"];
+    $obj->cpflono = $_POST["flono"];
+    $obj->cptotflo = $_POST["totflo"];
+    $obj->cparecov = $_POST["totare"];
+    $obj->cprdfac = $_POST["rdfac"];
+    $obj->cpagefconst = $_POST["ageofconst"];
+    $obj->cprnt = $_POST["rnt"];
+    $obj->cprntfor = $_POST["rntfor"];
+    $obj->cpocrg = $_POST["ocrg"];
+    $obj->cpscrty = $_POST["scrty"];
+    $obj->cpmntcrg = $_POST["mntcrg"];
+    $obj->cpmntcrgfor = $_POST["mcrgfor"];
+    $obj->cpsts = "P";
+    $obj->cpregcod = $_SESSION["lcod"];
+   
+    $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->cpavlfrm = $newDate->format('y-m-d');
+    // $obj->cpavlfrm=$_POST["avlfrm"];
+    $obj->cpdsc = $_POST["desc"];
+    $obj->cpfursts = $_POST["fursts"];
+    $obj->cplat = $_POST["lat"];
+    $obj->cplong = $_POST["long"];
+    // $obj->husstryblt=$_POST["strblt"];
+    $obj->cpareunt = $_POST["areunt"];
+    $obj->cpregdat = date('y-m-d');
 
-    if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
-    {
-    $obj->cpdelsts="Y";
+
+    if (isset($_POST["delsts"]) && $_POST["delsts"] == 1) {
+        $obj->cpdelsts = "Y";
+    } else { {
+            $obj->cpdelsts = "N";
+        }
     }
- else {
+
+    $sts = $obj->save_cp();
+    if ($sts) {
+
+
+        if (isset($_POST["pfac"])) {
+            foreach ($_POST["pfac"] as $check) {
+                $obj1 = new clsfacprp();
+                $obj1->faccode = $check;
+                $obj1->prpcod = $_SESSION["cpcod"];
+                $obj1->type = 'C';
+                $obj1->save_facprp();
+            }
+        }
+    } else {
         
- {
-     $obj->cpdelsts="N";
- }}
-    
-   $sts= $obj->save_cp();
-   if($sts)
-   {
- 
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["cpcod"];
-     $obj1->type='C';
-       $obj1->save_facprp();
-}
-   }
-   }
-   else
-   {
-
-       
-   }
-
+    }
 }
 include_once 'header.php';
 ?>

@@ -2,74 +2,65 @@
 include_once '../buslogic.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
-if(isset($_POST["property_submit"]))
-{
-    $obj= new clshus();
-    $obj->husfor=$_POST["husfor"];
-    $obj->husloc=$_POST["pgloc"];
-    $obj->huslndmrk=$_POST["lndmrk"];
-    $obj->husadd=$_POST["address"];
-    $obj->husbdrm=$_POST["bdrm"];
-    $obj->husbthrm=$_POST["bthrm"];
-    $obj->husblcny=$_POST["blcny"];
-    $obj->husktchn=$_POST["ktchn"];
-    $obj->huslvrm=$_POST["lvrm"];
-    $obj->husfursts=$_POST["fursts"];
-   $obj->huslby=$_POST["lby"];
-     $obj->hustotare=$_POST["totare"];
-    $obj->husrnt=$_POST["rnt"];
-    $obj->husrntfor=$_POST["rntfor"];
-    $obj->husocrg=$_POST["ocrg"];
-    $obj->husscrty=$_POST["scrty"];
-    $obj->husmntcrg=$_POST["mntcrg"];
-     $obj->husmntcrgfor=$_POST["mcrgfor"];
-    $obj->hussts="P";
-       $obj->husregcod=$_SESSION["lcod"];
-  //  $obj->husregcod=2;
-       $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->husavlfrm=$cls_date->format('y-m-d');
-   // $obj->husavlfrm=$_POST["avlfrm"];
-    $obj->husdsc=$_POST["desc"];
- //   $obj->flodelsts=$_POST["avlfrm"];
-     $obj->huslat=$_POST["lat"];
-    $obj->huslong=$_POST["long"];
-    $obj->husstryblt=$_POST["strblt"];
-    $obj->husareunt=$_POST["areunt"];
-    $obj->husregdat=date('y-m-d');
- 
+if (isset($_POST["property_submit"])) {
+    $obj = new clshus();
+    $obj->husfor = $_POST["husfor"];
+    $obj->husloc = $_POST["pgloc"];
+    $obj->huslndmrk = $_POST["lndmrk"];
+    $obj->husadd = $_POST["address"];
+    $obj->husbdrm = $_POST["bdrm"];
+    $obj->husbthrm = $_POST["bthrm"];
+    $obj->husblcny = $_POST["blcny"];
+    $obj->husktchn = $_POST["ktchn"];
+    $obj->huslvrm = $_POST["lvrm"];
+    $obj->husfursts = $_POST["fursts"];
+    $obj->huslby = $_POST["lby"];
+    $obj->hustotare = $_POST["totare"];
+    $obj->husrnt = $_POST["rnt"];
+    $obj->husrntfor = $_POST["rntfor"];
+    $obj->husocrg = $_POST["ocrg"];
+    $obj->husscrty = $_POST["scrty"];
+    $obj->husmntcrg = $_POST["mntcrg"];
+    $obj->husmntcrgfor = $_POST["mcrgfor"];
+    $obj->hussts = "P";
+    $obj->husregcod = $_SESSION["lcod"];
 
-    if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
-    {
-    $obj->husdelsts="Y";
+    $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->husavlfrm = $newDate->format('y-m-d');
+    // $obj->husavlfrm=$_POST["avlfrm"];
+    $obj->husdsc = $_POST["desc"];
+    //   $obj->flodelsts=$_POST["avlfrm"];
+    $obj->huslat = $_POST["lat"];
+    $obj->huslong = $_POST["long"];
+    $obj->husstryblt = $_POST["strblt"];
+    $obj->husareunt = $_POST["areunt"];
+    $obj->husregdat = date('y-m-d');
+
+
+    if (isset($_POST["delsts"]) && $_POST["delsts"] == 1) {
+        $obj->husdelsts = "Y";
+    } else { {
+            $obj->husdelsts = "N";
+        }
     }
- else {
+
+    $sts = $obj->save_hus();
+    if ($sts) {
+
+
+        if (isset($_POST["pfac"])) {
+            foreach ($_POST["pfac"] as $check) {
+                $obj1 = new clsfacprp();
+                $obj1->faccode = $check;
+                $obj1->prpcod = $_SESSION["huscod"];
+                $obj1->type = 'H';
+                $obj1->save_facprp();
+            }
+        }
+    } else {
         
- {
-     $obj->husdelsts="N";
- }}
-    
-   $sts= $obj->save_hus();
-   if($sts)
-   {
- 
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["huscod"];
-     $obj1->type='H';
-       $obj1->save_facprp();
-}
-   }
-   }
-   else
-   {
-
-       
-   }
-
+    }
 }
 include_once 'header.php';
 ?>

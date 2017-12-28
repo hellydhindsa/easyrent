@@ -29,7 +29,7 @@ if(isset($_POST["btnupd"]))
      $msg="Updation Sucessfull ";
 }
 
-include_once 'header_1.php';
+include_once 'header.php';
 
 ?>
 
@@ -38,7 +38,7 @@ include_once 'header_1.php';
 <div class="noo-wrapper">
  
 <div class="container noo-mainbody">
-<div class="noo-mainbody-inner">
+<div class="">
 <div class="row clearfix">
  
 <div class="noo-content col-xs-12 col-md-8">
@@ -112,8 +112,7 @@ include_once 'header_1.php';
  
  
 <div class="noo-sidebar noo-sidebar-right col-xs-12 col-md-4">
-<div class="noo-sidebar-inner">
- 
+
 <div class="block-sidebar find-property">
 <h3 class="title-block-sidebar">Update Profile </h3>
 <div class="gsearch">
@@ -194,7 +193,7 @@ include_once 'header_1.php';
  
 
  
-</div>
+
 </div>
  
 </div>

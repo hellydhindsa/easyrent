@@ -1,12 +1,12 @@
 <?php
 include_once '../buslogic.php';
 
-include_once 'header_1.php';
+include_once 'header.php';
 ?>
 <div class="noo-wrapper">
  
 <div class="container noo-mainbody">
-<div class="noo-mainbody-inner">
+
 <div class="row clearfix">
  
 <div class="noo-content col-xs-12 col-md-12">
@@ -43,20 +43,25 @@ echo'<img src="../pgpics/'.$arr[$i][7].'" alt="">';
 echo'</a>';
 echo'<span class="property-label">';
 echo $arr[$i][2]; 
-        echo '</span><span  class="property-category " ><input class="btn" type=button value="edit details"></div><div class="property-wrap"><h2 class="property-title"><a href="#" title="';
-    echo ' TYPE:'.$arr[$i][2];
+            echo '</span><span  class="property-category " ><input class="btn" type=button value="edit details"></div><div class="property-wrap"><h2 class="property-title"><a href="#" title="';
+            echo ' TYPE:'.$arr[$i][2];
             echo'">';
-    echo ' TYPE:'.$arr[$i][2];
+            echo ' TYPE:'.$arr[$i][2];
             echo'</a></h2><div class="property-excerpt"><p class="property-fullwidth-excerpt">';
             echo $arr[$i][1];
- echo' </p></div><div class="property-summary"><div class="property-detail"><div class="size"><span>';
-                echo $arr[$i][4]; 
-                echo'sqft</span></div><div class="bathrooms"><span>';
-                 echo $arr[$i][5]; 
-                echo'</span></div><div class="bedrooms"><span>';
-                      echo $arr[$i][6]; 
-                echo'</span></div></div><div class="property-info"><div class="property-price"><span><span class="amount">';
-                      echo $arr[$i][3]; 
+            echo' </p></div><div class="property-summary">';
+            if($typ!='P')
+            {
+            echo'<div class="property-detail"><div class="size"><span>';
+            echo $arr[$i][4]; 
+            echo'/'.$arr[$i][11].'</span></div><div class="bathrooms"><span>';
+            echo $arr[$i][5]; 
+            echo'</span></div><div class="bedrooms"><span>';
+            echo $arr[$i][6]; 
+            echo'</span></div></div>';
+            }
+            echo'<div class="property-info"><div class="property-price"><span><span class="amount">';
+            echo $arr[$i][3]; 
 echo'(rupees)/';
 if($arr[$i][10]=='M')
 { echo'Monthly';}
@@ -113,10 +118,11 @@ else
  
  
 </div>
-</div>
+
 </div>
  
 </div>
  <?php
 include_once 'footer_1.php';
+ //include_once '../admin/Adminfooter.php';
 ?>

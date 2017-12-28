@@ -2,74 +2,62 @@
 include_once '../buslogic.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
-if(isset($_POST["property_submit"]))
-{
-    $obj= new clsflo();
-    $obj->flofor=$_POST["flofor"];
-    $obj->floloc=$_POST["pgloc"];
-    $obj->flolndmrk=$_POST["lndmrk"];
-    $obj->floadd=$_POST["address"];
-    $obj->flobdrm=$_POST["bdrm"];
-    $obj->flobthrm=$_POST["bthrm"];
-    $obj->floblcny=$_POST["blcny"];
-    $obj->floktchn=$_POST["ktchn"];
-    $obj->flolvrm=$_POST["lvrm"];
-    $obj->flofursts=$_POST["fursts"];
-    $obj->floflono=$_POST["flono"];
-     $obj->floflotot=$_POST["totflo"];
-    $obj->flornt=$_POST["exprnt"];
-    $obj->florntfor=$_POST["rntfor"];
-    $obj->floocrg=$_POST["ocrg"];
-    $obj->floscrty=$_POST["scrty"];
-    $obj->flomntcrg=$_POST["mntcrg"];
-     $obj->flomntcrgfor=$_POST["mcrgfor"];
-    $obj->flosts="P";
-       $obj->floregcod=$_SESSION["lcod"];
-    //$obj->floregcod=2;
-       $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->floavlfrm=$cls_date->format('y-m-d');
-   // $obj->floavlfrm=$_POST["avlfrm"];
-    $obj->flodsc=$_POST["desc"];
- //   $obj->flodelsts=$_POST["avlfrm"];
-     $obj->flolat=$_POST["lat"];
-    $obj->flolong=$_POST["long"];
-    $obj->flototare=$_POST["totare"];
-    $obj->floareunt=$_POST["areunt"];
-    $obj->floregdat=date('y-m-d');
- 
+if (isset($_POST["property_submit"])) {
+    $obj = new clsflo();
+    $obj->flofor = $_POST["flofor"];
+    $obj->floloc = $_POST["pgloc"];
+    $obj->flolndmrk = $_POST["lndmrk"];
+    $obj->floadd = $_POST["address"];
+    $obj->flobdrm = $_POST["bdrm"];
+    $obj->flobthrm = $_POST["bthrm"];
+    $obj->floblcny = $_POST["blcny"];
+    $obj->floktchn = $_POST["ktchn"];
+    $obj->flolvrm = $_POST["lvrm"];
+    $obj->flofursts = $_POST["fursts"];
+    $obj->floflono = $_POST["flono"];
+    $obj->floflotot = $_POST["totflo"];
+    $obj->flornt = $_POST["exprnt"];
+    $obj->florntfor = $_POST["rntfor"];
+    $obj->floocrg = $_POST["ocrg"];
+    $obj->floscrty = $_POST["scrty"];
+    $obj->flomntcrg = $_POST["mntcrg"];
+    $obj->flomntcrgfor = $_POST["mcrgfor"];
+    $obj->flosts = "P";
+    $obj->floregcod = $_SESSION["lcod"];
+    $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->floavlfrm = $newDate->format('y-m-d');
+    $obj->flodsc = $_POST["desc"];
+    $obj->flolat = $_POST["lat"];
+    $obj->flolong = $_POST["long"];
+    $obj->flototare = $_POST["totare"];
+    $obj->floareunt = $_POST["areunt"];
+    $obj->floregdat = date('y-m-d');
 
-    if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
-    {
-    $obj->flodelsts="Y";
+
+    if (isset($_POST["delsts"]) && $_POST["delsts"] == 1) {
+        $obj->flodelsts = "Y";
+    } else { {
+            $obj->flodelsts = "N";
+        }
     }
- else {
+
+    $sts = $obj->save_flo();
+    if ($sts) {
+
+
+        if (isset($_POST["pfac"])) {
+            foreach ($_POST["pfac"] as $check) {
+                $obj1 = new clsfacprp();
+                $obj1->faccode = $check;
+                $obj1->prpcod = $_SESSION["flocod"];
+                $obj1->type = 'F';
+                $obj1->save_facprp();
+            }
+        }
+    } else {
         
- {
-     $obj->flodelsts="N";
- }}
-    
-   $sts= $obj->save_flo();
-   if($sts)
-   {
- 
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["flocod"];
-     $obj1->type='F';
-       $obj1->save_facprp();
-}
-   }
-   }
-   else
-   {
-
-       
-   }
-
+    }
 }
 include_once 'header.php';
 ?>

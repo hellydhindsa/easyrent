@@ -973,6 +973,21 @@ class ContactForm {
             return FALSE;
         }
     }
+     //GetContactForm method to get contact form who are not deleted and order by date desc
+    function GetContactFormById($cod) {
+        $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call GetContactFormById($cod)";
+        $res = mysqli_query($link, $qry);
+       $i = 0;
+        $arr = array();
+        while ($r = mysqli_fetch_array($res)) {
+            $arr[$i] = $r;
+            $i++;
+        }
+        $con->db_close();
+        return $arr;
+    }
 
 }
 

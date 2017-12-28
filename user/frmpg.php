@@ -2,90 +2,86 @@
 include_once '../buslogic.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
-if(isset($_POST["property_submit"]))
-{
-    $obj= new clspg();
-    $obj->pgtit=$_POST["title"];
-    $obj->pgtyp=$_POST["pgtyp"];
-    $obj->pgloc=$_POST["pgloc"];
-    $obj->pglndmrk=$_POST["lndmrk"];
-    $obj->pgadd=$_POST["address"];
-    $obj->pgrnt=$_POST["ernt"];
-    $obj->pgrntfor=$_POST["rntfor"];
-    $obj->pgscrty=$_POST["scrg"];
-    $obj->pgocrg=$_POST["ocrg"];
-    $obj->pgnoofseats=$_POST["noseat"];
-    $obj->pgdsc=$_POST["desc"];
-$cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->pgavlfrm=$cls_date->format('y-m-d');
-    $obj->pgsts="Y";
-   $obj->pgregcod=$_SESSION["lcod"];
-   //  $obj->pgregcod=1;
-    $obj->pgnoper=$_POST["noperson"];
-    $obj->pgfursts=$_POST["fursts"];
-    if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
-    {
-    $obj->pgdelsts="Y";
+if (isset($_POST["property_submit"])) {
+    $obj = new clspg();
+    $obj->pgtit = $_POST["title"];
+    $obj->pgtyp = $_POST["pgtyp"];
+    $obj->pgloc = $_POST["pgloc"];
+    $obj->pglndmrk = $_POST["lndmrk"];
+    $obj->pgadd = $_POST["address"];
+    $obj->pgrnt = $_POST["ernt"];
+    $obj->pgrntfor = $_POST["rntfor"];
+    $obj->pgscrty = $_POST["scrg"];
+    $obj->pgocrg = $_POST["ocrg"];
+    $obj->pgnoofseats = $_POST["noseat"];
+    $obj->pgdsc = $_POST["desc"];
+   // $cls_date = new DateTime($_POST["avlfrm"]);
+    $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->pgavlfrm = $newDate->format('y-m-d');
+    $obj->pgsts = "Y";
+    $obj->pgregcod = $_SESSION["lcod"];
+    //  $obj->pgregcod=1;
+    $obj->pgnoper = $_POST["noperson"];
+    $obj->pgfursts = $_POST["fursts"];
+    if (isset($_POST["delsts"]) && $_POST["delsts"] == 1) {
+        $obj->pgdelsts = "Y";
+    } else { {
+            $obj->pgdelsts = "N";
+        }
     }
- else {
+    $obj->pglat = $_POST["lat"];
+    $obj->pglong = $_POST["long"];
+    $obj->pgmntcrg = $_POST["mcrg"];
+    $obj->pgmntcrgfor = $_POST["mcrgfor"];
+    $obj->pgregdat = date('y-m-d');
+    $sts = $obj->save_pg();
+    if ($sts) {
+
+
+        if (isset($_POST["pfac"])) {
+            foreach ($_POST["pfac"] as $check) {
+                $obj1 = new clsfacprp();
+                $obj1->faccode = $check;
+                $obj1->prpcod = $_SESSION["pgcod"];
+                $obj1->type = 'P';
+                $obj1->save_facprp();
+            }
+        }
+
+        //process to send Email and SMS to Alert Users
+        $ObjGeneralFunction = new GeneralFunction();
+        //get info for alerts
+        $AlertUserDetailArray = $ObjGeneralFunction->GetUserdetailsForAlerts($_POST["pgloc"], 'P');
+        if (isset($AlertUserDetailArray) && count($AlertUserDetailArray) > 0) {
+            //get location and city name location and others fields to send email and sms alerts 
+            $ObjPoperty = new clsprop();
+            $CityLOcationNameARRAY = $ObjPoperty->GetCityAndLocationNamesByLocationId($_POST["pgloc"]);
+            if (count($CityLOcationNameARRAY) > 0) {
+                $CityName = $CityLOcationNameARRAY[0][0];
+                $LocationName = $CityLOcationNameARRAY[0][1];
+            } else {
+                $CityName = '';
+                $LocationName = '';
+            }
+            $rentFor = $ObjGeneralFunction->ReturnRentFor($_POST["rntfor"]);
+            $PropFurnishedStatus = $ObjGeneralFunction->ReturnFurnishedStatus($_POST["fursts"]);
+            $RentString = 'Rs ' . $_POST["ernt"] . ' /' . $rentFor;
+            $SMSString = 'Dear Customer new Property added according to your requirement in ' . $CityName . ' ,' . $LocationName . ' at ' . $RentString . '.' . $PropFurnishedStatus;
+            $phoneNumbersComaString = '';
+            for ($i = 0; $i < count($AlertUserDetailArray); $i++) {
+                $phoneNumbersComaString .= $AlertUserDetailArray[$i][0] . ',';
+            }
+            rtrim($phoneNumbersComaString, ',');
+            $ObjGeneralFunction->SendSMSBulk($phoneNumbersComaString, $SMSString);
+            $FeatureListingString = $PropFurnishedStatus . ' | PG  For ' . $ObjGeneralFunction->ReturnPropertyFor($_POST["pgtyp"]) . ' | No of Seats ' . $_POST["noseat"];
+            $body = $ObjGeneralFunction->GeneratEmailHTML($CityName, $LocationName, $RentString, 'PG', $FeatureListingString);
+            $ObjGeneralFunction->SenMailBulk($body, $AlertUserDetailArray);
+            //InformUsersAfterPropertyAdded
+        }
+    } else {
         
- {
-     $obj->pgdelsts="N";
- }}
-    $obj->pglat=$_POST["lat"];
-    $obj->pglong=$_POST["long"];
-    $obj->pgmntcrg=$_POST["mcrg"];
-    $obj->pgmntcrgfor=$_POST["mcrgfor"];
-    $obj->pgregdat=date('y-m-d');
-   $sts= $obj->save_pg();
-   if($sts)
-   {
- 
-  
-if(isset($_POST["pfac"]))
-{
-   foreach($_POST["pfac"] as $check) {
-       $obj1= new clsfacprp();
-    $obj1->faccode=$check; 
-     $obj1->prpcod=$_SESSION["pgcod"];
-     $obj1->type='P';
-       $obj1->save_facprp();
-}
-   }
-   
-   //process to send Email and SMS to Alert Users
-   $ObjGeneralFunction = new GeneralFunction();
-   //get info for alerts
-   $AlertUserDetailArray=$ObjGeneralFunction->GetUserdetailsForAlerts($_POST["pgloc"],'P');
-   if(isset($AlertUserDetailArray) && count($AlertUserDetailArray)>0)
-   {
-      //get location and city name location and others fields to send email and sms alerts 
-   $ObjPoperty = new clsprop();
-   $CityLOcationNameARRAY=$ObjPoperty->GetCityAndLocationNamesByLocationId($_POST["pgloc"]);
-   if(count($CityLOcationNameARRAY)>0){$CityName=$CityLOcationNameARRAY[0][0]; $LocationName=$CityLOcationNameARRAY[0][1];} else{$CityName='';$LocationName='';}
-   $rentFor= $ObjGeneralFunction->ReturnRentFor($_POST["rntfor"]);
-   $PropFurnishedStatus=$ObjGeneralFunction->ReturnFurnishedStatus($_POST["fursts"]);
-   $RentString='Rs '.$_POST["ernt"].' /'.$rentFor;
-   $SMSString='Dear Customer new Property added according to your requirement in '.$CityName.' ,'.$LocationName.' at '.$RentString.'.'.$PropFurnishedStatus;
-   $phoneNumbersComaString='';
-       for ($i = 0; $i < count($AlertUserDetailArray); $i++) {
-       $phoneNumbersComaString .= $AlertUserDetailArray[$i][0].','; 
-          
-           }
-           rtrim($phoneNumbersComaString,',');
-   $ObjGeneralFunction->SendSMSBulk($phoneNumbersComaString, $SMSString);
-   $FeatureListingString=$PropFurnishedStatus.' | PG  For '.$ObjGeneralFunction->ReturnPropertyFor($_POST["pgtyp"]).' | No of Seats '.$_POST["noseat"];
-   $body=$ObjGeneralFunction->GeneratEmailHTML($CityName,$LocationName,$RentString,'PG',$FeatureListingString);
-   $ObjGeneralFunction->SenMailBulk($body, $AlertUserDetailArray);
-  //InformUsersAfterPropertyAdded
-   }
-   }
-   else
-   {
-
-       
-   }
-
+    }
 }
 
 include_once 'header.php';

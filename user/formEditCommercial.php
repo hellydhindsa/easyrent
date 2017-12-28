@@ -31,7 +31,9 @@ if (count($proparr) > 0) {
     $propRent = $proparr[0]['cprnt'];
     $PropSecurity = $proparr[0]['cpscrty'];
     $PropOtherCharges = $proparr[0]['cpocry'];
-    $AvalibleFrom = $proparr[0]['cpavlfrm'];
+   // $AvalibleFrom = $proparr[0]['cpavlfrm'];
+    $cls_date = new DateTime($proparr[0]['cpavlfrm']);
+     $AvalibleFrom=$cls_date->format('d-m-Y');
     $MainTainCharges = $proparr[0]['cpmntcrg'];
     $WashRooms = $proparr[0]['cppwshrm'];
     $Pentry = $proparr[0]['cpppentry'];
@@ -67,11 +69,9 @@ if (isset($_POST["property_submit"])) {
     $obj->cpscrty = $_POST["scrty"];
     $obj->cpmntcrg = $_POST["mntcrg"];
     $obj->cpmntcrgfor = $_POST["mcrgfor"];
-   // $obj->cpsts = "P";
-   // $obj->cpregcod = $_SESSION["lcod"];
-    //  $obj->cpregcod=2;
-    $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->cpavlfrm = $cls_date->format('y-m-d');
+     $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->cpavlfrm = $newDate->format('y-m-d');
     // $obj->cpavlfrm=$_POST["avlfrm"];
     $obj->cpdsc = $_POST["desc"];
     $obj->cpfursts = $_POST["fursts"];
@@ -559,5 +559,5 @@ $RentChargeArray = $ObjGeneralFunction->ReturnRentStructureArray();
  
 </div>
  <?php
-include_once 'footer.php';
+include_once 'footer_1.php';
  ?>

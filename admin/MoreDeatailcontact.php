@@ -1,24 +1,21 @@
 <?php
 include_once '../buslogic.php';
 
-if(isset($_POST["Contact_submit"]))
+if (isset($_REQUEST["Contactcod"]))
 {
-    $obj= new ContactForm();
-    $obj->contactFormName=$_POST["your-name"];
-    $obj->contactFormEmail=$_POST["your-email"];
-    $obj->contactFormSubject=$_POST["your-subject"];
-    $obj->contactFormMessage=$_POST["your-message"];
-    $obj->contactFormDate=date('y-m-d');
-   $sts= $obj->saveContactForm();
-   if($sts)
-   {
- $msg="Your message is Submitted.";
-   }
-   else
-   {
-
+        $obj=new ContactForm();
+    
+    
+     $ContactForm=$obj->GetContactFormById($_REQUEST["Contactcod"], 1);
        
-   }
+    if(count($ContactForm)>0)
+{
+            $Name=$ContactForm[0]['Name'];
+             $Email=$ContactForm[0]['Email'];
+              $Message=$ContactForm[0]['Message'];
+              $Subject=$ContactForm[0]['Subject'];
+}
+   
 
 }
 include_once 'AdminHeader.php';
@@ -42,22 +39,22 @@ include_once 'AdminHeader.php';
 <form name="new_post" method="post"  action="contact.php">
    <p>
 <span class="form-group form-control-wrap your-name">
-<input type="text" name="your-name" class="form-control" value="" size="40" placeholder="Contact Name*" readonly="true">
+<input type="text" name="your-name" class="form-control" value="<?php if(isset($Name)) echo $Name; ?>" size="40" placeholder="Contact Name*" readonly="true">
 </span>
 </p>
 <p>
 <span class="form-group form-control-wrap your-email">
-<input type="email" name="your-email" class="form-control" value="" size="40" placeholder="Contact Email*" readonly="true">
+<input type="email" name="your-email" class="form-control" value="<?php if(isset($Email)) echo $Email; ?>" size="40" placeholder="Contact Email*" readonly="true">
 </span>
 </p>
 <p>
 <span class="form-group form-control-wrap your-subject">
-    <input type="text" name="your-subject" class="form-control" value="" size="40" placeholder="contact Subject" readonly="true">
+    <input type="text" name="your-subject" class="form-control" value="<?php if(isset($Subject)) echo $Subject; ?>" size="40" placeholder="contact Subject" readonly="true">
 </span>
 </p>
 <p>
 <span class="form-group form-control-wrap your-message">
-<textarea name="your-message" cols="40" class="form-control" rows="10" placeholder="contact Message" readonly="true"></textarea>
+<textarea name="your-message" cols="40" class="form-control" rows="10" placeholder="contact Message" readonly="true"><?php if(isset($Message)) echo $Message; ?></textarea>
 </span>
 </p>
 <p>

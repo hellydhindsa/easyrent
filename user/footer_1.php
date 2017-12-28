@@ -72,8 +72,10 @@
 <script type="text/javascript" src="../js/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="../js/jquery.nouislider.all.min.js"></script>
 <script type="text/javascript" src="../js/style.selector.js"></script>
- 
+<script type="text/javascript" src="../js/script.js"></script>
+<!-- <script type="text/javascript" src="../js/property.js"></script>-->
 <script type="text/javascript" src="../js/property-slider.js"></script>
+
 
 </body>
 </html>

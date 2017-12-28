@@ -4,7 +4,7 @@ include_once '../buslogic.php';
  if(!isset($_SESSION["lcod"])){   header("location:../login.php");}
  
  //function to set  property code
-if (isset($_REQUEST["pno"])) {
+ if (isset($_REQUEST["pno"])) {
     $PropertyNO = $_REQUEST["pno"];
 }
 //fetch all property details
@@ -28,7 +28,9 @@ if (count($proparr) > 0) {
     $propRent = $proparr[0]['flornt'];
     $PropSecurity = $proparr[0]['floscrty'];
     $PropOtherCharges = $proparr[0]['floocrg'];
-    $AvalibleFrom = $proparr[0]['floavlfrm'];
+    // $AvalibleFrom = $proparr[0]['floavlfrm'];
+    $cls_date = new DateTime($proparr[0]['floavlfrm']);
+    $AvalibleFrom = $cls_date->format('d-m-Y');
     $MainTainCharges = $proparr[0]['flomntcrg'];
     $AreaUnits = $proparr[0]['floareunts'];
     $BedRooms = $proparr[0]['flobdrm'];
@@ -42,82 +44,64 @@ if (count($proparr) > 0) {
 }
 
 //Approch to get location list by city id
-if(isset($citycod))
-{
- $objlocation= new clssubcat();
-            $LocationArray = $objlocation->dsp_subcat($citycod);
+if (isset($citycod)) {
+    $objlocation = new clssubcat();
+    $LocationArray = $objlocation->dsp_subcat($citycod);
 }
-if(isset($_POST["property_submit"]))
-{
-    $obj= new clsflo();
-     $obj->flocode=$PropertyNO;
-    $obj->flofor=$_POST["flofor"];
-    $obj->floloc=$_POST["pgloc"];
-    $obj->flolndmrk=$_POST["lndmrk"];
-    $obj->floadd=$_POST["address"];
-    $obj->flobdrm=$_POST["bdrm"];
-    $obj->flobthrm=$_POST["bthrm"];
-    $obj->floblcny=$_POST["blcny"];
-    $obj->floktchn=$_POST["ktchn"];
-    $obj->flolvrm=$_POST["lvrm"];
-    $obj->flofursts=$_POST["fursts"];
-    $obj->floflono=$_POST["flono"];
-     $obj->floflotot=$_POST["totflo"];
-    $obj->flornt=$_POST["exprnt"];
-    $obj->florntfor=$_POST["rntfor"];
-    $obj->floocrg=$_POST["ocrg"];
-    $obj->floscrty=$_POST["scrty"];
-    $obj->flomntcrg=$_POST["mntcrg"];
-     $obj->flomntcrgfor=$_POST["mntcrgfor"];
-  //  $obj->flosts="P";
-     //  $obj->floregcod=$_SESSION["lcod"];
-    //$obj->floregcod=2;
-       $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->floavlfrm=$cls_date->format('y-m-d');
-   // $obj->floavlfrm=$_POST["avlfrm"];
-    $obj->flodsc=$_POST["desc"];
- //   $obj->flodelsts=$_POST["avlfrm"];
-   //  $obj->flolat=$_POST["lat"];
-    //$obj->flolong=$_POST["long"];
-    $obj->flototare=$_POST["totare"];
-    $obj->floareunt=$_POST["areunt"];
-   // $obj->floregdat=date('y-m-d');
- 
+if (isset($_POST["property_submit"])) {
+    $obj = new clsflo();
+    $obj->flocode = $PropertyNO;
+    $obj->flofor = $_POST["flofor"];
+    $obj->floloc = $_POST["pgloc"];
+    $obj->flolndmrk = $_POST["lndmrk"];
+    $obj->floadd = $_POST["address"];
+    $obj->flobdrm = $_POST["bdrm"];
+    $obj->flobthrm = $_POST["bthrm"];
+    $obj->floblcny = $_POST["blcny"];
+    $obj->floktchn = $_POST["ktchn"];
+    $obj->flolvrm = $_POST["lvrm"];
+    $obj->flofursts = $_POST["fursts"];
+    $obj->floflono = $_POST["flono"];
+    $obj->floflotot = $_POST["totflo"];
+    $obj->flornt = $_POST["exprnt"];
+    $obj->florntfor = $_POST["rntfor"];
+    $obj->floocrg = $_POST["ocrg"];
+    $obj->floscrty = $_POST["scrty"];
+    $obj->flomntcrg = $_POST["mntcrg"];
+    $obj->flomntcrgfor = $_POST["mntcrgfor"];
+    $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->floavlfrm = $newDate->format('y-m-d');
+    $obj->flodsc = $_POST["desc"];
+    $obj->flototare = $_POST["totare"];
+    $obj->floareunt = $_POST["areunt"];
 
-    if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
-    {
-    $obj->flodelsts="Y";
+    if (isset($_POST["delsts"]) && $_POST["delsts"] == 1) {
+        $obj->flodelsts = "Y";
+    } else { {
+            $obj->flodelsts = "N";
+        }
     }
- else {
-        
- {
-     $obj->flodelsts="N";
- }}
-    
-   $sts= $obj->Update_Floor();
-   if($sts)
-   {
-    if (isset($_POST["pfac"])) {
-        $objPropertFacility=new clsfacprp();
-        $objPropertFacility->type='F';
-        $objPropertFacility->prpcod=$PropertyNO;
-        $objPropertFacility->DeleteAllFeaturesByUser();
+
+    $sts = $obj->Update_Floor();
+    if ($sts) {
+        if (isset($_POST["pfac"])) {
+            $objPropertFacility = new clsfacprp();
+            $objPropertFacility->type = 'F';
+            $objPropertFacility->prpcod = $PropertyNO;
+            $objPropertFacility->DeleteAllFeaturesByUser();
             foreach ($_POST["pfac"] as $check) {
-              //  $obj1 = new clsfacprp();
+                //  $obj1 = new clsfacprp();
                 $objPropertFacility->faccode = $check;
-              //  $obj1->prpcod = $_SESSION["pgcod"];
-               // $obj1->type = 'P';
+                //  $obj1->prpcod = $_SESSION["pgcod"];
+                // $obj1->type = 'P';
                 $objPropertFacility->save_facprp();
             }
         }
-         header("location:frmEditProperties.php?pno=$PropertyNO&typ=F");
-   }
-   else
-   {
-
-       
-   }
-
+        header("location:frmEditProperties.php?pno=$PropertyNO&typ=F");
+    } else {
+        
+    }
 }
 include_once 'header.php';
 ?>

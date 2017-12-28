@@ -32,7 +32,9 @@ if (count($proparr) > 0) {
     $PropSecurity = $proparr[0]['pgscrty'];
     $PropOtherCharges = $proparr[0]['pgocrg'];
     $NoOfSeats = $proparr[0]['pgnofseats'];
-    $AvalibleFrom = $proparr[0]['pgavlfrm'];
+   // $AvalibleFrom = $proparr[0]['pgavlfrm'];
+     $cls_date = new DateTime($proparr[0]['pgavlfrm']);
+        $AvalibleFrom=$cls_date->format('d-m-Y');
     $NoOfPerson = $proparr[0]['pgnoper'];
     $MainTainCharges = $proparr[0]['pgmntcrg'] ;
 }
@@ -58,8 +60,10 @@ if (isset($_POST["property_submit"])) {
     $obj->pgocrg = $_POST["ocrg"];
     $obj->pgnoofseats = $_POST["noseat"];
     $obj->pgdsc = $_POST["desc"];
-    $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->pgavlfrm = $cls_date->format('y-m-d');
+   // $cls_date = new DateTime($_POST["avlfrm"]);
+       $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->pgavlfrm = $newDate->format('y-m-d');
    // $obj->pgsts = "Y";
   //  $obj->pgregcod = $_SESSION["lcod"];
     //  $obj->pgregcod=1;

@@ -17,106 +17,91 @@ if (count($proparr) > 0) {
     $Location = $proparr[0]['location'];
     $Locationcod = $proparr[0]['husloc'];
     $IsActive = $proparr[0]['IsActive'];
-      $propType= $proparr[0]['husfor'];
-        $rentFor= $proparr[0]['husrntfor'];
-        $MntChargesFor= $proparr[0]['husmntcryfor'];
-        $PropFurnishedStatus=$proparr[0]['husfursts'];
-        $AreaUnits=$proparr[0]['husareunit'];
-       
-        $PropDescription=$proparr[0]['husdsc'];
-            $LandMark=$proparr[0]['huslndmrk'];
-            $propAddress=$proparr[0]['husadd'];
-            $propRent=$proparr[0]['husrnt'];
-            $PropSecurity=$proparr[0]['husscrty'];
-            $PropOtherCharges=$proparr[0]['husocrg']; 
-            $AvalibleFrom=$proparr[0]['husavlfrm'];
-            $MainTainCharges=$proparr[0]['husmntcrg'];
-            $BedRooms=$proparr[0]['husbdrm'];
-            $BathRooms=$proparr[0]['husbtnrm'];
-            $Balcony=$proparr[0]['husblcny'];
-            $Kitchen=$proparr[0]['huskitchen'];
-            $LivingRoom=$proparr[0]['huslvrm'];
-            $Lobby=$proparr[0]['huslby'];
-            $propStoriesBuild=$proparr[0]['husstrybuit'];
-            $TotalArea=$proparr[0]['hustotare'];
+    $propType = $proparr[0]['husfor'];
+    $rentFor = $proparr[0]['husrntfor'];
+    $MntChargesFor = $proparr[0]['husmntcryfor'];
+    $PropFurnishedStatus = $proparr[0]['husfursts'];
+    $AreaUnits = $proparr[0]['husareunit'];
+
+    $PropDescription = $proparr[0]['husdsc'];
+    $LandMark = $proparr[0]['huslndmrk'];
+    $propAddress = $proparr[0]['husadd'];
+    $propRent = $proparr[0]['husrnt'];
+    $PropSecurity = $proparr[0]['husscrty'];
+    $PropOtherCharges = $proparr[0]['husocrg'];
+    // $AvalibleFrom=$proparr[0]['husavlfrm'];
+    $cls_date = new DateTime($proparr[0]['husavlfrm']);
+    $AvalibleFrom = $cls_date->format('d-m-Y');
+    $MainTainCharges = $proparr[0]['husmntcrg'];
+    $BedRooms = $proparr[0]['husbdrm'];
+    $BathRooms = $proparr[0]['husbtnrm'];
+    $Balcony = $proparr[0]['husblcny'];
+    $Kitchen = $proparr[0]['huskitchen'];
+    $LivingRoom = $proparr[0]['huslvrm'];
+    $Lobby = $proparr[0]['huslby'];
+    $propStoriesBuild = $proparr[0]['husstrybuit'];
+    $TotalArea = $proparr[0]['hustotare'];
 }
 //Approch to get location list by city id
-if(isset($citycod))
-{
- $objlocation= new clssubcat();
-            $LocationArray = $objlocation->dsp_subcat($citycod);
+if (isset($citycod)) {
+    $objlocation = new clssubcat();
+    $LocationArray = $objlocation->dsp_subcat($citycod);
 }
-if(isset($_POST["property_submit"]))
-{
-    $obj= new clshus();
-     $obj->huscode=$PropertyNO;
-    $obj->husfor=$_POST["husfor"];
-    $obj->husloc=$_POST["pgloc"];
-    $obj->huslndmrk=$_POST["lndmrk"];
-    $obj->husadd=$_POST["address"];
-    $obj->husbdrm=$_POST["bdrm"];
-    $obj->husbthrm=$_POST["bthrm"];
-    $obj->husblcny=$_POST["blcny"];
-    $obj->husktchn=$_POST["ktchn"];
-    $obj->huslvrm=$_POST["lvrm"];
-    $obj->husfursts=$_POST["fursts"];
-   $obj->huslby=$_POST["lby"];
-     $obj->hustotare=$_POST["totare"];
-    $obj->husrnt=$_POST["rnt"];
-    $obj->husrntfor=$_POST["rntfor"];
-    $obj->husocrg=$_POST["ocrg"];
-    $obj->husscrty=$_POST["scrty"];
-    $obj->husmntcrg=$_POST["mntcrg"];
-     $obj->husmntcrgfor=$_POST["mcrgfor"];
-   // $obj->hussts="P";
-    //   $obj->husregcod=$_SESSION["lcod"];
-  //  $obj->husregcod=2;
-       $cls_date = new DateTime($_POST["avlfrm"]);
-    $obj->husavlfrm=$cls_date->format('y-m-d');
-   // $obj->husavlfrm=$_POST["avlfrm"];
-    $obj->husdsc=$_POST["desc"];
- //   $obj->flodelsts=$_POST["avlfrm"];
-   //  $obj->huslat=$_POST["lat"];
-   // $obj->huslong=$_POST["long"];
-    $obj->husstryblt=$_POST["strblt"];
-    $obj->husareunt=$_POST["areunt"];
-   // $obj->husregdat=date('y-m-d');
- 
+if (isset($_POST["property_submit"])) {
+    $obj = new clshus();
+    $obj->huscode = $PropertyNO;
+    $obj->husfor = $_POST["husfor"];
+    $obj->husloc = $_POST["pgloc"];
+    $obj->huslndmrk = $_POST["lndmrk"];
+    $obj->husadd = $_POST["address"];
+    $obj->husbdrm = $_POST["bdrm"];
+    $obj->husbthrm = $_POST["bthrm"];
+    $obj->husblcny = $_POST["blcny"];
+    $obj->husktchn = $_POST["ktchn"];
+    $obj->huslvrm = $_POST["lvrm"];
+    $obj->husfursts = $_POST["fursts"];
+    $obj->huslby = $_POST["lby"];
+    $obj->hustotare = $_POST["totare"];
+    $obj->husrnt = $_POST["rnt"];
+    $obj->husrntfor = $_POST["rntfor"];
+    $obj->husocrg = $_POST["ocrg"];
+    $obj->husscrty = $_POST["scrty"];
+    $obj->husmntcrg = $_POST["mntcrg"];
+    $obj->husmntcrgfor = $_POST["mcrgfor"];
 
-    if(isset($_POST["delsts"])&& $_POST["delsts"]==1)
-    {
-    $obj->husdelsts="Y";
+    $datetime = new DateTime();
+    $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
+    $obj->husavlfrm = $newDate->format('y-m-d');
+    $obj->husdsc = $_POST["desc"];
+
+    $obj->husstryblt = $_POST["strblt"];
+    $obj->husareunt = $_POST["areunt"];
+    if (isset($_POST["delsts"]) && $_POST["delsts"] == 1) {
+        $obj->husdelsts = "Y";
+    } else { {
+            $obj->husdelsts = "N";
+        }
     }
- else {
-        
- {
-     $obj->husdelsts="N";
- }}
-    
-   $sts= $obj->Update_house();
-   if($sts)
-   {
-   if (isset($_POST["pfac"])) {
-        $objPropertFacility=new clsfacprp();
-        $objPropertFacility->type='H';
-        $objPropertFacility->prpcod=$PropertyNO;
-        $objPropertFacility->DeleteAllFeaturesByUser();
+
+    $sts = $obj->Update_house();
+    if ($sts) {
+        if (isset($_POST["pfac"])) {
+            $objPropertFacility = new clsfacprp();
+            $objPropertFacility->type = 'H';
+            $objPropertFacility->prpcod = $PropertyNO;
+            $objPropertFacility->DeleteAllFeaturesByUser();
             foreach ($_POST["pfac"] as $check) {
-              //  $obj1 = new clsfacprp();
+                //  $obj1 = new clsfacprp();
                 $objPropertFacility->faccode = $check;
-              //  $obj1->prpcod = $_SESSION["pgcod"];
-               // $obj1->type = 'P';
+                //  $obj1->prpcod = $_SESSION["pgcod"];
+                // $obj1->type = 'P';
                 $objPropertFacility->save_facprp();
             }
         }
-         header("location:frmEditProperties.php?pno=$PropertyNO&typ=H");
-   }
-   else
-   {
-
-       
-   }
-
+        header("location:frmEditProperties.php?pno=$PropertyNO&typ=H");
+    } else {
+        
+    }
 }
 include_once 'header.php';
 ?>
@@ -138,7 +123,7 @@ function getState(val) {
 <div class="container noo-mainbody">
     
  
-<div class="noo-mainbody">
+
 <div class="row clearfix">
  
  
@@ -602,5 +587,5 @@ $RentChargeArray = $ObjGeneralFunction->ReturnRentStructureArray();
  
 </div>
  <?php
-include_once 'footer.php';
+include_once 'footer_1.php';
  ?>

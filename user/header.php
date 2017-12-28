@@ -20,6 +20,7 @@
  
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/shortcode.css">
+<link rel="stylesheet" href="../css/citilights-shortcode.css">
 <link id="style-main-color" rel="stylesheet" href="../css/color/color1.css">
 <link href="../css/dropzone.css" type="text/css" rel="stylesheet" />
 <style>

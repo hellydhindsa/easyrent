@@ -146,7 +146,9 @@ if(count($proparr)>0)
             $PropSecurity=$proparr[0]['pgscrty'];
             $PropOtherCharges=$proparr[0]['pgocrg'];  
             $NoOfSeats=$proparr[0]['pgnofseats'];
-            $AvalibleFrom=$proparr[0]['pgavlfrm'];
+           // $AvalibleFrom=$proparr[0]['pgavlfrm'];
+            $cls_date = new DateTime($proparr[0]['pgavlfrm']);
+              $AvalibleFrom=$cls_date->format('d-m-Y');
             $NoOfPerson=$proparr[0]['pgnoper'];
             $MainTainCharges=$proparr[0]['pgmntcrg'].'/'.$MntChargesFor;
     }
@@ -165,7 +167,9 @@ if(count($proparr)>0)
         $propRent=$proparr[0]['flornt'].'/'.$rentFor;
         $PropSecurity=$proparr[0]['floscrty'];
         $PropOtherCharges=$proparr[0]['floocrg']; 
-        $AvalibleFrom=$proparr[0]['floavlfrm'];
+       // $AvalibleFrom=$proparr[0]['floavlfrm'];
+        $cls_date = new DateTime($proparr[0]['floavlfrm']);
+        $AvalibleFrom=$cls_date->format('d-m-Y');
         $MainTainCharges=$proparr[0]['flomntcrg'].'/'.$MntChargesFor;
         $BedRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['flobdrm']);
         $BathRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['flobthrm']);
@@ -178,61 +182,65 @@ if(count($proparr)>0)
     }
     elseif($type=='H')
     {
-        $propType= $ObjGeneralFunction->ReturnPropertyFor($proparr[0]['husfor']);
-        $rentFor= $ObjGeneralFunction->ReturnRentFor($proparr[0]['husrntfor']);
-        $MntChargesFor= $ObjGeneralFunction->ReturnRentFor($proparr[0]['husmntcryfor']);
-        $PropFurnishedStatus=$ObjGeneralFunction->ReturnFurnishedStatus($proparr[0]['husfursts']);
-        $AreaUnits=$proparr[0]['husareunit'];
-        $PageHeaader='House';;
-        $PageHeaderSmall=$proparr[0]['huslndmrk'].', '.$city;
-        $PropDescription=$proparr[0]['husdsc'];
-            $LandMark=$proparr[0]['huslndmrk'];
-            $propAddress=$proparr[0]['husadd'];
-            $propRent=$proparr[0]['husrnt'].'/'.$rentFor;
-            $PropSecurity=$proparr[0]['husscrty'];
-            $PropOtherCharges=$proparr[0]['husocrg']; 
-            $AvalibleFrom=$proparr[0]['husavlfrm'];
-            $MainTainCharges=$proparr[0]['husmntcrg'].'/'.$MntChargesFor;
-            $BedRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['husbdrm']);
-            $BathRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['husbtnrm']);
-            $Balcony=$ObjGeneralFunction->ReturnNumber($proparr[0]['husblcny']);
-            $Kitchen=$ObjGeneralFunction->ReturnNumber($proparr[0]['huskitchen']);
-            $LivingRoom=$ObjGeneralFunction->ReturnBoolStatus($proparr[0]['huslvrm']);
-            $Lobby=$ObjGeneralFunction->ReturnBoolStatus($proparr[0]['huslby']);
-            $propStoriesBuild=$ObjGeneralFunction->ReturnNumber($proparr[0]['husstrybuit']);
-            $TotalArea=$proparr[0]['hustotare'].'/'.$AreaUnits;
+        $propType = $ObjGeneralFunction->ReturnPropertyFor($proparr[0]['husfor']);
+        $rentFor = $ObjGeneralFunction->ReturnRentFor($proparr[0]['husrntfor']);
+        $MntChargesFor = $ObjGeneralFunction->ReturnRentFor($proparr[0]['husmntcryfor']);
+        $PropFurnishedStatus = $ObjGeneralFunction->ReturnFurnishedStatus($proparr[0]['husfursts']);
+        $AreaUnits = $proparr[0]['husareunit'];
+        $PageHeaader = 'House';
+        $PageHeaderSmall = $proparr[0]['huslndmrk'] . ', ' . $city;
+        $PropDescription = $proparr[0]['husdsc'];
+        $LandMark = $proparr[0]['huslndmrk'];
+        $propAddress = $proparr[0]['husadd'];
+        $propRent = $proparr[0]['husrnt'] . '/' . $rentFor;
+        $PropSecurity = $proparr[0]['husscrty'];
+        $PropOtherCharges = $proparr[0]['husocrg'];
+        // $AvalibleFrom=$proparr[0]['husavlfrm'];
+        $cls_date = new DateTime($proparr[0]['husavlfrm']);
+        $AvalibleFrom = $cls_date->format('d-m-Y');
+        $MainTainCharges = $proparr[0]['husmntcrg'] . '/' . $MntChargesFor;
+        $BedRooms = $ObjGeneralFunction->ReturnNumber($proparr[0]['husbdrm']);
+        $BathRooms = $ObjGeneralFunction->ReturnNumber($proparr[0]['husbtnrm']);
+        $Balcony = $ObjGeneralFunction->ReturnNumber($proparr[0]['husblcny']);
+        $Kitchen = $ObjGeneralFunction->ReturnNumber($proparr[0]['huskitchen']);
+        $LivingRoom = $ObjGeneralFunction->ReturnBoolStatus($proparr[0]['huslvrm']);
+        $Lobby = $ObjGeneralFunction->ReturnBoolStatus($proparr[0]['huslby']);
+        $propStoriesBuild = $ObjGeneralFunction->ReturnNumber($proparr[0]['husstrybuit']);
+        $TotalArea = $proparr[0]['hustotare'] . '/' . $AreaUnits;
     }
      elseif($type=='C')
     {
-        $propType= $ObjGeneralFunction->ReturnCommercialType($proparr[0]['cptyp']);
-        $rentFor= $ObjGeneralFunction->ReturnRentFor($proparr[0]['cprntfor']);
-        $MntChargesFor= $ObjGeneralFunction->ReturnRentFor($proparr[0]['cpmntcrgfor']);
-        $PropFurnishedStatus=$ObjGeneralFunction->ReturnFurnishedStatus($proparr[0]['cpfursts']);
-        $AreaUnits=$proparr[0]['cpareunit'];
-        $PageHeaader='Commercial Property';;
-        $PageHeaderSmall=$proparr[0]['cplndmrk'].', '.$city;
-        $PropDescription=$proparr[0]['cpdsc'];
-            $LandMark=$proparr[0]['cplndmrk'];
-            $propAddress=$proparr[0]['cpadd'];
-            $propRent=$proparr[0]['cprnt'].'/'.$rentFor;
-            $PropSecurity=$proparr[0]['cpscrty'];
-            $PropOtherCharges=$proparr[0]['cpocry']; 
-            $AvalibleFrom=$proparr[0]['cpavlfrm'];
-            $MainTainCharges=$proparr[0]['cpmntcrg'].'/'.$MntChargesFor;
-            $WashRooms=$ObjGeneralFunction->ReturnBoolStatus($proparr[0]['cppwshrm']);
-          $Pentry=$ObjGeneralFunction->ReturnBoolStatus($proparr[0]['cpppentry']);
-            $Roadfacing=$proparr[0]['cprdfac'];
-            $AgeofConstruction=$ObjGeneralFunction->ReturnNumber($proparr[0]['cpageofcnst']).' Years';
-            $TotalArea=$proparr[0]['cptotarecov'].'/'.$AreaUnits;
-             $FloorNo=$ObjGeneralFunction->ReturnNumber($proparr[0]['cpflono']);
-        $TotalFloor=$ObjGeneralFunction->ReturnNumber($proparr[0]['cptotflo']);
-       //
+        $propType = $ObjGeneralFunction->ReturnCommercialType($proparr[0]['cptyp']);
+        $rentFor = $ObjGeneralFunction->ReturnRentFor($proparr[0]['cprntfor']);
+        $MntChargesFor = $ObjGeneralFunction->ReturnRentFor($proparr[0]['cpmntcrgfor']);
+        $PropFurnishedStatus = $ObjGeneralFunction->ReturnFurnishedStatus($proparr[0]['cpfursts']);
+        $AreaUnits = $proparr[0]['cpareunit'];
+        $PageHeaader = 'Commercial Property';
+        $PageHeaderSmall = $proparr[0]['cplndmrk'] . ', ' . $city;
+        $PropDescription = $proparr[0]['cpdsc'];
+        $LandMark = $proparr[0]['cplndmrk'];
+        $propAddress = $proparr[0]['cpadd'];
+        $propRent = $proparr[0]['cprnt'] . '/' . $rentFor;
+        $PropSecurity = $proparr[0]['cpscrty'];
+        $PropOtherCharges = $proparr[0]['cpocry'];
+        //$AvalibleFrom=$proparr[0]['cpavlfrm'];
+        $cls_date = new DateTime($proparr[0]['cpavlfrm']);
+        $AvalibleFrom = $cls_date->format('d-m-Y');
+        $MainTainCharges = $proparr[0]['cpmntcrg'] . '/' . $MntChargesFor;
+        $WashRooms = $ObjGeneralFunction->ReturnBoolStatus($proparr[0]['cppwshrm']);
+        $Pentry = $ObjGeneralFunction->ReturnBoolStatus($proparr[0]['cpppentry']);
+        $Roadfacing = $proparr[0]['cprdfac'];
+        $AgeofConstruction = $ObjGeneralFunction->ReturnNumber($proparr[0]['cpageofcnst']) . ' Years';
+        $TotalArea = $proparr[0]['cptotarecov'] . '/' . $AreaUnits;
+        $FloorNo = $ObjGeneralFunction->ReturnNumber($proparr[0]['cpflono']);
+        $TotalFloor = $ObjGeneralFunction->ReturnNumber($proparr[0]['cptotflo']);
+        //
         //
         //
     }
     
   }
-include_once 'header_1.php';
+include_once 'header.php';
 ?>
 <script>
     function GetParameterValues(param) {
@@ -263,7 +271,7 @@ window.location = UrltoHit;
 <div class="noo-wrapper">
  
 <div class="container noo-mainbody">
-<div class="noo-mainbody-inner">
+<div class="noo-mainbody">
 <div class="row clearfix">
  
 <div class="noo-content col-xs-12 col-md-8">
