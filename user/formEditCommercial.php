@@ -33,7 +33,7 @@ if (count($proparr) > 0) {
     $PropOtherCharges = $proparr[0]['cpocry'];
    // $AvalibleFrom = $proparr[0]['cpavlfrm'];
     $cls_date = new DateTime($proparr[0]['cpavlfrm']);
-     $AvalibleFrom=$cls_date->format('d-m-Y');
+     $AvalibleFrom=$cls_date->format('d/m/Y');
     $MainTainCharges = $proparr[0]['cpmntcrg'];
     $WashRooms = $proparr[0]['cppwshrm'];
     $Pentry = $proparr[0]['cpppentry'];
@@ -133,7 +133,7 @@ function getState(val) {
 
 <div class="noo-content col-xs-12 col-md-12">
 <div class="submit-header">
-<h1 class="page-title">Update commercial Property</h1>
+<h1 class="page-title">Update Commercial Property</h1>
 </div>
 <div class="submit-content">
     <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="formEditCommercial.php?pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>">
@@ -387,7 +387,7 @@ for ($i = 0; $i < count($LocationArray); $i++) {
 <div class="col-md-6">
 <div class="form-group s-prop-status">
 
-<label>Personal Pentary</label>
+<label>Personal pantry</label>
 <div class="dropdown label-select">
 <select class="form-control" name="ppntry" required>
 <option value="">select one</option>

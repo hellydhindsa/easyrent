@@ -1,6 +1,6 @@
 <?php
 include_once '../buslogic.php';
-include_once 'header_1.php';
+include_once 'header.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
 if ($_REQUEST["pno"] && $_REQUEST["typ"]) {
@@ -33,6 +33,7 @@ if(count($proparr)>0)
 {
             $city=$proparr[0]['city'];
             $Location=$proparr[0]['location'];
+            $dealerStatus=$proparr[0]['delarstatus'];
     if($type=='P')
     {
             $propType= $ObjGeneralFunction->ReturnPropertyFor($proparr[0]['pgtyp']);
@@ -49,7 +50,9 @@ if(count($proparr)>0)
             $PropSecurity=$proparr[0]['pgscrty'];
             $PropOtherCharges=$proparr[0]['pgocrg'];  
             $NoOfSeats=$proparr[0]['pgnofseats'];
-            $AvalibleFrom=$proparr[0]['pgavlfrm'];
+           // $AvalibleFrom=$proparr[0]['pgavlfrm'];
+                   $cls_date = new DateTime($proparr[0]['pgavlfrm']);
+              $AvalibleFrom=$cls_date->format('d-m-Y');
             $NoOfPerson=$proparr[0]['pgnoper'];
             $MainTainCharges=$proparr[0]['pgmntcrg'].'/'.$MntChargesFor;
     }
@@ -68,7 +71,9 @@ if(count($proparr)>0)
         $propRent=$proparr[0]['flornt'].'/'.$rentFor;
         $PropSecurity=$proparr[0]['floscrty'];
         $PropOtherCharges=$proparr[0]['floocrg']; 
-        $AvalibleFrom=$proparr[0]['floavlfrm'];
+       // $AvalibleFrom=$proparr[0]['floavlfrm'];
+              $cls_date = new DateTime($proparr[0]['floavlfrm']);
+              $AvalibleFrom=$cls_date->format('d-m-Y');
         $MainTainCharges=$proparr[0]['flomntcrg'].'/'.$MntChargesFor;
         $BedRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['flobdrm']);
         $BathRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['flobthrm']);
@@ -94,7 +99,9 @@ if(count($proparr)>0)
             $propRent=$proparr[0]['husrnt'].'/'.$rentFor;
             $PropSecurity=$proparr[0]['husscrty'];
             $PropOtherCharges=$proparr[0]['husocrg']; 
-            $AvalibleFrom=$proparr[0]['husavlfrm'];
+           // $AvalibleFrom=$proparr[0]['husavlfrm'];
+             $cls_date = new DateTime($proparr[0]['husavlfrm']);
+              $AvalibleFrom=$cls_date->format('d-m-Y');
             $MainTainCharges=$proparr[0]['husmntcrg'].'/'.$MntChargesFor;
             $BedRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['husbdrm']);
             $BathRooms=$ObjGeneralFunction->ReturnNumber($proparr[0]['husbtnrm']);
@@ -120,7 +127,9 @@ if(count($proparr)>0)
             $propRent=$proparr[0]['cprnt'].'/'.$rentFor;
             $PropSecurity=$proparr[0]['cpscrty'];
             $PropOtherCharges=$proparr[0]['cpocry']; 
-            $AvalibleFrom=$proparr[0]['cpavlfrm'];
+           // $AvalibleFrom=$proparr[0]['cpavlfrm'];
+               $cls_date = new DateTime($proparr[0]['cpavlfrm']);
+              $AvalibleFrom=$cls_date->format('d-m-Y');
             $MainTainCharges=$proparr[0]['cpmntcrg'].'/'.$MntChargesFor;
             $WashRooms=$ObjGeneralFunction->ReturnBoolStatus($proparr[0]['cppwshrm']);
           $Pentry=$ObjGeneralFunction->ReturnBoolStatus($proparr[0]['cpppentry']);
@@ -141,7 +150,7 @@ if(count($proparr)>0)
 <div class="noo-wrapper">
  
 <div class="container noo-mainbody">
-<div class="noo-mainbody-inner">
+
 <div class="row clearfix">
  
 <div class="noo-content col-xs-12 col-md-8">
@@ -205,6 +214,16 @@ echo'<li><a href="#"><img src="../pgpics/'.$arr[$i][0].$arr[$i][1].'" height="20
 <a class="caroufredsel-prev" href="#"></a>
 <a class="caroufredsel-next" href="#"></a>
 </div>
+    <?php
+    if(isset($dealerStatus) && $dealerStatus=='Y')
+    {
+      echo'<div><label for="_noo_property_feature_attic"  style="color: red;
+    font-weight: bold;">
+<h4>&nbsp;I am not interested in getting response from brokers. <i></i></h4>
+</label></div>';
+    }
+    ?>
+  
 </div>
 <div class="property-summary">
 <div class="row">
@@ -412,7 +431,7 @@ Name: preet
 </div>
  
 </div>
-</div>
+
 </div>
  
 </div>

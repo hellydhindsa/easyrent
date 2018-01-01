@@ -462,7 +462,7 @@ echo'<i></i></label></div></div>';
     <option value="M">Monthly</option>
 <option value="Q">Quarterly</option>
 <option value="Y">Yearly</option>
-
+<option value="O">One-Time</option>
 
 </select>
 </div>

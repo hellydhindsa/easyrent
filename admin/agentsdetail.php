@@ -52,7 +52,7 @@ if(count($AgentDetailArray)>0)
 <div class="agent-info clearfix">
 <div class="content-featured">
 <div class="content-thumb">
-  <?php echo '<img src="../delpics/'.$pic.'" alt="">' ?>;
+  <?php echo '<img src="../delpics/'.$pic.'" alt="">' ?>
 </div>
 </div>
 <div class="agent-detail">

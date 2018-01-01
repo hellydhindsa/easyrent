@@ -61,9 +61,9 @@ include_once 'AdminHeader.php';
              echo"<td width='10%'>".$arr[$i][4]."</td>";
           //  if($arr[$i][6]==1)
           //  {
-            echo"<td width='10%'><a href=viewcontactForms.php?Contactcod=".$arr[$i][6]."&mode=A>Delete</a></td>";
-        //}
-echo"<td width='10%'><a href=viewcontactForms.php?Contactcod=".$arr[$i][6]."&mode=D>Detail</a></td>";
+            echo"<td width='10%'><a href=Viewcontactforms.php?Contactcod=".$arr[$i][6]."&mode=A>Delete</a></td>";
+        //}MoreDeatailcontact.php  viewcontactForms.php
+echo"<td width='10%'><a href=Viewcontactforms.php?Contactcod=".$arr[$i][6]."&mode=D>Detail</a></td>";
             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
            
         }

@@ -299,6 +299,21 @@ $("#ResendOTP").click(function(){
 	}
 	});
 });
+
+//changes for password and compaire password
+var password = document.getElementById("Rpwd")
+  , confirm_password = document.getElementById("cpwd");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
 });
 </script>
 <div class="noo-wrapper">
@@ -360,7 +375,7 @@ $("#ResendOTP").click(function(){
 
 
 
-         <form name="registration-form" id="registration-form" class="noo-form property-form" action="login.php" method="post"  enctype="multipart/form-data" >
+         <form name="registration-form" id="registration-form-Main" class="noo-form property-form" action="login.php" method="post"  enctype="multipart/form-data" >
           <div class="col-md-8">
            <div class="form-group s-prop-title">  
  <label class="radio-inline">
@@ -390,7 +405,7 @@ $("#ResendOTP").click(function(){
                      <div class="col-md-6">
 <div class="form-group s-prop-title">
 <label for="eml">Email Id&nbsp;&#42;</label>
-<input type="text" id="eml" class="form-control" value="" name="eml" required="">
+<input type="text" id="Reml" class="form-control" value="" name="eml" required="">
 </div>
 </div>
 <div class="col-md-6">
@@ -402,7 +417,7 @@ $("#ResendOTP").click(function(){
                                  <div class="col-md-6">
 <div class="form-group s-prop-title">
 <label for="pwd">Password&nbsp;&#42;</label>
-<input type="password" id="pwd" class="form-control" value="" name="pwd" required="">
+<input type="password" id="Rpwd" class="form-control" value="" name="pwd" required="">
 </div>
 </div>
 <div class="col-md-6">
@@ -481,7 +496,7 @@ $("#ResendOTP").click(function(){
           <h2 class="modal-title"> One Time Password Verification</h2>
         </div>
         <div class="modal-body">
-     <form name="SubmitOTP-form" id="registration-form" class="noo-form property-form" action="login.php" method="post">
+     <form name="SubmitOTP-form" id="registration-form-OTP" class="noo-form property-form" action="login.php" method="post">
           
                      <div class="col-md-12">
 <div class="form-group s-prop-title">
@@ -524,7 +539,7 @@ $("#ResendOTP").click(function(){
           <h2 class="modal-title"> Reset Password</h2>
         </div>
         <div class="modal-body">
-          <form name="SubmitpwdRestform" id="registration-form" class="noo-form property-form" action="login.php" method="post">
+          <form name="SubmitpwdRestform" id="registration-form-ResetPwd" class="noo-form property-form" action="login.php" method="post">
           
                      <div class="col-md-12">
 <div class="form-group s-prop-title">

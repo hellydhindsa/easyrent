@@ -34,7 +34,7 @@ if (count($proparr) > 0) {
     $NoOfSeats = $proparr[0]['pgnofseats'];
    // $AvalibleFrom = $proparr[0]['pgavlfrm'];
      $cls_date = new DateTime($proparr[0]['pgavlfrm']);
-        $AvalibleFrom=$cls_date->format('d-m-Y');
+        $AvalibleFrom=$cls_date->format('d/m/Y');
     $NoOfPerson = $proparr[0]['pgnoper'];
     $MainTainCharges = $proparr[0]['pgmntcrg'] ;
 }

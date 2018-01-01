@@ -66,19 +66,6 @@ window.location = UrltoHit;
 <h1 class="page-title">Agents Listing</h1>
 <div class="properties-toolbar">
       <form class="properties-ordering">
-<div class="properties-ordering-label">Locations</div>
-<div class="form-group properties-ordering-select">
-<div class="label-select">
-<select class="form-control" name="SearchLocationAgent" onChange="getLocation(this.value);" id="pgloc" required>
-    <option value="0">Select Location</option>
-
-</select>
-</div>
-    </div>
-
-</form>
-    
- <form class="properties-ordering">
 <div class="properties-ordering-label">City</div>
 <div class="form-group properties-ordering-select">
 <div class="label-select">
@@ -92,6 +79,20 @@ window.location = UrltoHit;
           echo " <option value=".$arrCity[$i][0]." />".$arrCity[$i][1]."</option>";
          }
         ?>
+</select>
+</div>
+    </div>
+
+</form>
+    
+ <form class="properties-ordering">
+<div class="properties-ordering-label">Locations</div>
+<div class="form-group properties-ordering-select">
+<div class="label-select">
+
+    <select class="form-control" name="SearchLocationAgent" onChange="getLocation(this.value);" id="pgloc" required>
+    <option value="0">Select Location</option>
+
 </select>
 </div>
     </div>
@@ -129,7 +130,8 @@ echo'<div class="agent-summary">';
 echo'<div class="agent-info">';
 echo'<div><i class="fa fa-user"></i>&nbsp;'.$agentDataArray[$i][0].'</div>';
 echo'<div><i class="fa fa-industry"></i>&nbsp;'.$agentDataArray[$i][1].'</div>';
-
+echo'<div><i class="fa fa-building"></i>&nbsp;'.$agentDataArray[$i][4].'</div>';
+echo'<div><i class="fa fa-map-marker"></i>&nbsp;'.$agentDataArray[$i][5].'</div>';
 echo'</div>';
 echo'<div class="agent-desc">';
 

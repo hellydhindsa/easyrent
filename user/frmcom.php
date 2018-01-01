@@ -101,7 +101,7 @@ include_once 'leftpanel.php';
  
 <div class="noo-content col-xs-12 col-md-8">
 <div class="submit-header">
-<h1 class="page-title">Submit commercial Property</h1>
+<h1 class="page-title">Submit Commercial Property</h1>
 </div>
 <div class="submit-content">
 <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form">
@@ -359,7 +359,7 @@ include_once 'leftpanel.php';
 <div class="col-md-6">
 <div class="form-group s-prop-status">
 
-<label>Personal Pentary</label>
+<label>Personal pantry</label>
 <div class="dropdown label-select">
 <select class="form-control" name="ppntry" required>
 <option value="">select one</option>

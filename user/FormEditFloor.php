@@ -30,7 +30,7 @@ if (count($proparr) > 0) {
     $PropOtherCharges = $proparr[0]['floocrg'];
     // $AvalibleFrom = $proparr[0]['floavlfrm'];
     $cls_date = new DateTime($proparr[0]['floavlfrm']);
-    $AvalibleFrom = $cls_date->format('d-m-Y');
+    $AvalibleFrom = $cls_date->format('d/m/Y');
     $MainTainCharges = $proparr[0]['flomntcrg'];
     $AreaUnits = $proparr[0]['floareunts'];
     $BedRooms = $proparr[0]['flobdrm'];
@@ -68,7 +68,7 @@ if (isset($_POST["property_submit"])) {
     $obj->floocrg = $_POST["ocrg"];
     $obj->floscrty = $_POST["scrty"];
     $obj->flomntcrg = $_POST["mntcrg"];
-    $obj->flomntcrgfor = $_POST["mntcrgfor"];
+    $obj->flomntcrgfor = $_POST["mcrgfor"];
     $datetime = new DateTime();
     $newDate = $datetime->createFromFormat('d/m/Y', $_POST["avlfrm"]);
     $obj->floavlfrm = $newDate->format('y-m-d');

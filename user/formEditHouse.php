@@ -31,7 +31,7 @@ if (count($proparr) > 0) {
     $PropOtherCharges = $proparr[0]['husocrg'];
     // $AvalibleFrom=$proparr[0]['husavlfrm'];
     $cls_date = new DateTime($proparr[0]['husavlfrm']);
-    $AvalibleFrom = $cls_date->format('d-m-Y');
+    $AvalibleFrom = $cls_date->format('d/m/Y');
     $MainTainCharges = $proparr[0]['husmntcrg'];
     $BedRooms = $proparr[0]['husbdrm'];
     $BathRooms = $proparr[0]['husbtnrm'];

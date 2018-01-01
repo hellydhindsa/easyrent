@@ -57,7 +57,7 @@ curl_close($ch);
 <div class="noo-wrapper">
  
 <div class="container-fluid noo-mainbody">
-<div class="noo-mainbody-inner">
+
 <div class="row clearfix">
  
 <div class="noo-content col-xs-12">
@@ -105,7 +105,7 @@ curl_close($ch);
 </div>
 </div>
 </div>
-</div>
+
  
 </div>
 </div>

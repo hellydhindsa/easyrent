@@ -16,7 +16,7 @@ if(isset($_POST["Alert_submit"]))
    $stsAlert= $obj->SaveUserAlerts();
    if($stsAlert)
    {
- $msg="your Alert Added Sucessfully";
+ $msg="Your Alert Added Successfully";
    }
    else
    {
