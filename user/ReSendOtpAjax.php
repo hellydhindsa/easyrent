@@ -13,15 +13,23 @@ include_once '../buslogic.php';
    // $typ=$_POST["PropertyType"];
 	 $obj= new clsprop();
             $phoneEmail = $obj->GetOtpByEmail($Email);
+            if(isset($phoneEmail))
+            {
             $objGenfunction=new GeneralFunction();
             $message= 'OTP for EasyRent Registration is '.$phoneEmail[0][0];
             $objGenfunction->SendMessageByPhone($phoneEmail[0][1], $message);
-            echo 'your OTP send at '.$phoneEmail[0][1];
+            $userSucessMessage='*******'.substr($phoneEmail[0][1], 7);
+            echo 'Your OTP send at '.$userSucessMessage;
+            }
+            else
+            {
+                echo 'Your OTP Resend is unsucessfull';
+            }
 //}
    }
    else
    {
-       echo 'your OTP Resend is unsucessfull';
+       echo 'Your OTP Resend is unsucessfull';
    }
 ?>
 	

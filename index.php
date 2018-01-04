@@ -170,13 +170,13 @@ echo'<div class="property-row">';
            
 echo'<article class="hentry has-featured">';
 echo'<div class="property-featured">';
-echo'<a class="content-thumb" href="property-details.html">';
-echo'<img src="pgpics/'.$arr[$i][7].'" class="attachment-property-thumb" alt=""/></a>';
+//echo'<a class="content-thumb" href="property-details.html">';
+echo'<img src="pgpics/'.$arr[$i][7].'" class="attachment-property-thumb" alt=""/>';
 echo'<span class="property-category">';
 echo'<a href="#">'.$arr[$i][0].'</a>';
 echo'</span>';
 echo'<div class="property-detail">';
-echo'<div class="size"><span>'.$arr[$i][4].' sqft</span>';
+echo'<div class="size"><span>'.$arr[$i][4].' '.$arr[$i][10].'</span>';
 echo'</div>';
 echo'<div class="bathrooms"><span>'.$arr[$i][5].'</span>';
 echo'</div>';

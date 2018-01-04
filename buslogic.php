@@ -1376,7 +1376,7 @@ class clsprf {
     function update_prf() {
         $con = new clscon();
         $link = $con->db_connect();
-        $qry = "call UpdateUserProfile($this->prfcode,'$this->prfname','$this->prfaddress','$this->prfcmp','$this->prfpic')";
+        $qry = "call UpdateUserProfile($this->prfcode,'$this->prfname','$this->prfaddress','$this->prfcmp','$this->prfpic','$this->prfphn','$this->Otp')";
         // echo $qry;
         $res = mysqli_query($link, $qry) or die(mysqli_error($link));
         if (mysqli_affected_rows($link)) {

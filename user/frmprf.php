@@ -3,30 +3,50 @@
 include_once '../buslogic.php';
 //code check user is login or not
  if(!isset($_SESSION["lcod"])){ header("location:../login.php");  }
+
 if(isset($_POST["btnupd"]))
 {
    // echo "enter to update   section here ";
      $obj1= new clsprf();
     $obj1->prfname=$_POST["nam"];
-   // $obj1->prfphn=$_POST["phn"];
+    $obj1->prfphn=$_POST["phn"];
   //  $obj1->prftype=$_POST["regtyp"];
    $obj1->prfcode=$_SESSION["prfcod"];
     $obj1->prfaddress=$_POST["address"];
     $obj1->prfcmp=$_POST["cmp"];
-   
+    $newOtp=rand(1000, 9999);
+   $obj1->Otp=$newOtp;
    $s=$_FILES["fil"]["name"];
     $s=  substr($s, strpos($s, '.'));
+    if(isset($s) && trim($s)!=='')
+    {
     $obj1->prfpic=$s;
+    }
+    else
+    {
+        $obj1->prfpic=$_SESSION["extension"];
+    }
    // echo"jnsadkcksd sakjdnxaskjcb sakjdnasknaskjd askdnaskjdnsakjdbaskjdnaskj;";
    // echo $s;
-    $obj1->update_prf();
+   $result= $obj1->update_prf();
     $a=$_SESSION["prfcod"];
     if($s!="")
     {
    move_uploaded_file ($_FILES["fil"]["tmp_name"],"../delpics/".$a.$s);
     }
+    
 //     $msgreg="Registration sucessfull ";
+    if($result)
+    {
+         $Otpmsg="Otp for Easy Rent Profile Updation Verification is " .$newOtp; 
+        $ObjGeneralFunction= new GeneralFunction();
+        $ObjGeneralFunction->SendMessageByPhone($_POST["phn"], $Otpmsg);
+        unset($_SESSION["lcod"]);
+        header("location:../login.php");
+    }
      $msg="Updation Sucessfull ";
+     unset($_SESSION["prfcod"]);
+     unset($_SESSION["extension"]);
 }
 
 include_once 'header.php';
@@ -62,6 +82,9 @@ include_once 'header.php';
                                                   $address= $arr[0][5];
                                                   $cmpny= $arr[0][4];
                                                   $_SESSION["prfcod"]=$arr[0][8];
+                                                 // $_SESSION["extension"]='';
+                                                  $_SESSION["extension"]=$arr[0][9];
+                                                  
  ?>
  
 <h1 class="content-title"><?php echo $arr[0][2]; ?></h1>
@@ -126,12 +149,12 @@ include_once 'header.php';
 <input type="text" id="nam" class="form-control" value="<?php if(isset($name)) echo $name; ?>" name="nam" required="">
 </div>
 </div>
-<!--<div class="form-group gsub-location">
+<div class="form-group gsub-location">
 <div class="form-group s-prop-title">
 <label for="phn">Phone No&nbsp;&#42;</label>
 <input type="text" id="phn" class="form-control" value="<?php if(isset($phone)) echo $phone; ?>" name="phn" required="">
 </div>
-</div>-->
+</div>
 <div class="form-group gstatus">
 <div class="form-group s-prop-title">
 <label for="address">Address&nbsp;&#42;</label>
@@ -141,7 +164,7 @@ include_once 'header.php';
 <div class="form-group gtype">
 <div class="form-group s-prop-title">
 <label for="cmp">Company&nbsp;&#42;</label>
-<input type="text" id="cmp" class="form-control" value="<?php if(isset($cmpny)) echo $cmpny; ?>" name="cmp" required="">
+<input type="text" id="cmp" class="form-control" value="<?php if(isset($cmpny)) echo $cmpny; ?>" name="cmp" >
 </div>
 </div>
     <div class="form-group gtype">

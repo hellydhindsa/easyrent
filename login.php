@@ -295,6 +295,11 @@ $("#ResendOTP").click(function(){
 	url: "user/ReSendOtpAjax.php",
 	//data:'country_id='+val,
 	success: function(data){
+            if(data.indexOf("#500") != -1)
+            {
+               data=data.substring(4);
+            }
+               
 		$("#resentOtpMessages").html(data);
 	}
 	});
