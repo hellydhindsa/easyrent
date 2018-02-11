@@ -100,13 +100,19 @@ window.location = UrltoHit;
  </div>
 </div>
          <?php
+          $ObjAgentData= new clsprf();
       if(isset($_REQUEST["loc"]))
       {
           $loc=$_REQUEST["loc"];
          
-      $ObjAgentData= new clsprf();
+     // $ObjAgentData= new clsprf();
         $agentDataArray = $ObjAgentData->DisplayAllAgentsByLocationID($loc);
        // If(count($arr)>0)
+      }
+      else
+      {
+           $agentDataArray = $ObjAgentData->DisplayAllAgents();
+          
       }
       if(isset($agentDataArray))
       {

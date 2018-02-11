@@ -6,12 +6,12 @@
 
 <div class="gsearch">
 <div class="gsearch-wrap">
-<form class="gsearchform" role="search" action="ListWithSidebar.php" name="innersearch" method="post">
+<form class="gsearchform" role="search" action="ListWithSidebar.php" onsubmit="return validateMyForm();" name="innersearch" method="post">
 <div class="gsearch-content">
 <div class="gsearch-field">
 <div class="form-group glocation">
 <div class="label-select">
-<select class="form-control" onChange="getState(this.value);" required>
+<select class="form-control" id="cityDropdown" onChange="getState(this.value);" required>
     <option value="0">Select City</option>
  <?php
   $obj= new clscat();         
@@ -34,7 +34,7 @@
 </div>
 <div class="form-group gstatus">
 <div class="label-select">
-<select id="SearchType" class="form-control" name="SearchType">
+<select id="SearchType" class="form-control" name="SearchType" required>
 <option value="A">Select Type</option>
 <option  value="P">PG</option>
 <option value="F">Floor</option>
@@ -45,7 +45,7 @@
 </div>
     <div id="commercial" class="form-group gstatus">
 <div class="label-select">
-<select  id="commercialSelect" class="form-control" name="commercialSelect">
+<select  id="commercialSelect" class="form-control" name="commercialSelect" required>
 <option value="A">All Commercial</option>
 <option  value="O">Office</option>
 <option value="S">Shop</option>
@@ -56,7 +56,7 @@
 </div>
 <div class="form-group gtype" id="SelectCategory">
 <div class="label-select">
-<select id="SearchCategory" class="form-control" name="SearchCategory">
+<select id="SearchCategory" class="form-control" name="SearchCategory" required>
 <option value="A">Select Category </option>
 <option value="B">Boys</option>
 <option value="G">Girls</option>
@@ -67,7 +67,7 @@
     
 <div class="form-group gbed" id="bedroomSelect">
 <div class="label-select">
-<select  class="form-control" name="bedroomSelect">
+<select  class="form-control" id="bedroomSelect" name="bedroomSelect" >
 <option value="0">No. of Bedrooms</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -81,7 +81,7 @@
 <div class="form-group gbath">
   
 <div class="label-select">
-<select class="form-control" name="furnishedStatusSelect">
+<select class="form-control" id="furnishedStatusSelect" name="furnishedStatusSelect">
 <option value="N">Furnished Status</option>
 <option value="F">Fully-Furnished</option>
 <option value="S">Semi-Furnished</option>
@@ -119,6 +119,8 @@
 
 </div>
 <div class="gsearch-action">
+    <label id="validationAlert" style="color: red;
+    font-weight: bold;" ></label>
 <div class="gsubmit">
 <!--<a class="btn btn-deault" href="#">Search Property</a>-->
 <input class="btn btn-deault" type="submit" value="Search Property" name="SearchResults">
@@ -129,7 +131,52 @@
 </div>
 </div>
 </div>
- 
+    <script>
+        function validateMyForm()
+{
+    debugger;
+    if($("#cityDropdown").val()==0)
+    {
+        $("#validationAlert").html("Please select City first");
+        return false;
+    }
+    else if($("#pgloc").val()==0)
+    {
+          $("#validationAlert").html("Please select LOcation first");
+        return false;
+    }
+     else if($("#SearchType").val()=="A")
+    {
+          $("#validationAlert").html("Please select Property Type First");
+        return false;
+    }
+     else if($("#SearchType").val()=="C" && $("#commercialSelect").val()=="A")
+    {
+          $("#validationAlert").html("Please select Commercial Type First");
+        return false;
+    }
+     else if(($("#SearchType").val()=="P" || $("#SearchType").val()=="F" || $("#SearchType").val()=="H") && $("#SearchCategory").val()=="A")
+    {
+          $("#validationAlert").html("Please select Category First");
+        return false;
+    }
+    else if(($("#SearchType").val()=="F" || $("#SearchType").val()=="H") && $("#bedroomSelect").val()==0)
+    {
+          $("#validationAlert").html("Please select No of Bedrooms First");
+        return false;
+    }
+    else if($("#furnishedStatusSelect").val()=="N")
+    {
+             $("#validationAlert").html("Please select Furnished Status First");
+        return false;
+    }
+    else
+    {
+          return true;
+    }
+    }
+
+        </script>
  
 <div class="block-sidebar recent-property">
 <h3 class="title-block-sidebar">Recent Property</h3>

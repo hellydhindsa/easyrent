@@ -131,7 +131,7 @@ function getState(val) {
 <h1 class="page-title">Update Floor</h1>
 </div>
 <div class="submit-content">
-    <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="formEditFloor.php?pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>">
+    <form id="new_post" name="new_post" method="post" class="noo-form property-form" role="form" action="FormEditFloor.php?pno=<?php if(isset($PropertyNO)) echo $PropertyNO; ?>">
 <div class="noo-control-group">
 <div class="group-title">Floor Description</div>
 <div class="group-container row">

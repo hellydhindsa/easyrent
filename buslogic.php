@@ -1318,7 +1318,7 @@ class clscp {
 function Update_Commercial() {
        $con = new clscon();
         $link = $con->db_connect();
-       $qry = "call UpdateCommercial('$this->cpcode','$this->cptyp','$this->cploc','$this->cplndmrk','$this->cpadd','$this->cppbthrm','$this->cpppntry','$this->cpflono','$this->cptotflo','$this->cparecov','$this->cprdfac','$this->cprnt','$this->cprntfor','$this->cpmntcrg','$this->cpmntcrgfor','$this->cpocrg','$this->cpavlfrm','$this->cpagefconst','$this->cpdsc','$this->cpdelsts','$this->cpscrty','$this->cpareunt','$this->cpfursts',)";
+       $qry = "call UpdateCommercial('$this->cpcode','$this->cptyp','$this->cploc','$this->cplndmrk','$this->cpadd','$this->cppbthrm','$this->cpppntry','$this->cpflono','$this->cptotflo','$this->cparecov','$this->cprdfac','$this->cprnt','$this->cprntfor','$this->cpmntcrg','$this->cpmntcrgfor','$this->cpocrg','$this->cpavlfrm','$this->cpagefconst','$this->cpdsc','$this->cpdelsts','$this->cpscrty','$this->cpareunt','$this->cpfursts')";
          $res = mysqli_query($link, $qry)or die(mysqli_error($link));
      
         if (mysqli_affected_rows($link)) {
@@ -1378,7 +1378,10 @@ class clsprf {
         $link = $con->db_connect();
         $qry = "call UpdateUserProfile($this->prfcode,'$this->prfname','$this->prfaddress','$this->prfcmp','$this->prfpic','$this->prfphn','$this->Otp')";
         // echo $qry;
-        $res = mysqli_query($link, $qry) or die(mysqli_error($link));
+        $res = mysqli_query($link, $qry);
+        if (!$res) {
+            return mysqli_errno($link);
+        }
         if (mysqli_affected_rows($link)) {
             $con->db_close();
             return TRUE;
@@ -1486,6 +1489,20 @@ class clsprf {
         $con = new clscon();
         $link = $con->db_connect();
         $qry = "call DisplayAllAgentsByLocation('$loc')";
+        $res = mysqli_query($link, $qry)or die(mysqli_error($link));
+        $i = 0;
+        $arr = array();
+        while ($r = mysqli_fetch_row($res)) {
+            $arr[$i] = $r;
+            $i++;
+        }
+        $con->db_close();
+        return $arr;
+    }
+ function DisplayAllAgents() {
+        $con = new clscon();
+        $link = $con->db_connect();
+        $qry = "call DisplayAllAgents()";
         $res = mysqli_query($link, $qry)or die(mysqli_error($link));
         $i = 0;
         $arr = array();

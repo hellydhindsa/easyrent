@@ -1,5 +1,6 @@
 <?php
 include_once 'buslogic.php';
+
  if(isset($_POST["SearchResults"]))
 {
     $location=$_POST["SearchLocation"];
@@ -10,6 +11,15 @@ include_once 'buslogic.php';
       $FurnishedStatus=$_POST["furnishedStatusSelect"];
          $PriceStart=$_POST["pricestart"];
             $PriceEnd=$_POST["priceend"];
+            if($PriceStart=='')
+            {
+                $PriceStart=0;
+              
+            }
+            if($PriceEnd=='')
+            {
+                  $PriceEnd=1000000;
+            }
                $PriceUnits=$_POST["pricefor"];
 $obj= new clsprop();
         $arr = $obj->DisplayInnerSearch($location,$type,$category,$FurnishedStatus,$NoOfBedrooms,$commercial,$PriceStart,$PriceEnd,$PriceUnits);
@@ -101,16 +111,18 @@ echo'<span class="property-category"><a href="#">'.$arr[$i][2].'</a></span>';
 echo'</div>';
 echo'<div class="property-wrap">';
 echo'<h2 class="property-title">';
-echo'<a href="property-details.html" title="'.$arr[$i][10].'">'.$arr[$i][0].' '. $arr[$i][10].'</a>';
+echo'<a href="#" title="'.$arr[$i][10].'">'.$arr[$i][0].' '. $arr[$i][10].'</a>';
 echo'</h2>';
 echo'<div class="property-excerpt">';
 echo'<p>'.$arr[$i][1].'...</p>';
 
 echo'</div>';
 echo'<div class="property-summary">';
+if($arr[$i][2] !='PG')
+{
 echo'<div class="property-detail">';
 echo'<div class="size">';
-echo'<span>'.$arr[$i][4].' sqft</span>';
+echo'<span>'.$arr[$i][4].' '.$arr[$i][11].'</span>';
 echo'</div>';
 echo'<div class="bathrooms">';
 echo'<span>'.$arr[$i][5].'</span>';
@@ -119,6 +131,7 @@ echo'<div class="bedrooms">';
 echo'<span>'.$arr[$i][6].'</span>';
 echo'</div>';
 echo'</div>';
+}
 echo'<div class="property-info">';
 echo'<div class="property-price">';
 echo'<span>';
@@ -182,7 +195,7 @@ $( "#SearchType" ).change(function() {
             $('#bedroomSelect').hide();
              $('#SelectCategory').show(); 
     }
-    })
+    });
 
 </script>
   <?php

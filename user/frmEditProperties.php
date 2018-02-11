@@ -79,7 +79,7 @@ if(isset($_POST["MakePrivate"]))
  
    $updateStatus= $objChangePublicStatus->UpdatePropertyStatus($PropertyNO, $PropertyType, 0);
     if($updateStatus){
-$msgPublicStatus="Property is Updated to Public sucessfully";
+$msgPublicStatus="Property is Updated to Private sucessfully";
     }
     else
     {

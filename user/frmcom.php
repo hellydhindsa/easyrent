@@ -133,7 +133,6 @@ include_once 'leftpanel.php';
 <option value="3">Three</option>
 <option value="4">Four</option>
 <option value="5">Five</option>
-<option value="5">Five</option>
 <option value="6">Six</option>
 <option value="7">Seven</option>
 <option value="8">Eight</option>
@@ -154,7 +153,6 @@ include_once 'leftpanel.php';
 <option value="2">Two</option>
 <option value="3">Three</option>
 <option value="4">Four</option>
-<option value="5">Five</option>
 <option value="5">Five</option>
 <option value="6">Six</option>
 <option value="7">Seven</option>
@@ -282,7 +280,7 @@ include_once 'leftpanel.php';
         <div class="col-md-6">
 
 <div class="form-group s-prop-_noo_property_field_lot_area">
-<label for="rdfac">Width of road Facing plot(feets)</label>
+<label for="rdfac">Width of Road Facing Plot(feets)</label>
 <input type="number" id="rdfac" name="rdfac" class="form-control" value="" required>
 </div>
 </div>
@@ -359,7 +357,7 @@ include_once 'leftpanel.php';
 <div class="col-md-6">
 <div class="form-group s-prop-status">
 
-<label>Personal pantry</label>
+<label>Personal Pantry</label>
 <div class="dropdown label-select">
 <select class="form-control" name="ppntry" required>
 <option value="">select one</option>

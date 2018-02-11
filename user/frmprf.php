@@ -29,6 +29,8 @@ if(isset($_POST["btnupd"]))
    // echo"jnsadkcksd sakjdnxaskjcb sakjdnasknaskjd askdnaskjdnsakjdbaskjdnaskj;";
    // echo $s;
    $result= $obj1->update_prf();
+      if($result !=1062)
+      {
     $a=$_SESSION["prfcod"];
     if($s!="")
     {
@@ -47,6 +49,11 @@ if(isset($_POST["btnupd"]))
      $msg="Updation Sucessfull ";
      unset($_SESSION["prfcod"]);
      unset($_SESSION["extension"]);
+      }
+      else
+      {
+            $msg="Your Phone Number -".$_POST["phn"]."- Already Exist";
+      }
 }
 
 include_once 'header.php';
